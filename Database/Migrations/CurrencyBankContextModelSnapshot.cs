@@ -35,7 +35,7 @@ namespace Database.Migrations
                     b.Property<byte>("Currency")
                         .HasColumnType("tinyint");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -70,10 +70,7 @@ namespace Database.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("PasswordHash")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<byte[]>("PasswordSalt")
+                    b.Property<byte[]>("Password")
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Pesel")
@@ -91,9 +88,7 @@ namespace Database.Migrations
                 {
                     b.HasOne("Database.Models.User", "User")
                         .WithMany("Accounts")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

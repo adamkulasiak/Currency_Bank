@@ -17,8 +17,7 @@ namespace Database.Models
         public string UserName { get; set; }
         public string Email { get; set; }
         public string Pesel { get; set; }
-        public byte[] PasswordHash { get; set; }
-        public byte[] PasswordSalt { get; set; }
+        public byte[] Password { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? DeletedTime { get; set; }
         public bool IsDeleted { get; set; } = false;
