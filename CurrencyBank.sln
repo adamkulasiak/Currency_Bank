@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.29418.71
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Database", "Database\Database.csproj", "{E3076BDC-6760-44B9-826C-DF11BEBA12EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyBank.BLL", "CurrencyBank.BLL\CurrencyBank.BLL.csproj", "{C7BFB642-94DE-41AC-A052-CE8891EE1C3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrencyBank.BLL", "CurrencyBank.BLL\CurrencyBank.BLL.csproj", "{C7BFB642-94DE-41AC-A052-CE8891EE1C3F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyBank.WPF", "CurrencyBank.WPF\CurrencyBank.WPF.csproj", "{394467BD-9075-4E33-BFD4-2CD7EA4FC7FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{C7BFB642-94DE-41AC-A052-CE8891EE1C3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7BFB642-94DE-41AC-A052-CE8891EE1C3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7BFB642-94DE-41AC-A052-CE8891EE1C3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{394467BD-9075-4E33-BFD4-2CD7EA4FC7FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{394467BD-9075-4E33-BFD4-2CD7EA4FC7FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{394467BD-9075-4E33-BFD4-2CD7EA4FC7FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{394467BD-9075-4E33-BFD4-2CD7EA4FC7FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
