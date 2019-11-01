@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29418.71
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{E3076BDC-6760-44B9-826C-DF11BEBA12EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Database", "Database\Database.csproj", "{E3076BDC-6760-44B9-826C-DF11BEBA12EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyBank.BLL", "CurrencyBank.BLL\CurrencyBank.BLL.csproj", "{C7BFB642-94DE-41AC-A052-CE8891EE1C3F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{E3076BDC-6760-44B9-826C-DF11BEBA12EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3076BDC-6760-44B9-826C-DF11BEBA12EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3076BDC-6760-44B9-826C-DF11BEBA12EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7BFB642-94DE-41AC-A052-CE8891EE1C3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7BFB642-94DE-41AC-A052-CE8891EE1C3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7BFB642-94DE-41AC-A052-CE8891EE1C3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7BFB642-94DE-41AC-A052-CE8891EE1C3F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
