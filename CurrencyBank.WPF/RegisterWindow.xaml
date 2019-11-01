@@ -12,19 +12,19 @@
         <Label Content="Create Your account" HorizontalAlignment="Center" Foreground="Black" FontSize="14" FontWeight="Bold"></Label>
             <Separator></Separator>
             <Label Content="Name:" HorizontalAlignment="Center"></Label>
-            <TextBox x:Name="firstName_tb" TextWrapping="Wrap" TextAlignment="Center" Width="200" Height="25"/>
+            <TextBox x:Name="FirstName_tb" TextWrapping="Wrap" TextAlignment="Center" Width="200" Height="25"/>
             <Label Content="Surname:" HorizontalAlignment="Center"></Label>
-            <TextBox x:Name="lastName_tb" TextAlignment="Center" TextWrapping="Wrap" Width="200" Height="25"/>
+            <TextBox x:Name="LastName_tb" TextAlignment="Center" TextWrapping="Wrap" Width="200" Height="25"/>
             <Label Content="User name:" HorizontalAlignment="Center"></Label>
-            <TextBox x:Name="userName_tb" TextAlignment="Center" TextWrapping="Wrap" Width="200" Height="25"/>
+            <TextBox x:Name="UserName_tb" TextAlignment="Center" TextWrapping="Wrap" Width="200" Height="25"/>
             <Label Content="Email:" HorizontalAlignment="Center"></Label>
-            <TextBox x:Name="email_tb" TextAlignment="Center" TextWrapping="Wrap" Width="200" Height="25"/>
+            <TextBox x:Name="Email_tb" TextAlignment="Center" TextWrapping="Wrap" Width="200" Height="25"/>
             <Label Content="Pesel:" HorizontalAlignment="Center"></Label>
-            <TextBox x:Name="pesel_tb" TextAlignment="Center" TextWrapping="Wrap" Width="200" Height="25"/>
+            <TextBox x:Name="Pesel_tb" TextAlignment="Center" TextWrapping="Wrap" Width="200" Height="25"/>
             <Label Content="Password:" HorizontalAlignment="Center"></Label>
             <PasswordBox x:Name="password_tb"  Width="200" Height="25"/>
             
-            <Button x:Name="register_btn" Margin="15" Content="Register" Height="25" HorizontalAlignment="Center" Width="100" />
+            <Button x:Name="Register_btn" Margin="15" Content="Register" Height="25" HorizontalAlignment="Center" Width="100" Click="Register_btn_Click" />
 
         </StackPanel>
     </Border>

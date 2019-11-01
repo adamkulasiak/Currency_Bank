@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CurrencyBank.BLL.Managers;
+using Database.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -17,9 +19,31 @@ namespace CurrencyBank.WPF
     /// </summary>
     public partial class RegisterWindow : Window
     {
+        private readonly AuthManager _authManager;
         public RegisterWindow()
         {
             InitializeComponent();
+            _authManager = new AuthManager();
+        }
+
+        private async void Register_btn_Click(object sender, RoutedEventArgs e)
+        {
+            var user = new User()
+            {
+                FirstName = FirstName_tb.Text,
+                LastName = LastName_tb.Text,
+                UserName = UserName_tb.Text,
+                Email = Email_tb.Text,
+                Pesel = Pesel_tb.Text
+            };
+
+            var password = password_tb.Password;
+
+            var result = await _authManager.Register(user, password);
+
+            if (result is null)
+                MessageBox.Show("Error");
+            else MessageBox.Show("Success");
         }
     }
 }

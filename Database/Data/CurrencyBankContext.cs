@@ -14,6 +14,13 @@ namespace Database.Data
             optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=CurrencyBankDB;Trusted_Connection=True;MultipleActiveResultSets=true");
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().HasIndex(u => u.UserName).IsUnique();
+            modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
+            modelBuilder.Entity<User>().HasIndex(u => u.Pesel).IsUnique();
+        }
+
         public DbSet<User> Users { get; set; }
         public DbSet<Account> Accounts { get; set; }
     }
