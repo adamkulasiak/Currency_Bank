@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Database", "Database\Databa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrencyBank.BLL", "CurrencyBank.BLL\CurrencyBank.BLL.csproj", "{C7BFB642-94DE-41AC-A052-CE8891EE1C3F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyBank.WPF", "CurrencyBank.WPF\CurrencyBank.WPF.csproj", "{394467BD-9075-4E33-BFD4-2CD7EA4FC7FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrencyBank.WPF", "CurrencyBank.WPF\CurrencyBank.WPF.csproj", "{394467BD-9075-4E33-BFD4-2CD7EA4FC7FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyBank.Commons", "CurrencyBank.Commons\CurrencyBank.Commons.csproj", "{F0F11DCE-A572-421F-BCFA-E46729008789}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{394467BD-9075-4E33-BFD4-2CD7EA4FC7FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{394467BD-9075-4E33-BFD4-2CD7EA4FC7FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{394467BD-9075-4E33-BFD4-2CD7EA4FC7FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0F11DCE-A572-421F-BCFA-E46729008789}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0F11DCE-A572-421F-BCFA-E46729008789}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0F11DCE-A572-421F-BCFA-E46729008789}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0F11DCE-A572-421F-BCFA-E46729008789}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

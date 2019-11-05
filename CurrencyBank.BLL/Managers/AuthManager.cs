@@ -1,4 +1,6 @@
-﻿using CurrencyBank.BLL.Interfaces;
+﻿using AutoMapper;
+using CurrencyBank.BLL.Dtos;
+using CurrencyBank.BLL.Interfaces;
 using Database.Data;
 using Database.Models;
 using Microsoft.EntityFrameworkCore;
@@ -11,9 +13,16 @@ namespace CurrencyBank.BLL.Managers
     public class AuthManager : IAuth
     {
         private readonly CurrencyBankContext _context;
+        private IMapper _iMapper;
+
         public AuthManager()
         {
             _context = new CurrencyBankContext();
+
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<User, UserRegisterDto>().ReverseMap();
+            });
+            _iMapper = config.CreateMapper();
         }
 
         public Task<User> Login(string username, string password)
@@ -27,18 +36,20 @@ namespace CurrencyBank.BLL.Managers
         /// <param name="user">obiekt użytkownika</param>
         /// <param name="password">hasło</param>
         /// <returns></returns>
-        public async Task<User> Register(User user, string password)
+        public async Task<UserRegisterDto> Register(UserRegisterDto user, string password)
         {
             byte[] PasswordHash, PasswordSalt;
             CreatePasswordHashSalt(password, out PasswordHash, out PasswordSalt);
 
-            user.PasswordHash = PasswordHash;
-            user.PasswordSalt = PasswordSalt;
-            user.UserName = user.UserName.ToLower();
+            var userModel = _iMapper.Map<UserRegisterDto, User>(user);
 
-            if (!await UserExists(user.UserName))
+            userModel.PasswordHash = PasswordHash;
+            userModel.PasswordSalt = PasswordSalt;
+            userModel.UserName = user.UserName.ToLower();
+
+            if (!await UserExists(userModel.UserName))
             {
-                await _context.Users.AddAsync(user);
+                await _context.Users.AddAsync(userModel);
                 try
                 {
                     await _context.SaveChangesAsync();
