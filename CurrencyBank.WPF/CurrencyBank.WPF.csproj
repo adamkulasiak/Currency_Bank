@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CurrencyBank.BLL\CurrencyBank.BLL.csproj" />
     <ProjectReference Include="..\Database\Database.csproj" />
   </ItemGroup>

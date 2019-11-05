@@ -25,7 +25,7 @@
             <Label Content="Amount:" HorizontalAlignment="Center"></Label>
             <TextBox x:Name="Amount_tb"  Width="200" Height="25"/>
 
-            <Button x:Name="AccountOpening_btn" Margin="15" Content="Open" Height="25" HorizontalAlignment="Center" Width="100" Click="Register_btn_Click" />
+            <Button x:Name="AccountOpening_btn" Margin="15" Content="Open" Height="25" HorizontalAlignment="Center" Width="100"/>
 
         </StackPanel>
     </Border>
