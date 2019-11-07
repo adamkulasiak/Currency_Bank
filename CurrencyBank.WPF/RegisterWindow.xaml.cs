@@ -1,5 +1,6 @@
 ﻿using CurrencyBank.BLL.Dtos;
 using CurrencyBank.BLL.Managers;
+using CurrencyBank.Commons;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -38,7 +39,15 @@ namespace CurrencyBank.WPF
 
         private async void Register_btn_Click(object sender, RoutedEventArgs e)
         {
-            this.IsEnabled = false;
+            Register_btn.IsEnabled = false;
+            if(!EmailValidator.IsEmailValid(Email_tb.Text))
+            {
+                MessageBox.Show("Zly mail");
+            }
+            else
+            {
+                MessageBox.Show("Dobry mail");
+            }
             var user = new UserRegisterDto()
             {
                 FirstName = FirstName_tb.Text,
@@ -52,12 +61,18 @@ namespace CurrencyBank.WPF
             var result = await _authManager.Register(user, user.Password);
 
             if (result is null)
+            {
                 MessageBox.Show("Error");
+                Register_btn.IsEnabled = true;
+            }
             else
             {
                 MessageBox.Show("Success");
                 this.CreateRegisterForm();
-                this.IsEnabled = true;
+                Register_btn.IsEnabled = true;
+                this.Hide();
+                MainWindow mw = new MainWindow();
+                mw.Show();
             }
         }
     }
