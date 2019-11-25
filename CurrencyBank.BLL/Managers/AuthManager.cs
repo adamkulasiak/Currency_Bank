@@ -54,7 +54,7 @@ namespace CurrencyBank.BLL.Managers
                 {
                     await _context.SaveChangesAsync();
                 }
-                catch (DbUpdateException exception)
+                catch (DbUpdateException)
                 {
                     return null;
                 }

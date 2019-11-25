@@ -9,11 +9,7 @@ namespace Database.Data
 {
     public class CurrencyBankContext: DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlite(@"Data Source=C:\Users\Adam\Desktop\Currency_Bank\Database\CurrencyBankDb.db");
-        }
-
+        public CurrencyBankContext(DbContextOptions<CurrencyBankContext> options) : base(options) { }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasIndex(u => u.UserName).IsUnique();
