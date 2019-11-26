@@ -9,5 +9,6 @@ namespace WebApiCurrencyBank.Interfaces
     public interface IAccount
     {
         Task<Account> Create(int userId, Currency currency);
+        Task<Account> CashIn(int userId, int accountId, decimal ammount);
     }
 }

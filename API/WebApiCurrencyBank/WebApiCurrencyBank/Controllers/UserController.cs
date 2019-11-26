@@ -11,6 +11,9 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace WebApiCurrencyBank.Controllers
 {
+    /// <summary>
+    /// Kontoler do zarzadzania uzytkownikami
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
@@ -23,22 +26,31 @@ namespace WebApiCurrencyBank.Controllers
             _context = context;
         }
 
+        /// <summary>
+        /// Akcja do pobierania wszystkich uzytkownikow wraz z ich kontami
+        /// </summary>
+        /// <returns>lista uzytkownikow wraz z kontami</returns>
         // GET: api/User
         [HttpGet]
         public async Task<IActionResult> GetUsers()
         {
-            var users = await _context.Users.ToListAsync();
+            var users = await _context.Users.Include(x => x.Accounts).ToListAsync();
             if (!users.Any())
                 return BadRequest();
 
             return Ok(users);
         }
 
+        /// <summary>
+        /// Akcja do pobierania konkretnego uzytkownika wraz z kontem / kontami
+        /// </summary>
+        /// <param name="id">id usera</param>
+        /// <returns>uzytkownik wraz z kontem/kontami</returns>
         // GET: api/User/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user = await _context.Users.Include(x => x.Accounts).FirstOrDefaultAsync(x => x.Id == id);
 
             if (user == null)
             {

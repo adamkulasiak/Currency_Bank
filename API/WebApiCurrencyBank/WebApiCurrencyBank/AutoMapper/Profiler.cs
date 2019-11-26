@@ -14,6 +14,7 @@ namespace WebApiCurrencyBank.AutoMapper
         {
             CreateMap<User, UserRegisterDto>().ReverseMap();
             CreateMap<User, UserLoginDto>().ReverseMap();
+            CreateMap<Account, AccountToCreateDto>().ReverseMap();
         }
         
     }

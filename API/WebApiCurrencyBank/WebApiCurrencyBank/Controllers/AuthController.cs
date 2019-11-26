@@ -16,6 +16,9 @@ using WebApiCurrencyBank.Interfaces;
 
 namespace WebApiCurrencyBank.Controllers
 {
+    /// <summary>
+    /// Kontroler do zarzadzania autoryzacja
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
@@ -31,6 +34,11 @@ namespace WebApiCurrencyBank.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Akcja sluzaca do rejestracji uzytkownika
+        /// </summary>
+        /// <param name="userRegisterDto">dto userRegister</param>
+        /// <returns></returns>
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserRegisterDto userRegisterDto)
         {
@@ -46,6 +54,11 @@ namespace WebApiCurrencyBank.Controllers
             return Created("", createdUser);
         }
 
+        /// <summary>
+        /// Akcja sluzaca do logowania zwracajaca token dostepu
+        /// </summary>
+        /// <param name="userLoginDto">dto userLoginDto</param>
+        /// <returns></returns>
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserLoginDto userLoginDto)
         {
