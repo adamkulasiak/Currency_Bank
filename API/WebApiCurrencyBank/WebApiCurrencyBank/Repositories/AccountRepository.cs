@@ -77,6 +77,52 @@ namespace WebApiCurrencyBank.Repositories
 
             return account;
         }
+        /// <summary>
+        /// Metoda sluzaca do wyplacenia pieniedzy z konta
+        /// </summary>
+        /// <param name="userId">id wlasciciela konta</param>
+        /// <param name="accountId">id konta</param>
+        /// <param name="ammount">kwota</param>
+        /// <returns></returns>
+        public async Task<Account> CashOut(int userId, int accountId, decimal ammount)
+        {
+            var account = await _context.Accounts.FirstOrDefaultAsync(x => x.Id == accountId);
+            if (account.UserId != userId)
+                return null;
+
+            if (account.Balance < ammount)
+                return null;
+            account.Balance -= ammount;
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException) { return null; }
+            return account;
+        }
+
+        /// <summary>
+        /// Metoda sluzaca do usuwania(zmiany atrybutu na usuniety) konta
+        /// </summary>
+        /// <param name="userId">id wlasciciela</param>
+        /// <param name="accountId">id konta</param>
+        /// <returns></returns>
+        public async Task<bool> DeleteAccount(int userId, int accountId)
+        {
+            var account = await _context.Accounts.FirstOrDefaultAsync(x => x.Id == accountId);
+            if (account?.UserId != userId)
+                return false;
+
+            account.IsDeleted = true;
+            account.DeleteTime = DateTime.Now;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (DbUpdateException) { return false; }
+        }
 
         #endregion
 

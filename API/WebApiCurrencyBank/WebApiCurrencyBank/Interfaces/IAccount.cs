@@ -10,5 +10,7 @@ namespace WebApiCurrencyBank.Interfaces
     {
         Task<Account> Create(int userId, Currency currency);
         Task<Account> CashIn(int userId, int accountId, decimal ammount);
+        Task<Account> CashOut(int userId, int accountId, decimal ammount);
+        Task<bool> DeleteAccount(int userId, int accountId);
     }
 }

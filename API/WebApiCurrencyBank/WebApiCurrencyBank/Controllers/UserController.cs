@@ -34,7 +34,7 @@ namespace WebApiCurrencyBank.Controllers
         [HttpGet]
         public async Task<IActionResult> GetUsers()
         {
-            var users = await _context.Users.Include(x => x.Accounts).ToListAsync();
+            var users = await _context.Users.Include(x => x.Accounts.Where(x => !x.IsDeleted)).ToListAsync();
             if (!users.Any())
                 return BadRequest();
 
@@ -50,7 +50,7 @@ namespace WebApiCurrencyBank.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
-            var user = await _context.Users.Include(x => x.Accounts).FirstOrDefaultAsync(x => x.Id == id);
+            var user = await _context.Users.Include(x => x.Accounts.Where(x => !x.IsDeleted)).FirstOrDefaultAsync(x => x.Id == id);
 
             if (user == null)
             {

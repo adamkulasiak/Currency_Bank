@@ -39,6 +39,7 @@ namespace WebApiCurrencyBank
             services.AddAutoMapper();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IAccount, AccountRepository>();
+            services.AddScoped<IExchangeRate, ExchangeRateRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                         .AddJwtBearer(options => {
                             options.TokenValidationParameters = new TokenValidationParameters
