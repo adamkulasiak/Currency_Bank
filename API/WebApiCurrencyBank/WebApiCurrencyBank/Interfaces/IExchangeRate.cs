@@ -7,6 +7,8 @@ namespace WebApiCurrencyBank.Interfaces
 {
     public interface IExchangeRate
     {
-        Task<bool> GetRatesFromNbp();
+        Task<string> GetUSDRateFromNbp();
+        Task<string> GetEURRateFromNbp();
+        Task<string> GetGBPRateFromNbp();
     }
 }
