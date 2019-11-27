@@ -17,6 +17,7 @@ using WebApiCurrencyBank.Repositories;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
+using System.IO;
 
 namespace WebApiCurrencyBank
 {
@@ -33,10 +34,11 @@ namespace WebApiCurrencyBank
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<CurrencyBankContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
             services.AddMvc(option => option.EnableEndpointRouting = false);
             services.AddCors();
             services.AddAutoMapper();
+            services.AddTransient<Seed>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IAccount, AccountRepository>();
             services.AddScoped<IExchangeRate, ExchangeRateRepository>();
@@ -53,8 +55,9 @@ namespace WebApiCurrencyBank
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, Seed seeder)
         {
+            CreateDatabaseDirectory();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -63,13 +66,27 @@ namespace WebApiCurrencyBank
             app.UseRouting();
 
             app.UseAuthorization();
-
+            seeder.SeedData();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             app.UseMvc();
+        }
+
+        private void CreateDatabaseDirectory()
+        {
+            string path = @"C:\Database";
+
+            if (Directory.Exists(path))
+                return;
+            try
+            {
+                Directory.CreateDirectory(path);
+                Console.WriteLine("Directory created succesfully");
+            }
+            catch (Exception e) { Console.WriteLine("EEEEEEEEEE" + e.ToString()); }
         }
     }
 }
