@@ -1,7 +1,4 @@
-﻿using CurrencyBank.BLL.Dtos;
-using CurrencyBank.BLL.Managers;
-using CurrencyBank.Commons;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -24,12 +21,10 @@ namespace CurrencyBank.WPF
     /// </summary>
     public partial class RegisterWindow : Window
     {
-        private readonly AuthManager _authManager;
         private static readonly HttpClient client = new HttpClient();
         public RegisterWindow()
         {
             InitializeComponent();
-            _authManager = new AuthManager();
         }
 
         private void CreateRegisterForm()
@@ -45,14 +40,6 @@ namespace CurrencyBank.WPF
         private async void Register_btn_Click(object sender, RoutedEventArgs e)
         {
             Register_btn.IsEnabled = false;
-            if(!EmailValidator.IsEmailValid(Email_tb.Text))
-            {
-                MessageBox.Show("Zly mail");
-            }
-            else
-            {
-                MessageBox.Show("Dobry mail");
-            }
             var user = new UserRegisterDto()
             {
                 FirstName = FirstName_tb.Text,
