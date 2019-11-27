@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using WebApiCurrencyBank.Interfaces;
 
@@ -15,7 +16,7 @@ namespace WebApiCurrencyBank.Repositories
     {
         private readonly HttpClient _client;
         private readonly CurrencyBankContext _context;
-        private const string baseUrl = "http://api.nbp.pl/api/exchangerates/rates/A/";
+        private const string baseUrl = "http://api.exchangeratesapi.io/latest/";
         public ExchangeRateRepository(CurrencyBankContext context)
         {
             _client = new HttpClient();
@@ -24,43 +25,32 @@ namespace WebApiCurrencyBank.Repositories
         }
 
         /// <summary>
-        /// Metoda pobierajaca dane o kursie euro i zapisujace do lokalnej bazy
+        /// Metoda zamieniajaca waluty
         /// </summary>
-        /// <returns></returns>
-        public async Task<string> GetEURRateFromNbp() => await GetDataFromNBP(Currency.EUR);
-
-        /// <summary>
-        /// Metoda pobierajaca dane o kursie dolara i zapisujace do lokalnej bazy
-        /// </summary>
-        /// <returns></returns>
-        public async Task<string> GetUSDRateFromNbp() => await GetDataFromNBP(Currency.USD);
-
-        /// <summary>
-        /// Metoda pobierajaca dane o kursie funta i zapisujace do lokalnej bazy
-        /// </summary>
-        /// <returns></returns>
-        public async Task<string> GetGBPRateFromNbp() => await GetDataFromNBP(Currency.GBP);
-
-        private async Task<string> GetDataFromNBP(Currency currency)
+        /// <param name="src">waluta zrodlowa</param>
+        /// <param name="dest">waluta docelowa</param>
+        /// <returns>kurs</returns>
+        public async Task<string> ChangeMoney(Currency src, Currency dest)
         {
-            var response = _client.GetAsync(currency.ToString()).Result;
+            var response = _client.GetAsync("?base="+src.ToString()).Result;
             JObject json = JObject.Parse(response.Content.ReadAsStringAsync().Result);
-            var USDrates = (decimal)json.SelectToken("rates[0].mid");
+            var rate = (decimal)json.SelectToken($"rates.{dest.ToString()}");
 
             var d = new ExchangeRates
             {
                 DateTime = DateTime.Now,
-                Currency = currency,
-                Mid = USDrates
+                From = src,
+                To = dest,
+                Rate = rate
             };
 
             _context.Add(d);
             try
             {
                 await _context.SaveChangesAsync();
-                return $"{d.Currency} {d.Mid}";
+                return $"{src.ToString()} to {dest.ToString()}: {rate.ToString()}";
             }
-            catch (DbUpdateException) { return null; }
+            catch (DbUpdateException e) { Console.WriteLine(e.ToString()); return null; }
         }
     }
 }

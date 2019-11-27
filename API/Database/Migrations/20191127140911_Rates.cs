@@ -3,10 +3,26 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Database.Migrations
 {
-    public partial class UserAndAccount : Migration
+    public partial class Rates : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "ExchangeRates",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    DateTime = table.Column<DateTime>(nullable: false),
+                    From = table.Column<byte>(nullable: false),
+                    To = table.Column<byte>(nullable: false),
+                    Rate = table.Column<decimal>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ExchangeRates", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
@@ -38,6 +54,8 @@ namespace Database.Migrations
                     AccountNumber = table.Column<string>(nullable: true),
                     Currency = table.Column<byte>(nullable: false),
                     Balance = table.Column<decimal>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeleteTime = table.Column<DateTime>(nullable: false),
                     UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -79,6 +97,9 @@ namespace Database.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Accounts");
+
+            migrationBuilder.DropTable(
+                name: "ExchangeRates");
 
             migrationBuilder.DropTable(
                 name: "Users");

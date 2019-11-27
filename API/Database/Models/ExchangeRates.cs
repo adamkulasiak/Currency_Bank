@@ -8,7 +8,8 @@ namespace Database.Models
     {
         public int Id { get; set; }
         public DateTime DateTime { get; set; }
-        public Currency Currency { get; set; }
-        public decimal Mid { get; set; }
+        public Currency From { get; set; }
+        public Currency To { get; set; }
+        public decimal Rate { get; set; }
     }
 }

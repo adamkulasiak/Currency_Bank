@@ -53,14 +53,17 @@ namespace Database.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<byte>("Currency")
-                        .HasColumnType("INTEGER");
-
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal>("Mid")
+                    b.Property<byte>("From")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("Rate")
                         .HasColumnType("TEXT");
+
+                    b.Property<byte>("To")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Database.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,18 +22,14 @@ namespace WebApiCurrencyBank.Controllers
             _rateRepo = rateRepo;
         }
 
-        /// <summary>
-        /// Akcja do pobierania danych z nbp
-        /// </summary>
-        /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> GetRates()
+        public IActionResult GetRate([FromQuery] Currency source, Currency dest)
         {
-            var eur = await _rateRepo.GetEURRateFromNbp();
-            var usd = await _rateRepo.GetUSDRateFromNbp();
-            var gbp = await _rateRepo.GetGBPRateFromNbp();
-            string result = usd + "\n" + eur + "\n" + gbp;
-            return Ok(result);
+            if (source == dest)
+                return BadRequest();
+
+            var result = _rateRepo.ChangeMoney(source, dest);
+            return Ok(result.Result);
         }
     }
 }
