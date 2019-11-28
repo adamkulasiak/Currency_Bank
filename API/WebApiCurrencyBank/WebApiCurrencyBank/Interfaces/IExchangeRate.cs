@@ -8,6 +8,6 @@ namespace WebApiCurrencyBank.Interfaces
 {
     public interface IExchangeRate
     {
-        Task<string> ChangeMoney(Currency src, Currency dest);
+        Task<decimal> ChangeMoney(Currency src, Currency dest);
     }
 }

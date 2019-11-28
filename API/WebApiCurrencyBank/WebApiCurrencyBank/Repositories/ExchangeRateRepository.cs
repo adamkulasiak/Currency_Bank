@@ -30,15 +30,20 @@ namespace WebApiCurrencyBank.Repositories
         /// <param name="src">waluta zrodlowa</param>
         /// <param name="dest">waluta docelowa</param>
         /// <returns>kurs</returns>
-        public async Task<string> ChangeMoney(Currency src, Currency dest)
+        public async Task<decimal> ChangeMoney(Currency src, Currency dest)
         {
+            if (_context.ExchangeRates.Where(x => x.From == src && x.To == dest && x.DateTime == DateTime.Today).Any())
+            {
+                var data = await _context.ExchangeRates.Where(x => x.From == src && x.To == dest && x.DateTime == DateTime.Today).SingleOrDefaultAsync();
+                return data.Rate;
+            }
             var response = _client.GetAsync("?base="+src.ToString()).Result;
             JObject json = JObject.Parse(response.Content.ReadAsStringAsync().Result);
             var rate = (decimal)json.SelectToken($"rates.{dest.ToString()}");
 
             var d = new ExchangeRates
             {
-                DateTime = DateTime.Now,
+                DateTime = DateTime.Today,
                 From = src,
                 To = dest,
                 Rate = rate
@@ -48,9 +53,9 @@ namespace WebApiCurrencyBank.Repositories
             try
             {
                 await _context.SaveChangesAsync();
-                return $"{src.ToString()} to {dest.ToString()}: {rate.ToString()}";
+                return rate;
             }
-            catch (DbUpdateException e) { Console.WriteLine(e.ToString()); return null; }
+            catch (DbUpdateException e) { Console.WriteLine(e.ToString()); return 0; }
         }
     }
 }

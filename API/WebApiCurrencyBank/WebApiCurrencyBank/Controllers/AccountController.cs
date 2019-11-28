@@ -83,6 +83,18 @@ namespace WebApiCurrencyBank.Controllers
             return Ok(account);
         }
 
+        [HttpPut("exchange")]
+        public async Task<IActionResult> Exchange([FromQuery]int sourceAccountId, int destinationAccountId, decimal ammount)
+        {
+            var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var accounts = await _accountRepo.ExchangeMoney(currentUserId, sourceAccountId, destinationAccountId, ammount);
+
+            if (accounts is null)
+                return BadRequest();
+
+            return Ok(accounts);
+        }
+
         /// <summary>
         /// Akcja do usuwania (zmiany atrybutu na usuniete konta)
         /// </summary>

@@ -17,9 +17,11 @@ namespace WebApiCurrencyBank.Repositories
     public class AccountRepository : IAccount
     {
         private readonly CurrencyBankContext _context;
-        public AccountRepository(CurrencyBankContext context)
+        private readonly IExchangeRate _exchangeRateRepo;
+        public AccountRepository(CurrencyBankContext context, IExchangeRate rate)
         {
             _context = context;
+            _exchangeRateRepo = rate;
         }
         #region public methods
         /// <summary>
@@ -122,6 +124,39 @@ namespace WebApiCurrencyBank.Repositories
                 return true;
             }
             catch (DbUpdateException) { return false; }
+        }
+
+        /// <summary>
+        /// Metoda sluzaca do wymiany pieniedzy pomiedzy kontami
+        /// </summary>
+        /// <param name="userId">id wlasciciela obydwu kont</param>
+        /// <param name="sourceAccountId">id konta z ktorego pobieramy i chcemy wymienic pieniadze</param>
+        /// <param name="destinationAccountId">id konta docelowego w innej walucie</param>
+        /// <param name="ammount">kwota ktora chcemy odjac od konta zrodlowego i zamienic na docelowe</param>
+        /// <returns>lista kont po zmianach</returns>
+        public async Task<IList<Account>> ExchangeMoney(int userId, int sourceAccountId, int destinationAccountId, decimal ammount)
+        {
+            if (sourceAccountId == destinationAccountId) return null;
+
+            var sourceAccount = await _context.Accounts.FirstOrDefaultAsync(x => x.Id == sourceAccountId);
+            var destinationAccount = await _context.Accounts.FirstOrDefaultAsync(x => x.Id == destinationAccountId);
+
+            if((sourceAccount.UserId == userId && destinationAccount.UserId == userId) && sourceAccount.Currency != destinationAccount.Currency)
+            {
+                var sourceAccountAfter = await CashOut(userId, sourceAccountId, ammount);
+                if (sourceAccountAfter == null) return null;
+
+                var rate = await _exchangeRateRepo.ChangeMoney(sourceAccount.Currency, destinationAccount.Currency);
+                var ammountToAdd = decimal.Round(ammount * rate, 2);
+                var destinationAccountAfter = await CashIn(userId, destinationAccountId, ammountToAdd);
+
+                return new List<Account>
+                {
+                    sourceAccountAfter,
+                    destinationAccountAfter
+                };
+            }
+            return null;
         }
 
         #endregion
