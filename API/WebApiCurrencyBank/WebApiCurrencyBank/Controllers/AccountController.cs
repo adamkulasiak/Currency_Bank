@@ -21,9 +21,9 @@ namespace WebApiCurrencyBank.Controllers
     [Authorize]
     public class AccountController : ControllerBase
     {
-        private readonly IAccount _accountRepo;
+        private readonly IAccountRepository _accountRepo;
         private readonly IMapper _mapper;
-        public AccountController(IAccount accountRepo, IMapper mapper)
+        public AccountController(IAccountRepository accountRepo, IMapper mapper)
         {
             _accountRepo = accountRepo;
             _mapper = mapper;
@@ -83,11 +83,37 @@ namespace WebApiCurrencyBank.Controllers
             return Ok(account);
         }
 
+        /// <summary>
+        /// Akcja sluzaca do wymiany waluty 
+        /// </summary>
+        /// <param name="sourceAccountId">id konta z ktorego pobieramy pieniadze do wymiany</param>
+        /// <param name="destinationAccountId">id konta docelowego w innej walucie niz zrodlowa</param>
+        /// <param name="ammount">kwota</param>
+        /// <returns></returns>
         [HttpPut("exchange")]
         public async Task<IActionResult> Exchange([FromQuery]int sourceAccountId, int destinationAccountId, decimal ammount)
         {
             var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             var accounts = await _accountRepo.ExchangeMoney(currentUserId, sourceAccountId, destinationAccountId, ammount);
+
+            if (accounts is null)
+                return BadRequest();
+
+            return Ok(accounts);
+        }
+
+        /// <summary>
+        /// Akcja sluzaca do wykonania przelewu
+        /// </summary>
+        /// <param name="principalAccountId">id konta zleceniodawcy</param>
+        /// <param name="destinationAccountNumber">numer konta docelowego</param>
+        /// <param name="ammount">kwota</param>
+        /// <returns></returns>
+        [HttpPost("transferMoney")]
+        public async Task<IActionResult> TransferMoney([FromQuery]int principalAccountId, string destinationAccountNumber, decimal ammount)
+        {
+            var principalId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var accounts = await _accountRepo.DoTransferMoney(principalId, principalAccountId, destinationAccountNumber, ammount);
 
             if (accounts is null)
                 return BadRequest();

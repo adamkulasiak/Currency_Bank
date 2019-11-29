@@ -40,7 +40,7 @@ namespace WebApiCurrencyBank
             services.AddAutoMapper();
             services.AddTransient<Seed>();
             services.AddScoped<IAuthRepository, AuthRepository>();
-            services.AddScoped<IAccount, AccountRepository>();
+            services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IExchangeRate, ExchangeRateRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                         .AddJwtBearer(options => {

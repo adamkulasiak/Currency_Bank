@@ -14,7 +14,7 @@ namespace WebApiCurrencyBank.Repositories
     /// <summary>
     /// Repozytorium do zarzadzania operacjami na koncie
     /// </summary>
-    public class AccountRepository : IAccount
+    public class AccountRepository : IAccountRepository
     {
         private readonly CurrencyBankContext _context;
         private readonly IExchangeRate _exchangeRateRepo;
@@ -157,6 +157,43 @@ namespace WebApiCurrencyBank.Repositories
                 };
             }
             return null;
+        }
+
+        /// <summary>
+        /// Metoda sluzaca do zrobienia przelewu na inne konto
+        /// </summary>
+        /// <param name="principalId">id zleceniodawcy</param>
+        /// <param name="principalAccountId">id konta zleceniodawcy</param>
+        /// <param name="destinationAccountNumber">numer konta docelowego</param>
+        /// <param name="ammount">kwota</param>
+        /// <returns></returns>
+        public async Task<IList<Account>> DoTransferMoney(int principalId, int principalAccountId, string destinationAccountNumber, decimal ammount)
+        {
+            var sourceAccount = await _context.Accounts.FirstOrDefaultAsync(x => x.Id == principalAccountId);
+            var destinationAccount = await _context.Accounts.FirstOrDefaultAsync(x => x.AccountNumber == destinationAccountNumber);
+
+            if (sourceAccount.Id == destinationAccount.Id) return null;
+            if (sourceAccount.UserId != principalId) return null;
+
+            if (sourceAccount.Balance >= ammount)
+            {
+                sourceAccount.Balance -= ammount;
+                decimal ammountToAdd = ammount;
+                if (sourceAccount.Currency != destinationAccount.Currency)
+                {
+                    var rate = await _exchangeRateRepo.ChangeMoney(sourceAccount.Currency, destinationAccount.Currency);
+                    ammountToAdd = ammount * rate;
+                }
+                destinationAccount.Balance += ammountToAdd;
+                try
+                {
+                    await _context.SaveChangesAsync();
+                    return new List<Account> { sourceAccount, destinationAccount };
+                }
+                catch (DbUpdateException e) { Console.WriteLine(e.ToString()); return null; }
+            }
+            else
+                return null;
         }
 
         #endregion
