@@ -5,8 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CurrencyBank.WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="User profile" Height="450" Width="800">
+    <Border Background="Bisque" CornerRadius="20" Margin="20">
+        <Grid  Margin="20" Background="BlanchedAlmond">
 
-    </Grid>
+            <Label x:Name="manageYourAccounts" Content="Manage Your accounts" HorizontalAlignment="Center" FontSize="14" FontWeight="Bold" Width="166" Margin="0,0,0,320"/>
+            <Label Content="Your accounts:" Width="87"  HorizontalAlignment="Left" Margin="0,72,0,256"/>
+            <ListView x:Name="accountsList" Margin="0,103,360,92" SelectionChanged="accountsList_SelectionChanged_1">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn x:Name="id_column" Width="40" Header="ID"/>
+                        <GridViewColumn x:Name="accountNumber_column" Width="150" Header="Account Number"/>
+                        <GridViewColumn x:Name="balance_column" Width="100" Header="Balance"/>
+                        <GridViewColumn x:Name="currency_column" Width="70" Header="Currency"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Label Content="Actions" Width="100" HorizontalAlignment="Left" Margin="360,72,0,0" VerticalAlignment="Top" Height="26" />
+            <Button x:Name="create_btn" Content="Create a new account" HorizontalAlignment="Left" Margin="365,103,0,0" VerticalAlignment="Top" Width="163" Height="35"/>
+            <Button x:Name="transferMoney_btn" Content="New external transfer" HorizontalAlignment="Left" Margin="365,143,0,0" VerticalAlignment="Top" Width="163" Height="35"/>
+            <Button x:Name="exchange_btn" Content="Exchange" HorizontalAlignment="Left" Margin="533,143,0,0" VerticalAlignment="Top" Width="163" Height="35"/>
+            <Button x:Name="cashIn_btn" Content="Deposit the currency" HorizontalAlignment="Left" Margin="365,183,0,0" VerticalAlignment="Top" Width="163" Height="35"/>
+            <Button x:Name="cashOut_btn" Content="Withdrawal" HorizontalAlignment="Left" Margin="533,103,0,0" VerticalAlignment="Top" Height="35" Width="163"/>
+            <Button x:Name="deleteAccount_btn" Content="Delete an account" HorizontalAlignment="Left" Margin="533,183,0,0" VerticalAlignment="Top" Height="35" Width="163"/>
+
+
+        </Grid>
+    </Border>
 </Window>

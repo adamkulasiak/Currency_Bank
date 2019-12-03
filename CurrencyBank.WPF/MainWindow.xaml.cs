@@ -24,5 +24,15 @@ namespace CurrencyBank.WPF
         {
             InitializeComponent();
         }
+
+        private void accountsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void accountsList_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
