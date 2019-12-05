@@ -5,13 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CurrencyBank.WPF"
         mc:Ignorable="d"
-        Title="WithdrawalWindow" Height="450" Width="651">
+        Title="WithdrawalWindow" Height="299" Width="378">
     <Border Background="Bisque" CornerRadius="20" Margin="20">
 
-        <Grid Margin="20" Background="BlanchedAlmond">
-            <Label x:Name="Withdrawal_lbl" Content="Withdrawal" HorizontalAlignment="Center" FontSize="14" FontWeight="Bold" Width="93" Margin="0,0,0,321"/>
-            <Label Content="Label" HorizontalAlignment="Left" Margin="239,60,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.632,0.618"/>
+        <Grid Margin="20,0,20,0" Background="BlanchedAlmond">
 
+            <Label x:Name="Withdrawal_lbl" Content="Withdrawal" HorizontalAlignment="Center" FontSize="14" FontWeight="Bold" Width="94" Margin="0,23,0,193"/>
+            <Label Content="Account ID" HorizontalAlignment="Center" Margin="0,55,0,164" RenderTransformOrigin="0.632,0.618" Width="68"/>
+            <TextBox x:Name="AccountID_btn" HorizontalAlignment="Center" Margin="0,79,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Height="25" TextChanged="AccountID_btn_TextChanged"/>
+            <Label Content="Amount" HorizontalAlignment="Center" Margin="0,114,0,0" VerticalAlignment="Top" Height="26" Width="54"/>
+            <TextBox x:Name="Amount_btn" HorizontalAlignment="Center" Margin="0,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Height="25"/>
+            <Button x:Name="Withdraw_btn" Margin="154,184,0,34" Content="Withdraw" Height="25" HorizontalAlignment="Left" Width="100"/>
+            <Button x:Name="Back_btn" Content="Go back" HorizontalAlignment="Left" Height="25" Width="100" Margin="49,184,0,0" VerticalAlignment="Top"/>
         </Grid>
     </Border>
 </Window>

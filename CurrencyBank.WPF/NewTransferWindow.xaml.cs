@@ -13,18 +13,13 @@ using System.Windows.Shapes;
 namespace CurrencyBank.WPF
 {
     /// <summary>
-    /// Interaction logic for WithdrawalWindow.xaml
+    /// Interaction logic for NewTransferWindow.xaml
     /// </summary>
-    public partial class WithdrawalWindow : Window
+    public partial class NewTransferWindow : Window
     {
-        public WithdrawalWindow()
+        public NewTransferWindow()
         {
             InitializeComponent();
-        }
-
-        private void AccountID_btn_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
         }
     }
 }

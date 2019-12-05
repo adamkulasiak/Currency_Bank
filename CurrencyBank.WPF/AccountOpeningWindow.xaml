@@ -25,7 +25,7 @@
             <TextBox x:Name="Amount_tb"  Width="205" Height="25" Margin="82,123,82,56"/>
 
             <Button x:Name="Create_btn" Margin="188,169,0,10" Content="Open" Height="25" HorizontalAlignment="Left" Width="100"/>
-            <Button Content="Go back" HorizontalAlignment="Left" Height="25" Width="100" Margin="85,169,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="Back_btn" Content="Go back" HorizontalAlignment="Left" Height="25" Width="100" Margin="85,169,0,0" VerticalAlignment="Top"/>
 
         </Grid>
     </Border>
