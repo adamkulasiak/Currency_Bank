@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <StartupObject>WebApiCurrencyBank.Program</StartupObject>
+    <RootNamespace>CurrencyBank.API</RootNamespace>
+    <AssemblyName>CurrencyBank.API</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Database\Database.csproj" />
+    <ProjectReference Include="..\Database\CurrencyBank.Database.csproj" />
   </ItemGroup>
 
 </Project>
