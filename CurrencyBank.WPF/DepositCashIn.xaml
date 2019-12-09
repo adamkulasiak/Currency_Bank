@@ -1,21 +1,21 @@
-﻿<Window x:Class="CurrencyBank.WPF.WithdrawalWindow"
+﻿<Window x:Class="CurrencyBank.WPF.DepositCashIn"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CurrencyBank.WPF"
         mc:Ignorable="d"
-        Title="WithdrawalWindow" Height="299" Width="378">
+        Title="Deposit cash" Height="299" Width="378">
     <Border Background="Bisque" CornerRadius="20" Margin="20">
 
         <Grid Margin="20,0,20,0" Background="BlanchedAlmond">
 
-            <Label x:Name="Withdrawal_lbl" Content="Withdrawal" HorizontalAlignment="Center" FontSize="14" FontWeight="Bold" Width="94" Margin="0,23,0,193"/>
+            <Label Content="Deposit" HorizontalAlignment="Center" FontSize="14" FontWeight="Bold" Width="68" Margin="0,23,0,193"/>
             <Label Content="Account ID" HorizontalAlignment="Center" Margin="0,55,0,164" RenderTransformOrigin="0.632,0.618" Width="68"/>
-            <TextBox x:Name="AccountID_txt" HorizontalAlignment="Center" Margin="0,79,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Height="25" TextChanged="AccountID_btn_TextChanged"/>
+            <TextBox x:Name="AccountID_txt" HorizontalAlignment="Center" Margin="0,79,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Height="25"/>
             <Label Content="Amount" HorizontalAlignment="Center" Margin="0,114,0,0" VerticalAlignment="Top" Height="26" Width="54"/>
             <TextBox x:Name="Amount_txt" HorizontalAlignment="Center" Margin="0,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Height="25"/>
-            <Button x:Name="Withdraw_btn" Margin="154,184,0,34" Content="Withdraw" Height="25" HorizontalAlignment="Left" Width="100"/>
+            <Button x:Name="CashIn_btn" Margin="154,184,0,34" Content="Deposit" Height="25" HorizontalAlignment="Left" Width="100"/>
             <Button x:Name="Back_btn" Content="Go back" HorizontalAlignment="Left" Height="25" Width="100" Margin="49,184,0,0" VerticalAlignment="Top"/>
         </Grid>
     </Border>
