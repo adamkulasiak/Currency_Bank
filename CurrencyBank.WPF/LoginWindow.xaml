@@ -17,7 +17,7 @@
                 <Label Content="Password:" HorizontalAlignment="Center"></Label>
                 <PasswordBox x:Name="password_tb"  Width="200" Height="25"/>
 
-                <Button x:Name="Login_btn" Margin="15" Content="Login" Height="25" HorizontalAlignment="Center" Width="100"/>
+                <Button x:Name="Login_btn" Margin="15" Content="Login" Height="25" HorizontalAlignment="Center" Width="100" Click="Login_btn_Click"/>
 
             </StackPanel>
         </Border>
