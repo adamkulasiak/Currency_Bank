@@ -1,10 +1,10 @@
-﻿using Database.Models;
+﻿using CurrencyBank.Database.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Database.Data
+namespace CurrencyBank.Database.Data
 {
     public class Seed
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using Database.Data;
+using CurrencyBank.Database.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -12,14 +12,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using WebApiCurrencyBank.Interfaces;
-using WebApiCurrencyBank.Repositories;
+using CurrencyBank.API.Interfaces;
+using CurrencyBank.API.Repositories;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
 using System.IO;
 
-namespace WebApiCurrencyBank
+namespace CurrencyBank.API
 {
     public class Startup
     {
@@ -77,7 +77,7 @@ namespace WebApiCurrencyBank
 
         private void CreateDatabaseDirectory()
         {
-            string path = @"C:\Database";
+            string path = @"C:\CurrencyBank.Database";
 
             if (Directory.Exists(path))
                 return;

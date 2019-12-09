@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-    <StartupObject>WebApiCurrencyBank.Program</StartupObject>
+    <StartupObject>CurrencyBank.API.Program</StartupObject>
     <RootNamespace>CurrencyBank.API</RootNamespace>
     <AssemblyName>CurrencyBank.API</AssemblyName>
   </PropertyGroup>

@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Database.Data;
-using Database.Models;
+using CurrencyBank.Database.Data;
+using CurrencyBank.Database.Models;
 using Microsoft.AspNetCore.Authorization;
 
-namespace WebApiCurrencyBank.Controllers
+namespace CurrencyBank.API.Controllers
 {
     /// <summary>
     /// Kontoler do zarzadzania uzytkownikami

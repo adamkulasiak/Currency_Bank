@@ -6,7 +6,7 @@
           "files": [
             "**.csproj"
           ],
-          "src": "C:\\Users\\Adam\\Desktop\\Currency_Bank\\API\\WebApiCurrencyBank\\WebApiCurrencyBank"
+          "src": "C:\\Users\\Adam\\Desktop\\Currency_Bank\\API\\CurrencyBank.API\\CurrencyBank.API"
         }
       ],
       "dest": "api",

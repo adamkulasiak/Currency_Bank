@@ -6,15 +6,15 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using Database.Models;
+using CurrencyBank.Database.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using WebApiCurrencyBank.Dtos;
-using WebApiCurrencyBank.Interfaces;
+using CurrencyBank.API.Dtos;
+using CurrencyBank.API.Interfaces;
 
-namespace WebApiCurrencyBank.Controllers
+namespace CurrencyBank.API.Controllers
 {
     /// <summary>
     /// Kontroler do zarzadzania autoryzacja

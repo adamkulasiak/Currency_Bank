@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApiCurrencyBank.Dtos
+namespace CurrencyBank.API.Dtos
 {
     public class UserRegisterDto
     {

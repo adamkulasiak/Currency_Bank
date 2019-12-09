@@ -1,11 +1,11 @@
-﻿using Database.Models;
+﻿using CurrencyBank.Database.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Text;
 
-namespace Database.Data
+namespace CurrencyBank.Database.Data
 {
     public class CurrencyBankContext: DbContext
     {

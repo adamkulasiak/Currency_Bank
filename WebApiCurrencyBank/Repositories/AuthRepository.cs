@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Database.Data;
-using Database.Models;
+using CurrencyBank.Database.Data;
+using CurrencyBank.Database.Models;
 using Microsoft.EntityFrameworkCore;
-using WebApiCurrencyBank.Interfaces;
+using CurrencyBank.API.Interfaces;
 
-namespace WebApiCurrencyBank.Repositories
+namespace CurrencyBank.API.Repositories
 {
     public class AuthRepository : IAuthRepository
     {

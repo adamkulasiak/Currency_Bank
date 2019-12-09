@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Database.Migrations
+namespace CurrencyBank.Database.Migrations
 {
     public partial class Rates : Migration
     {

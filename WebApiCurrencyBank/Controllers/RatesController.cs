@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Database.Models;
+using CurrencyBank.Database.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
-using WebApiCurrencyBank.Interfaces;
+using CurrencyBank.API.Interfaces;
 
-namespace WebApiCurrencyBank.Controllers
+namespace CurrencyBank.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

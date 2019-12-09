@@ -1,10 +1,10 @@
-﻿using Database.Models;
+﻿using CurrencyBank.Database.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApiCurrencyBank.Interfaces
+namespace CurrencyBank.API.Interfaces
 {
     public interface IExchangeRate
     {

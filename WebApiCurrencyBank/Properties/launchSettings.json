@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iis": {
-      "applicationUrl": "http://localhost/WebApiCurrencyBank",
+      "applicationUrl": "http://localhost/CurrencyBank.API",
       "sslPort": 0
     },
     "iisExpress": {
@@ -20,7 +20,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "WebApiCurrencyBank": {
+    "CurrencyBank.API": {
       "commandName": "Project",
       "launchUrl": "weatherforecast",
       "environmentVariables": {

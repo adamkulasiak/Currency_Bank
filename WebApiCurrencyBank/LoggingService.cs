@@ -5,7 +5,7 @@ using System.Linq;
 using System.ServiceProcess;
 using System.Threading.Tasks;
 
-namespace WebApiCurrencyBank
+namespace CurrencyBank.API
 {
     public class LoggingService: ServiceBase
     {

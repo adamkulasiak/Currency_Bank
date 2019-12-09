@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
-using Database.Models;
+using CurrencyBank.Database.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebApiCurrencyBank.Dtos;
+using CurrencyBank.API.Dtos;
 
-namespace WebApiCurrencyBank.AutoMapper
+namespace CurrencyBank.API.AutoMapper
 {
     public class Profiler: Profile
     {

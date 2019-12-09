@@ -21,64 +21,64 @@ namespace CurrencyBank.WPF
     /// </summary>
     public partial class RegisterWindow : Window
     {
-        private static readonly HttpClient client = new HttpClient();
-        public RegisterWindow()
-        {
-            InitializeComponent();
-        }
+        //private static readonly HttpClient client = new HttpClient();
+        //public RegisterWindow()
+        //{
+        //    InitializeComponent();
+        //}
 
-        private void CreateRegisterForm()
-        {
-            FirstName_tb.Text = "";
-            LastName_tb.Text = "";
-            UserName_tb.Text = "";
-            Email_tb.Text = "";
-            Pesel_tb.Text = "";
-            password_tb.Password = "";
-        }
+        //private void CreateRegisterForm()
+        //{
+        //    FirstName_tb.Text = "";
+        //    LastName_tb.Text = "";
+        //    UserName_tb.Text = "";
+        //    Email_tb.Text = "";
+        //    Pesel_tb.Text = "";
+        //    password_tb.Password = "";
+        //}
+        private void Register_btn_Click(object sender, RoutedEventArgs e) { }
+        //private async void Register_btn_Click(object sender, RoutedEventArgs e)
+        //{
+        //Register_btn.IsEnabled = false;
+        //var user = new UserRegisterDto()
+        //{
+        //    FirstName = FirstName_tb.Text,
+        //    LastName = LastName_tb.Text,
+        //    UserName = UserName_tb.Text,
+        //    Email = Email_tb.Text,
+        //    Pesel = Pesel_tb.Text,
+        //    Password = password_tb.Password
+        //};
 
-        private async void Register_btn_Click(object sender, RoutedEventArgs e)
-        {
-            Register_btn.IsEnabled = false;
-            var user = new UserRegisterDto()
-            {
-                FirstName = FirstName_tb.Text,
-                LastName = LastName_tb.Text,
-                UserName = UserName_tb.Text,
-                Email = Email_tb.Text,
-                Pesel = Pesel_tb.Text,
-                Password = password_tb.Password
-            };
+        //var val = new Dictionary<string, string>
+        //{
+        //    {"FirstName",user.FirstName },
+        //    {"LastName",user.LastName },
+        //    {"UserName",user.UserName},
+        //    {"Email",user.Email },
+        //    {"Pesel",user.Pesel },
+        //    {"Password",user.Password },
+        //};
 
-            var val = new Dictionary<string, string>
-            {
-                {"FirstName",user.FirstName },
-                {"LastName",user.LastName },
-                {"UserName",user.UserName},
-                {"Email",user.Email },
-                {"Pesel",user.Pesel },
-                {"Password",user.Password },
-            };
+        //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        //var response = client.PostAsJsonAsync("http://localhost:5000/api/auth/register", user).Result;
 
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            var response = client.PostAsJsonAsync("http://localhost:5000/api/auth/register", user).Result;
+        //MessageBox.Show(response);
 
-            MessageBox.Show(response);
-            
-            if (result is null)
-            {
-                MessageBox.Show("Error");
-                Register_btn.IsEnabled = true;
-            }
-            else
-            {
-                MessageBox.Show("Success");
-                this.CreateRegisterForm();
-                Register_btn.IsEnabled = true;
-                this.Hide();
-                MainWindow mw = new MainWindow();
-                mw.Show();
-            }
-        }
+        //if (result is null)
+        //{
+        //    MessageBox.Show("Error");
+        //    Register_btn.IsEnabled = true;
+        //}
+        //else
+        //{
+        //    MessageBox.Show("Success");
+        //    this.CreateRegisterForm();
+        //    Register_btn.IsEnabled = true;
+        //    this.Hide();
+        //    MainWindow mw = new MainWindow();
+        //    mw.Show();
+        //}
+        //}
     }
 }

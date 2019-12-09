@@ -1,5 +1,5 @@
-﻿using Database.Data;
-using Database.Models;
+﻿using CurrencyBank.Database.Data;
+using CurrencyBank.Database.Models;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 using System;
@@ -8,9 +8,9 @@ using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using WebApiCurrencyBank.Interfaces;
+using CurrencyBank.API.Interfaces;
 
-namespace WebApiCurrencyBank.Repositories
+namespace CurrencyBank.API.Repositories
 {
     public class ExchangeRateRepository : IExchangeRate
     {
