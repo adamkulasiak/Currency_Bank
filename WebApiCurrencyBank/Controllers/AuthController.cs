@@ -66,6 +66,8 @@ namespace CurrencyBank.API.Controllers
 
             if (userFromRepo == null) return Unauthorized();
 
+            var userToReturn = _mapper.Map<UserToReturnDto>(userFromRepo);
+
             //create token
             var claims = new[]
             {
@@ -87,9 +89,11 @@ namespace CurrencyBank.API.Controllers
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
+            userToReturn.Token = tokenHandler.WriteToken(token);
+
             return Ok(new
             {
-                token = tokenHandler.WriteToken(token)
+                userToReturn
             });
         }
     }

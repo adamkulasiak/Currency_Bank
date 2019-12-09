@@ -15,6 +15,7 @@ namespace CurrencyBank.API.AutoMapper
             CreateMap<User, UserRegisterDto>().ReverseMap();
             CreateMap<User, UserLoginDto>().ReverseMap();
             CreateMap<Account, AccountToCreateDto>().ReverseMap();
+            CreateMap<User, UserToReturnDto>().ReverseMap();
         }
         
     }
