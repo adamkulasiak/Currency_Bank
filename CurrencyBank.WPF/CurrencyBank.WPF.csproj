@@ -17,9 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CurrencyBank.BLL\CurrencyBank.BLL.csproj" />
     <ProjectReference Include="..\CurrencyBank.Commons\CurrencyBank.Commons.csproj" />
-    <ProjectReference Include="..\Database\Database.csproj" />
+    <ProjectReference Include="..\Database\CurrencyBank.Database.csproj" />
   </ItemGroup>
 
 </Project>
