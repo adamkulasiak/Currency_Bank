@@ -1,6 +1,7 @@
 ﻿using CurrencyBank.WPF.Dto;
 using CurrencyBank.WPF.Models;
 using CurrencyBank.WPF.Services;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -37,11 +38,32 @@ namespace CurrencyBank.WPF
             };
 
             var response = _authService.Login(userLoginDto);
-            JObject json = JObject.Parse(response.Content.ReadAsStringAsync().Result);
-            var loggedInUser = new LoggedInUser()
+
+            if (response.IsSuccessStatusCode)
             {
-                Token = (string)json.SelectToken("token"),
-            };
+                JObject json = JObject.Parse(response.Content.ReadAsStringAsync().Result);
+
+                var loggedInUser = new LoggedInUser()
+                {
+                    Id = (int)json.SelectToken("userToReturn.id"),
+                    FirstName = (string)json.SelectToken("userToReturn.firstName"),
+                    LastName = (string)json.SelectToken("userToReturn.lastName"),
+                    UserName = (string)json.SelectToken("userToReturn.userName"),
+                    Email = (string)json.SelectToken("userToReturn.email"),
+                    Pesel = (string)json.SelectToken("userToReturn.pesel"),
+                    CreatedDate = (DateTime)json.SelectToken("userToReturn.createdDate"),
+                    Token = (string)json.SelectToken("userToReturn.token"),
+                };
+
+                //open main window
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.Show();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Try again.");
+            }
         }
 
     }
