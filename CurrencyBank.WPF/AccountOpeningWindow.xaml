@@ -5,28 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CurrencyBank.WPF"
         mc:Ignorable="d"
-        Title="Open new account" Height="300" Width="450">
-    <Border Background="Bisque" CornerRadius="20" Margin="20">
-        <Grid Margin="20" Background="BlanchedAlmond">
+        Title="Open new account" Height="378" Width="450">
+    <Grid Margin="10" Background="BlanchedAlmond">
+        <Label Content="Label" Width="100" Height="25" Margin="165,10,165,307"/>
 
-            <Label Content="Open a new account!" HorizontalAlignment="Center" Foreground="Black" FontSize="14" FontWeight="Bold" Margin="0,0,0,173"></Label>
-            <Label Content="Choose Your currency:" HorizontalAlignment="Center" Margin="0,36,0,140"></Label>
-            <ComboBox x:Name="CurrencyList_lb" Height="25" Width="206" HorizontalAlignment="Center" Margin="0,62,0,117" >
 
-                <ComboBoxItem Content="PLN"/>
-                <ComboBoxItem Content="GBP"/>
-                <ComboBoxItem Content="HUF"/>
-                <ComboBoxItem Content="RON"/>
-                <ComboBoxItem Content="CZK"/>
-                <ComboBoxItem Content="EUR"/>
-
-            </ComboBox>
-            <Label Content="Amount:" HorizontalAlignment="Center" Margin="0,92,0,86"></Label>
-            <TextBox x:Name="Amount_tb"  Width="205" Height="25" Margin="82,123,82,56"/>
-
-            <Button x:Name="Create_btn" Margin="188,169,0,10" Content="Open" Height="25" HorizontalAlignment="Left" Width="100"/>
-            <Button x:Name="Back_btn" Content="Go back" HorizontalAlignment="Left" Height="25" Width="100" Margin="85,169,0,0" VerticalAlignment="Top"/>
-
-        </Grid>
-    </Border>
+    </Grid>
 </Window>

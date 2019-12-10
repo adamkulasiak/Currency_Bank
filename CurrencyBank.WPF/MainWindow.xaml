@@ -5,35 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CurrencyBank.WPF"
         mc:Ignorable="d"
-        Title="User profile" Height="450" Width="800">
+        Title="User profile" Height="450" Width="900">
     <Border Background="Bisque" CornerRadius="20" Margin="20">
-        <Grid  Margin="20" Background="BlanchedAlmond">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="581*"/>
-                <ColumnDefinition Width="139*"/>
-            </Grid.ColumnDefinitions>
+        <Grid  Margin="10,0,10,0" Background="BlanchedAlmond" Height="384">
 
-            <Label x:Name="manageYourAccounts" Content="Manage Your accounts" HorizontalAlignment="Left" FontSize="14" FontWeight="Bold" Width="166" Margin="271,19,0,301"/>
-            <Label Content="Your accounts:" Width="87"  HorizontalAlignment="Left" Margin="0,72,0,256"/>
-            <ListView x:Name="accountsList" Margin="0,103,221,92" SelectionChanged="accountsList_SelectionChanged_1">
+            <ListView x:Name="accountsList" Margin="10,124,362,71" SelectionChanged="accountsList_SelectionChanged_1">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn x:Name="Id_column" Width="40" Header="ID" DisplayMemberBinding="{Binding Id}"/>
-                        <GridViewColumn x:Name="AccountNumber_column" Width="150" Header="Account Number" DisplayMemberBinding="{Binding AccountNumber}"/>
-                        <GridViewColumn x:Name="Balance_column" Width="100" Header="Balance" DisplayMemberBinding="{Binding Balance}"/>
+                        <GridViewColumn x:Name="AccountNumber_column" Width="220" Header="Account Number" DisplayMemberBinding="{Binding AccountNumber}"/>
+                        <GridViewColumn x:Name="Balance_column" Width="110" Header="Balance" DisplayMemberBinding="{Binding Balance}"/>
                         <GridViewColumn x:Name="Currency_column" Width="70" Header="Currency" DisplayMemberBinding="{Binding Currency}"/>
                     </GridView>
                 </ListView.View>
             </ListView>
-            <Label Content="Actions" Width="100" HorizontalAlignment="Left" Margin="360,72,0,0" VerticalAlignment="Top" Height="26" />
-            <Button x:Name="Create_btn" Content="Open a new account" HorizontalAlignment="Left" Margin="365,103,0,0" VerticalAlignment="Top" Width="163" Height="35"/>
-            <Button x:Name="TransferMoney_btn" Content="New transfer" HorizontalAlignment="Left" Margin="365,143,0,0" VerticalAlignment="Top" Width="163" Height="35"/>
-            <Button x:Name="Exchange_btn" Content="Exchange" HorizontalAlignment="Left" Margin="533,143,0,0" VerticalAlignment="Top" Width="163" Height="35" Grid.ColumnSpan="2"/>
-            <Button x:Name="CashIn_btn" Content="Deposit the currency" HorizontalAlignment="Left" Margin="365,183,0,0" VerticalAlignment="Top" Width="163" Height="35"/>
-            <Button x:Name="CashOut_btn" Content="Withdrawal" HorizontalAlignment="Left" Margin="533,103,0,0" VerticalAlignment="Top" Height="35" Width="163" Grid.ColumnSpan="2"/>
-            <Button x:Name="DeleteAccount_btn" Content="Delete an account" HorizontalAlignment="Left" Margin="533,183,0,0" VerticalAlignment="Top" Height="35" Width="163" Grid.ColumnSpan="2"/>
-            <Label x:Name="loggedInAs" HorizontalAlignment="Left" Margin="442,39,0,0" VerticalAlignment="Top" Height="35" Width="auto">
-            </Label>
+            <Label Content="Manage Your accounts" FontSize="15" FontWeight="Bold" Width="172" Margin="234,10,406,334"/>
+            <Label Content="Your accounts:"  Height="26" Margin="10,93,702,265" />
+            <Label Content="Actions" Width="87" Height="26" Margin="472,93,253,265" />
+            <Button x:Name="Create_btn" Content="Open a new account" Margin="472,193,200,156" Width="140" Height="35" Click="Create_btn_Click"/>
+            <Button x:Name="TransferMoney_btn" Content="New transfer" Margin="472,124,200,225" Width="140" Height="35" Click="TransferMoney_btn_Click"/>
+            <Button x:Name="Exchange_btn" Content="Exchange" Margin="640,193,32,156" Width="140" Height="35"/>
+            <Button x:Name="CashIn_btn" Content="Deposit the currency" Margin="472,260,200,89" Width="140" Height="35"/>
+            <Button x:Name="CashOut_btn" Content="Withdrawal" Margin="640,124,32,225" Height="35" Width="140"/>
+            <Button x:Name="DeleteAccount_btn" Content="Delete an account" Margin="640,260,32,89" Height="35" Width="140"/>
+            <Label x:Name="loggedInAs" Margin="610,10,10,339" Height="35" Width="192"/>
+
 
 
         </Grid>

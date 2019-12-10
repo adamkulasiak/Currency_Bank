@@ -9,7 +9,7 @@
     <Border Background="Bisque" CornerRadius="20" Margin="20">
         <Grid Margin="20" Background="BlanchedAlmond">
             <Label Content="New Transfer" HorizontalAlignment="Center" Foreground="Black" FontSize="14" FontWeight="Bold" Margin="0,0,0,249"></Label>
-            <Label Content="From:" HorizontalAlignment="Center" Margin="0,38,0,0" VerticalAlignment="Top" Width="46"/>
+            <Label Content="From:" HorizontalAlignment="Center" Margin="0,38,0,0" Width="46"/>
             <Label Content="To:" HorizontalAlignment="Center" VerticalAlignment="Top" Width="46" Margin="0,94,0,0"/>
             <TextBox x:Name="FromAccount_btn" HorizontalAlignment="Center" Margin="0,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Height="25"/>
             <TextBox x:Name="ToAccount_btn" HorizontalAlignment="Center" Margin="0,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Height="25"/>

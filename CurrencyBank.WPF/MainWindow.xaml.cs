@@ -53,5 +53,17 @@ namespace CurrencyBank.WPF
         {
 
         }
+
+        private void Create_btn_Click(object sender, RoutedEventArgs e)
+        {
+            AccountOpeningWindow accountOpeningWindow = new AccountOpeningWindow();
+            accountOpeningWindow.Show();
+        }
+
+        private void TransferMoney_btn_Click(object sender, RoutedEventArgs e)
+        {
+            NewTransferWindow newTransferWindow = new NewTransferWindow();
+            newTransferWindow.Show();
+        }
     }
 }

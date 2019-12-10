@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CurrencyBank.WPF"
         mc:Ignorable="d"
-        Title="Login" Height="300" Width="450" Background="Azure">
+        Title="Login" Height="346" Width="450" Background="Azure">
         <Border Background="Bisque" CornerRadius="20" Margin="20">
             <StackPanel Orientation="Vertical" Margin="20" Background="BlanchedAlmond">
 
