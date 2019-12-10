@@ -30,6 +30,20 @@ namespace CurrencyBank.API.Controllers
         }
 
         /// <summary>
+        /// Akcja do pobierania kont dla zalogowanego uzytkownika
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("getAccounts")]
+        public async Task<IActionResult> GetAccountsForUser()
+        {
+            var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var accounts = await _accountRepo.GetAccountForUser(currentUserId);
+            if (accounts is null)
+                return NotFound();
+            return Ok(accounts);
+        }
+
+        /// <summary>
         /// Akcja do dodawania konta dla uzytkownika ktory wywola ta metode
         /// </summary>
         /// <param name="accountToCreateDto"></param>

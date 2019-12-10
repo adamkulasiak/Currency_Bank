@@ -1,4 +1,7 @@
-﻿using System;
+﻿using CurrencyBank.WPF.Models;
+using CurrencyBank.WPF.Services;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +23,25 @@ namespace CurrencyBank.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        private AccountService _accountService;
+        private LoggedInUser _loggedInUser;
+        
         public MainWindow()
         {
             InitializeComponent();
+            _accountService = new AccountService();
+        }
+
+        public MainWindow(LoggedInUser loggedInUser) : this()
+        {
+            _loggedInUser = loggedInUser;
+            SetView();
+        }
+
+        public void SetView()
+        {
+            accountsList.ItemsSource = _loggedInUser.Accounts;
+            loggedInAs.Content = $"Logged in as: {_loggedInUser.UserName}";
         }
 
         private void accountsList_SelectionChanged(object sender, SelectionChangedEventArgs e)

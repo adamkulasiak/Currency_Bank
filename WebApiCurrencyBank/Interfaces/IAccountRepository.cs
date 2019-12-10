@@ -8,6 +8,7 @@ namespace CurrencyBank.API.Interfaces
 {
     public interface IAccountRepository
     {
+        Task<List<Account>> GetAccountForUser(int userId);
         Task<Account> Create(int userId, Currency currency);
         Task<Account> CashIn(int userId, int accountId, decimal ammount);
         Task<Account> CashOut(int userId, int accountId, decimal ammount);

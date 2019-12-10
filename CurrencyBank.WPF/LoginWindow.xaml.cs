@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,6 +28,10 @@ namespace CurrencyBank.WPF
         {
             InitializeComponent();
             _authService = new AuthService();
+
+            //to remove later
+            UserName_tb.Text = "jkowalski";
+            password_tb.Password = "test12345";
         }
 
         private void Login_btn_Click(object sender, RoutedEventArgs e)
@@ -53,10 +58,11 @@ namespace CurrencyBank.WPF
                     Pesel = (string)json.SelectToken("userToReturn.pesel"),
                     CreatedDate = (DateTime)json.SelectToken("userToReturn.createdDate"),
                     Token = (string)json.SelectToken("userToReturn.token"),
+                    Accounts = json.SelectToken("userToReturn.accounts").ToObject<List<Account>>()
                 };
 
                 //open main window
-                MainWindow mainWindow = new MainWindow();
+                MainWindow mainWindow = new MainWindow(loggedInUser);
                 mainWindow.Show();
                 this.Close();
             }

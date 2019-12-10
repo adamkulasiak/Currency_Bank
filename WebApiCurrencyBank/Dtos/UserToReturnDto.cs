@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CurrencyBank.Database.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,5 +16,6 @@ namespace CurrencyBank.API.Dtos
         public string Pesel { get; set; }
         public DateTime CreatedDate { get; set; }
         public string Token { get; set; }
+        public ICollection<Account> Accounts { get; set; }
     }
 }

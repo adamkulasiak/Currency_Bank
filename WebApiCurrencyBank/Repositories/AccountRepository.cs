@@ -25,6 +25,21 @@ namespace CurrencyBank.API.Repositories
         }
         #region public methods
         /// <summary>
+        /// Metoda sluzaca do pobierania wszystkich kont uzytkownika
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public async Task<List<Account>> GetAccountForUser(int userId)
+        {
+            var accounts = await _context.Accounts.Where(u => u.UserId == userId).ToListAsync();
+
+            if (accounts is null)
+                return null;
+
+            return accounts;
+        }
+
+        /// <summary>
         /// Metoda sluzaca do stworzenia konta
         /// </summary>
         /// <param name="userId">id usera dla ktorego ma byc utworzone konto</param>

@@ -20,7 +20,7 @@ namespace CurrencyBank.API.Repositories
 
         public async Task<User> Login(string username, string password)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == username);
+            var user = await _context.Users.Include(x => x.Accounts).FirstOrDefaultAsync(x => x.UserName == username);
 
             if (user == null) return null;
 
