@@ -29,6 +29,7 @@
             <Button x:Name="CashOut_btn" Content="Withdrawal" Margin="640,124,32,225" Height="35" Width="140" Click="CashOut_btn_Click"/>
             <Button x:Name="DeleteAccount_btn" Content="Delete an account" Margin="640,260,32,89" Height="35" Width="140" Click="DeleteAccount_btn_Click"/>
             <Label x:Name="loggedInAs" Margin="610,10,10,339" Height="35" Width="192"/>
+            <Button x:Name="LoggOff_btn" Content="Logg Off" Margin="624,50,97,312"/>
 
 
 

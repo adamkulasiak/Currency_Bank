@@ -5,19 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CurrencyBank.WPF"
         mc:Ignorable="d"
-        Title="NewTransferWindow" Height="408" Width="384">
-    <Border Background="Bisque" CornerRadius="20" Margin="20">
-        <Grid Margin="20" Background="BlanchedAlmond">
-            <Label Content="New Transfer" HorizontalAlignment="Center" Foreground="Black" FontSize="14" FontWeight="Bold"/>
-            <Label Content="From:" HorizontalAlignment="Center" Margin="0,38,0,0" Width="46"/>
-            <Label Content="To:" HorizontalAlignment="Center" VerticalAlignment="Top" Width="46" Margin="0,94,0,0" Height="218"/>
-            <TextBox x:Name="FromAccount_btn" HorizontalAlignment="Center" Margin="0,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Height="25"/>
-            <TextBox x:Name="ToAccount_btn" HorizontalAlignment="Center" Margin="0,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Height="25"/>
-            <Label Content="Amount:" HorizontalAlignment="Center" Margin="0,150,0,0" VerticalAlignment="Top" Width="64" Height="162"/>
-            <TextBox  HorizontalAlignment="Center" Margin="0,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Height="25"/>
-            <Button x:Name="Transfer_btn" Margin="157,216,0,71" Content="Transfer" Height="25" HorizontalAlignment="Left" Width="100"/>
-            <Button x:Name="Back_btn" Content="Go back" HorizontalAlignment="Left" Height="25" Width="100" Margin="52,216,0,0" VerticalAlignment="Top"/>
+        Title="NewTransferWindow" Height="384" Width="384">
+    <Grid Margin="20,0,20,0" Background="BlanchedAlmond" Height="322">
+        <Label Content="New Transfer" HorizontalAlignment="Center" Foreground="Black" FontSize="14" FontWeight="Bold" Margin="0,10,0,230"/>
+        <Label Content="From:" HorizontalAlignment="Center" Margin="0,68,0,0" Width="46" Height="242" VerticalAlignment="Top"/>
+        <Label Content="Destination account number:" HorizontalAlignment="Center" VerticalAlignment="Top" Width="164" Margin="0,122,0,0" Height="54"/>
+        <ComboBox x:Name="FromAccount_cbbx" Width="206" Height="25" Margin="49,97,49,200">
+            <ComboBoxItem x:Name="AccountsOfLoggedUser_cbbx"/>
+        </ComboBox>
+        <TextBox x:Name="ToAccount_btn" HorizontalAlignment="Center" Margin="0,151,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Height="25"/>
+        <Label Content="Amount:" HorizontalAlignment="Center" Margin="0,176,0,0" VerticalAlignment="Top" Width="64" Height="52"/>
+        <TextBox  HorizontalAlignment="Center" Margin="0,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Height="25"/>
+        <Button x:Name="Transfer_btn" Margin="174,244,68,53" Content="Transfer" Height="25"/>
+        <Button x:Name="Back_btn" Content="Go back" Height="25" Margin="69,244,175,53" RenderTransformOrigin="0.512,0.401"/>
 
-        </Grid>
-    </Border>
+    </Grid>
 </Window>

@@ -5,37 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CurrencyBank.WPF"
         mc:Ignorable="d"
-        Title="ExchangeWindow" Height="438" Width="384">
-    <Border Background="Bisque" CornerRadius="20" Margin="20">
-        <Grid Margin="20" Background="BlanchedAlmond">
-            <Label Content="Exchange" HorizontalAlignment="Center" Foreground="Black" FontSize="14" FontWeight="Bold" Margin="0,28,0,288"></Label>
-            <Label Content="Choose Your currency:" HorizontalAlignment="Center" Margin="0,71,0,0" VerticalAlignment="Top" Width="131"/>
-            <Label Content="Choose target currency:" HorizontalAlignment="Center" VerticalAlignment="Top" Width="138" Margin="0,132,0,0"/>
-            <ComboBox x:Name="ExchangeFrom_lb" Height="25" Width="206" HorizontalAlignment="Center" Margin="0,102,0,227" >
+        Title="ExchangeWindow" Height="383" Width="384">
+    <Grid Margin="10,0,10,0" Background="BlanchedAlmond" Height="343">
+        <Label Content="Choose Your currency:" Height="30" Margin="114,66,114,247"/>
+        <Label Content="Choose target currency:" Height="30" Margin="111,131,111,182"/>
+        <ComboBox x:Name="ExchangeFrom_lb" Height="25" Width="206" Margin="69,101,69,217" >
 
-                <ComboBoxItem Content="PLN"/>
-                <ComboBoxItem Content="GBP"/>
-                <ComboBoxItem Content="HUF"/>
-                <ComboBoxItem Content="RON"/>
-                <ComboBoxItem Content="CZK"/>
-                <ComboBoxItem Content="EUR"/>
+            <ComboBoxItem Content="PLN"/>
+            <ComboBoxItem Content="GBP"/>
+            <ComboBoxItem Content="HUF"/>
+            <ComboBoxItem Content="RON"/>
+            <ComboBoxItem Content="CZK"/>
+            <ComboBoxItem Content="EUR"/>
 
-            </ComboBox>
-            <ComboBox x:Name="ExchangeTo_lb" Height="25" Width="206" HorizontalAlignment="Center" Margin="0,163,0,166" >
+        </ComboBox>
+        <ComboBox x:Name="ExchangeTo_lb" Height="25" Width="206" Margin="69,166,69,152" >
 
-                <ComboBoxItem Content="PLN"/>
-                <ComboBoxItem Content="GBP"/>
-                <ComboBoxItem Content="HUF"/>
-                <ComboBoxItem Content="RON"/>
-                <ComboBoxItem Content="CZK"/>
-                <ComboBoxItem Content="EUR"/>
+            <ComboBoxItem Content="PLN"/>
+            <ComboBoxItem Content="GBP"/>
+            <ComboBoxItem Content="HUF"/>
+            <ComboBoxItem Content="RON"/>
+            <ComboBoxItem Content="CZK"/>
+            <ComboBoxItem Content="EUR"/>
 
-            </ComboBox>
-            <Label Content="Amount:" HorizontalAlignment="Center" Margin="0,188,0,0" VerticalAlignment="Top" Width="64"/>
-            <TextBox  HorizontalAlignment="Center" Margin="0,219,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Height="25"/>
-            <Button x:Name="Exchange_btn" Margin="157,260,0,57" Content="Transfer" Height="25" HorizontalAlignment="Left" Width="100"/>
-            <Button x:Name="Back_btn" Content="Go back" HorizontalAlignment="Left" Height="25" Width="100" Margin="52,260,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.48,1.642"/>
+        </ComboBox>
+        <Label Content="Amount:" Height="30" Margin="150,196,150,117" Width="64" />
+        <TextBox  HorizontalAlignment="Center" Margin="0,231,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Height="25"/>
+        <Button x:Name="Exchange_btn" Content="Transfer" Height="25" Margin="174,269,70,49" Width="100"/>
+        <Button x:Name="Back_btn" Content="Go back" Height="25" Width="100" Margin="69,269,175,49"/>
+        <Label Content="Exchange the currency" Height="30" FontSize="14" FontWeight="Bold" Margin="79,10,80,303" />
 
-        </Grid>
-    </Border>
+    </Grid>
 </Window>
