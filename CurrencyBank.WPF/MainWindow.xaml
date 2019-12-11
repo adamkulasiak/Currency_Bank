@@ -24,10 +24,10 @@
             <Label Content="Actions" Width="87" Height="26" Margin="472,93,253,265" />
             <Button x:Name="Create_btn" Content="Open a new account" Margin="472,193,200,156" Width="140" Height="35" Click="Create_btn_Click"/>
             <Button x:Name="TransferMoney_btn" Content="New transfer" Margin="472,124,200,225" Width="140" Height="35" Click="TransferMoney_btn_Click"/>
-            <Button x:Name="Exchange_btn" Content="Exchange" Margin="640,193,32,156" Width="140" Height="35"/>
-            <Button x:Name="CashIn_btn" Content="Deposit the currency" Margin="472,260,200,89" Width="140" Height="35"/>
-            <Button x:Name="CashOut_btn" Content="Withdrawal" Margin="640,124,32,225" Height="35" Width="140"/>
-            <Button x:Name="DeleteAccount_btn" Content="Delete an account" Margin="640,260,32,89" Height="35" Width="140"/>
+            <Button x:Name="Exchange_btn" Content="Exchange" Margin="640,193,32,156" Width="140" Height="35" Click="Exchange_btn_Click"/>
+            <Button x:Name="CashIn_btn" Content="Deposit the currency" Margin="472,260,200,89" Width="140" Height="35" Click="CashIn_btn_Click"/>
+            <Button x:Name="CashOut_btn" Content="Withdrawal" Margin="640,124,32,225" Height="35" Width="140" Click="CashOut_btn_Click"/>
+            <Button x:Name="DeleteAccount_btn" Content="Delete an account" Margin="640,260,32,89" Height="35" Width="140" Click="DeleteAccount_btn_Click"/>
             <Label x:Name="loggedInAs" Margin="610,10,10,339" Height="35" Width="192"/>
 
 
