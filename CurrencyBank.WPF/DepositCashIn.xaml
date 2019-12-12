@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CurrencyBank.WPF"
         mc:Ignorable="d"
-        Title="Deposit cash" Height="299" Width="378">
-    <Border Background="Bisque" CornerRadius="20" Margin="20">
+        Title="Deposit cash" Height="300" Width="400">
+    <Border Background="Bisque" Height="250" CornerRadius="20" Margin="20,0,20,0">
 
         <Grid Margin="20,0,20,0" Background="BlanchedAlmond">
 
@@ -15,7 +15,7 @@
             <TextBox x:Name="AccountID_txt" HorizontalAlignment="Center" Margin="0,79,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Height="25"/>
             <Label Content="Amount" HorizontalAlignment="Center" Margin="0,114,0,0" VerticalAlignment="Top" Height="26" Width="54"/>
             <TextBox x:Name="Amount_txt" HorizontalAlignment="Center" Margin="0,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Height="25"/>
-            <Button x:Name="CashIn_btn" Margin="154,184,0,34" Content="Deposit" Height="25" HorizontalAlignment="Left" Width="100"/>
+            <Button x:Name="CashIn_btn" Margin="154,184,0,41" Content="Deposit" Height="25" HorizontalAlignment="Left" Width="100"/>
             <Button x:Name="Back_btn" Content="Go back" HorizontalAlignment="Left" Height="25" Width="100" Margin="49,184,0,0" VerticalAlignment="Top"/>
         </Grid>
     </Border>
