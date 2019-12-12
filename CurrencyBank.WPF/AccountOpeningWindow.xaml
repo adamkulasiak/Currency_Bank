@@ -6,9 +6,22 @@
         xmlns:local="clr-namespace:CurrencyBank.WPF"
         mc:Ignorable="d"
         Title="Open new account" Height="378" Width="450">
-    <Grid Margin="10" Background="BlanchedAlmond">
-        <Label Content="Label" Width="100" Height="25" Margin="165,10,165,307"/>
+    <Border Background="Bisque" Height="360" CornerRadius="20" Margin="20,0,20,0">
 
+        <Grid Margin="10" Background="BlanchedAlmond">
+            <Label Content="Open a new account" Height="30" FontSize="14" FontWeight="Bold" Margin="123,10,115,300"/>
+            <ComboBox x:Name="Currency_lb" Height="25" Width="206" Margin="67,90,67,215" >
 
-    </Grid>
+                <ComboBoxItem Content="PLN"/>
+                <ComboBoxItem Content="GBP"/>
+                <ComboBoxItem Content="HUF"/>
+                <ComboBoxItem Content="RON"/>
+                <ComboBoxItem Content="CZK"/>
+                <ComboBoxItem Content="EUR"/>
+
+            </ComboBox>
+            <Label Content="Choose the currency" Height="25" Margin="130,65,130,250"/>
+
+        </Grid>
+    </Border>
 </Window>
