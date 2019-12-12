@@ -5,8 +5,10 @@ using System.ServiceProcess;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.EventLog;
 
 namespace CurrencyBank.API
 {
@@ -15,14 +17,25 @@ namespace CurrencyBank.API
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
-            //ServiceBase.Run(new LoggingService());
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
+            .ConfigureServices(services =>
+            {
+                services.Configure<EventLogSettings>(config =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                      config.LogName = "CurrencyBankApi";
+                      config.SourceName = "CurrencyBankApi Source";
                 });
+            })
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Startup>();
+            })
+            .ConfigureWebHost(config =>
+            {
+                config.UseUrls("http://*:5000");
+            }).UseWindowsService();
     }
 }
