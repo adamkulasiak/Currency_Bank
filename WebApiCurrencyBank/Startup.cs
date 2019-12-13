@@ -39,9 +39,11 @@ namespace CurrencyBank.API
             services.AddCors();
             services.AddAutoMapper();
             services.AddTransient<Seed>();
+            services.AddScoped<IGenericRepository, GenericRepository>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IExchangeRate, ExchangeRateRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                         .AddJwtBearer(options => {
                             options.TokenValidationParameters = new TokenValidationParameters
