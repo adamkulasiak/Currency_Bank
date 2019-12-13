@@ -24,6 +24,13 @@ namespace CurrencyBank.Database.Models
         public DateTime CreatedDate { get; set; }
         public DateTime? DeletedTime { get; set; }
         public bool IsDeleted { get; set; } = false;
+        public Languages? Language { get; set; }
         public virtual ICollection<Account> Accounts { get; set; }
+    }
+
+    public enum Languages: byte
+    {
+        PL = 1,
+        EN
     }
 }

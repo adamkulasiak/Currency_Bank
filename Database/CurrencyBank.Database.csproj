@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-    <RootNamespace>CurrencyBank.CurrencyBank.Database</RootNamespace>
-    <AssemblyName>CurrencyBank.CurrencyBank.Database</AssemblyName>
+    <RootNamespace>CurrencyBank.Database</RootNamespace>
+    <AssemblyName>CurrencyBank.Database</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
