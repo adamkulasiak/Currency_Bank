@@ -9,6 +9,8 @@ using CurrencyBank.Database.Data;
 using CurrencyBank.Database.Models;
 using Microsoft.AspNetCore.Authorization;
 using CurrencyBank.API.Interfaces;
+using CurrencyBank.API.Dtos;
+using AutoMapper;
 
 namespace CurrencyBank.API.Controllers
 {
@@ -21,10 +23,12 @@ namespace CurrencyBank.API.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _repo;
+        private readonly IMapper _mapper;
 
-        public UserController(IUserRepository userRepository)
+        public UserController(IUserRepository userRepository, IMapper mapper)
         {
             _repo = userRepository;
+            _mapper = mapper;
         }
 
         /// <summary>
@@ -49,14 +53,16 @@ namespace CurrencyBank.API.Controllers
         /// <returns>uzytkownik wraz z kontem/kontami</returns>
         // GET: api/User/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<ActionResult<UserToReturnDto>> GetUser(int id)
         {
             var user = await _repo.GetUser(id);
 
             if (user == null)
                 return NotFound();
 
-            return Ok(user);
+            var userToReturn = _mapper.Map<UserToReturnDto>(user);
+
+            return Ok(userToReturn);
         }
 
         // PUT: api/User/5
