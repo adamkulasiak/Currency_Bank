@@ -5,9 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CurrencyBank.WPF"
         mc:Ignorable="d"
-        Title="DeleteAccount" Height="450" Width="800">
-    <Grid>
-        <Label Content="ToDo" HorizontalAlignment="Left" Margin="385,0,0,0" VerticalAlignment="Center" Width="145"/>
+        Title="Delete an account" Height="300" Width="400">
+    <Border Background="Bisque" Height="250" CornerRadius="20" Margin="20,0,20,0">
 
-    </Grid>
+        <Grid Margin="5,10,5,0" Width="350" Height="240" Background="BlanchedAlmond">
+            <Label Content="Delete an account" Height="30" FontSize="14" FontWeight="Bold" Margin="92,10,92,190"/>
+            <Label Content="Choose an account ID" Margin="104,56,104,157"/>
+            <ComboBox x:Name="ExchangeTo_lb" Height="25" Width="206" Margin="72,88,72,127" >
+
+            </ComboBox>
+            <Label Content="Are You sure You want to delete that account?" Margin="46,118,46,86"/>
+            <Button x:Name="DeleteAcc_btn" Margin="67,154,173,51" Content="Delete" Height="25" Width="100"/>
+            <Button x:Name="Back_btn" Content="Go back" Height="25" Width="100" Margin="173,154,67,51"/>
+
+        </Grid>
+    </Border>
 </Window>

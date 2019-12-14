@@ -21,5 +21,15 @@ namespace CurrencyBank.WPF
         {
             InitializeComponent();
         }
+
+        private void Currency_lb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void Back_btn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

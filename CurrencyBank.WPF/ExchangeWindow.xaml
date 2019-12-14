@@ -33,7 +33,7 @@
             <Label Content="Amount:" Height="30" Margin="130,189,130,111" />
             <TextBox Margin="67,224,67,81" TextWrapping="Wrap" Width="206" Height="25"/>
             <Button x:Name="Exchange_btn" Content="Transfer" Height="25" Margin="175,277,65,28" Width="100"/>
-            <Button x:Name="Back_btn" Content="Go back" Height="25" Margin="67,277,170,28"/>
+            <Button x:Name="Back_btn" Content="Go back" Height="25" Margin="67,277,170,28" Width="100"/>
             <Label Content="Exchange the currency" Height="30" FontSize="14" FontWeight="Bold" Margin="96,10,77,290" />
 
         </Grid>

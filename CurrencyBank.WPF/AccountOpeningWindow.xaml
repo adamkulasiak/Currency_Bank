@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CurrencyBank.WPF"
         mc:Ignorable="d"
-        Title="Open new account" Height="378" Width="450">
-    <Border Background="Bisque" Height="360" CornerRadius="20" Margin="20,0,20,0">
+        Title="Open new account" Height="300" Width="400">
+    <Border Background="Bisque" Height="250" CornerRadius="20" Margin="20,0,20,0">
 
-        <Grid Margin="10" Background="BlanchedAlmond">
-            <Label Content="Open a new account" Height="30" FontSize="14" FontWeight="Bold" Margin="123,10,115,300"/>
-            <ComboBox x:Name="Currency_lb" Height="25" Width="206" Margin="67,90,67,215" >
+        <Grid Margin="10,10,10,10" Width="350" Height="240" Background="BlanchedAlmond">
+            <Label Content="Open a new account" Height="30" FontSize="14" FontWeight="Bold" Margin="92,10,92,190"/>
+            <ComboBox x:Name="Currency_lb" Width="206" Height="25" Margin="67,99,67,106" SelectionChanged="Currency_lb_SelectionChanged" >
 
                 <ComboBoxItem Content="PLN"/>
                 <ComboBoxItem Content="GBP"/>
@@ -20,7 +20,9 @@
                 <ComboBoxItem Content="EUR"/>
 
             </ComboBox>
-            <Label Content="Choose the currency" Height="25" Margin="130,65,130,250"/>
+            <Label Content="Choose the currency" Height="25" Margin="106,65,106,140"/>
+            <Button x:Name="OpenAcc_btn" Margin="67,154,173,51" Content="Open" Height="25" Width="100"/>
+            <Button x:Name="Back_btn" Content="Go back" Height="25" Width="100" Margin="173,154,67,51" Click="Back_btn_Click"/>
 
         </Grid>
     </Border>
