@@ -117,17 +117,44 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccountId_lb" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="AccountNumber_lb" xml:space="preserve">
+    <value>Numer konta</value>
+  </data>
+  <data name="Actions_lb" xml:space="preserve">
+    <value>Akcje</value>
+  </data>
+  <data name="Balance_lb" xml:space="preserve">
+    <value>Stan konta</value>
+  </data>
   <data name="CreateYourAccount_lb" xml:space="preserve">
     <value>Utwórz konto</value>
   </data>
+  <data name="Currency_lb" xml:space="preserve">
+    <value>Waluta</value>
+  </data>
+  <data name="DeleteAnAccount_btn" xml:space="preserve">
+    <value>Usuń konto</value>
+  </data>
+  <data name="DepositTheCurrency_btn" xml:space="preserve">
+    <value>Wpłata</value>
+  </data>
   <data name="Email_lb" xml:space="preserve">
     <value>Email</value>
+  </data>
+  <data name="Exchange_btn" xml:space="preserve">
+    <value>Wymiana walut</value>
   </data>
   <data name="Firstname_lb" xml:space="preserve">
     <value>Imię</value>
   </data>
   <data name="Lastname_lb" xml:space="preserve">
     <value>Nazwisko</value>
+  </data>
+  <data name="LoggedInAs_lb" xml:space="preserve">
+    <value>Zalogowany jako</value>
   </data>
   <data name="LogIntoYourAccount_lb" xml:space="preserve">
     <value>Zaloguj się na swoje konto</value>
@@ -137,6 +164,18 @@
   </data>
   <data name="Login_lb" xml:space="preserve">
     <value>Login</value>
+  </data>
+  <data name="LogOff_btn" xml:space="preserve">
+    <value>Wyloguj się</value>
+  </data>
+  <data name="ManageYourAccounts_lb" xml:space="preserve">
+    <value>Zarządzaj swoimi kontami</value>
+  </data>
+  <data name="NewTransfer_btn" xml:space="preserve">
+    <value>Nowy przelew</value>
+  </data>
+  <data name="OpenANewAccount_btn" xml:space="preserve">
+    <value>Otwórz nowe konto</value>
   </data>
   <data name="Password_lb" xml:space="preserve">
     <value>Hasło</value>
@@ -152,5 +191,11 @@
   </data>
   <data name="Username_lb" xml:space="preserve">
     <value>Nazwa użytkownika</value>
+  </data>
+  <data name="Withdrawal_btn" xml:space="preserve">
+    <value>Wypłata</value>
+  </data>
+  <data name="YourAccounts_lb" xml:space="preserve">
+    <value>Twoje konta</value>
   </data>
 </root>

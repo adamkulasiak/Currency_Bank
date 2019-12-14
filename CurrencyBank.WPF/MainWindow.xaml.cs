@@ -41,7 +41,7 @@ namespace CurrencyBank.WPF
         public void SetView()
         {
             accountsList.ItemsSource = _loggedInUser.Accounts;
-            loggedInAs.Content = $"Logged in as: {_loggedInUser.UserName}";
+            loggedInAs.Content += $": {_loggedInUser.UserName}";
         }
 
         private void accountsList_SelectionChanged(object sender, SelectionChangedEventArgs e)

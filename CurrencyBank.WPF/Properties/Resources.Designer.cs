@@ -61,6 +61,42 @@ namespace CurrencyBank.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Id.
+        /// </summary>
+        public static string AccountId_lb {
+            get {
+                return ResourceManager.GetString("AccountId_lb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account Number.
+        /// </summary>
+        public static string AccountNumber_lb {
+            get {
+                return ResourceManager.GetString("AccountNumber_lb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Actions.
+        /// </summary>
+        public static string Actions_lb {
+            get {
+                return ResourceManager.GetString("Actions_lb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Balance.
+        /// </summary>
+        public static string Balance_lb {
+            get {
+                return ResourceManager.GetString("Balance_lb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create Your Account.
         /// </summary>
         public static string CreateYourAccount_lb {
@@ -70,11 +106,47 @@ namespace CurrencyBank.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Currency.
+        /// </summary>
+        public static string Currency_lb {
+            get {
+                return ResourceManager.GetString("Currency_lb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete an account.
+        /// </summary>
+        public static string DeleteAnAccount_btn {
+            get {
+                return ResourceManager.GetString("DeleteAnAccount_btn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deposit the currency.
+        /// </summary>
+        public static string DepositTheCurrency_btn {
+            get {
+                return ResourceManager.GetString("DepositTheCurrency_btn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
         public static string Email_lb {
             get {
                 return ResourceManager.GetString("Email_lb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exchange.
+        /// </summary>
+        public static string Exchange_btn {
+            get {
+                return ResourceManager.GetString("Exchange_btn", resourceCulture);
             }
         }
         
@@ -93,6 +165,15 @@ namespace CurrencyBank.WPF.Properties {
         public static string Lastname_lb {
             get {
                 return ResourceManager.GetString("Lastname_lb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logged in as.
+        /// </summary>
+        public static string LoggedInAs_lb {
+            get {
+                return ResourceManager.GetString("LoggedInAs_lb", resourceCulture);
             }
         }
         
@@ -120,6 +201,42 @@ namespace CurrencyBank.WPF.Properties {
         public static string LogIntoYourAccount_lb {
             get {
                 return ResourceManager.GetString("LogIntoYourAccount_lb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log off.
+        /// </summary>
+        public static string LogOff_btn {
+            get {
+                return ResourceManager.GetString("LogOff_btn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage Your Accounts.
+        /// </summary>
+        public static string ManageYourAccounts_lb {
+            get {
+                return ResourceManager.GetString("ManageYourAccounts_lb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New transfer.
+        /// </summary>
+        public static string NewTransfer_btn {
+            get {
+                return ResourceManager.GetString("NewTransfer_btn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open a new account.
+        /// </summary>
+        public static string OpenANewAccount_btn {
+            get {
+                return ResourceManager.GetString("OpenANewAccount_btn", resourceCulture);
             }
         }
         
@@ -165,6 +282,24 @@ namespace CurrencyBank.WPF.Properties {
         public static string Username_lb {
             get {
                 return ResourceManager.GetString("Username_lb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Withdrawal.
+        /// </summary>
+        public static string Withdrawal_btn {
+            get {
+                return ResourceManager.GetString("Withdrawal_btn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your accounts.
+        /// </summary>
+        public static string YourAccounts_lb {
+            get {
+                return ResourceManager.GetString("YourAccounts_lb", resourceCulture);
             }
         }
     }
