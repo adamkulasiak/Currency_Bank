@@ -16,6 +16,7 @@ namespace CurrencyBank.API.Dtos
         public string Pesel { get; set; }
         public DateTime CreatedDate { get; set; }
         public string Token { get; set; }
+        public Languages Language { get; set; }
         public ICollection<Account> Accounts { get; set; }
     }
 }

@@ -20,9 +20,9 @@ namespace CurrencyBank.Database.Data
             {
                 IList<User> users = new List<User>
             {
-                new User{ FirstName = "Jan", LastName = "Kowalski", UserName = "jkowalski", Email = "j.kowalski@gmail.com", Pesel = "99012388777" },
-                new User{ FirstName = "Maria", LastName = "Nowak", UserName = "mnowak", Email = "m.nowak@gmail.com", Pesel = "99012388123" },
-                new User{ FirstName = "Wacław", LastName = "Nowacki", UserName = "wnowacki", Email = "w.nowacki@gmail.com", Pesel = "99012388222" }
+                new User{ FirstName = "Jan", LastName = "Kowalski", UserName = "jkowalski", Email = "j.kowalski@gmail.com", Pesel = "99012388777", Language = Languages.PL },
+                new User{ FirstName = "Maria", LastName = "Nowak", UserName = "mnowak", Email = "m.nowak@gmail.com", Pesel = "99012388123", Language = Languages.PL },
+                new User{ FirstName = "Wacław", LastName = "Nowacki", UserName = "wnowacki", Email = "w.nowacki@gmail.com", Pesel = "99012388222", Language = Languages.PL }
             };
 
                 foreach (var user in users)

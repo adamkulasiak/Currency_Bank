@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using CurrencyBank.Database.Data;
 using CurrencyBank.Database.Models;
 using Microsoft.AspNetCore.Authorization;
+using CurrencyBank.API.Interfaces;
+using CurrencyBank.API.Dtos;
+using AutoMapper;
 
 namespace CurrencyBank.API.Controllers
 {
@@ -19,11 +22,13 @@ namespace CurrencyBank.API.Controllers
     [Authorize]
     public class UserController : ControllerBase
     {
-        private readonly CurrencyBankContext _context;
+        private readonly IUserRepository _repo;
+        private readonly IMapper _mapper;
 
-        public UserController(CurrencyBankContext context)
+        public UserController(IUserRepository userRepository, IMapper mapper)
         {
-            _context = context;
+            _repo = userRepository;
+            _mapper = mapper;
         }
 
         /// <summary>
@@ -34,9 +39,9 @@ namespace CurrencyBank.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetUsers()
         {
-            var users = await _context.Users.Include(x => x.Accounts).ToListAsync();
+            var users = await _repo.GetUsers();
             if (!users.Any())
-                return BadRequest();
+                return NotFound();
 
             return Ok(users);
         }
@@ -48,16 +53,16 @@ namespace CurrencyBank.API.Controllers
         /// <returns>uzytkownik wraz z kontem/kontami</returns>
         // GET: api/User/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<ActionResult<UserToReturnDto>> GetUser(int id)
         {
-            var user = await _context.Users.Include(x => x.Accounts).FirstOrDefaultAsync(x => x.Id == id);
+            var user = await _repo.GetUser(id);
 
             if (user == null)
-            {
                 return NotFound();
-            }
 
-            return user;
+            var userToReturn = _mapper.Map<UserToReturnDto>(user);
+
+            return Ok(userToReturn);
         }
 
         // PUT: api/User/5
@@ -67,29 +72,14 @@ namespace CurrencyBank.API.Controllers
         public async Task<IActionResult> PutUser(int id, User user)
         {
             if (id != user.Id)
-            {
                 return BadRequest();
-            }
 
-            _context.Entry(user).State = EntityState.Modified;
+            var updatedUser = await _repo.UpdateUser(user);
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            if (updatedUser == null)
+                return BadRequest();
 
-            return NoContent();
+            return Ok(user);
         }
 
         // POST: api/User
@@ -98,31 +88,26 @@ namespace CurrencyBank.API.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
+            _repo.Add(user);
+            if (await _repo.SaveAll())
+                return CreatedAtAction("GetUser", new { id = user.Id }, user);
 
-            return CreatedAtAction("GetUser", new { id = user.Id }, user);
+            return BadRequest();
         }
 
         // DELETE: api/User/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<User>> DeleteUser(int id)
         {
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
+            var userToDelete = await _repo.GetUser(id);
 
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
+            _repo.Delete(userToDelete);
 
-            return user;
-        }
+            if (await _repo.SaveAll())
+                return Ok();
 
-        private bool UserExists(int id)
-        {
-            return _context.Users.Any(e => e.Id == id);
+            return BadRequest();
+            
         }
     }
 }
