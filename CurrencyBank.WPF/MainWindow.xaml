@@ -20,16 +20,16 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-            <Label Content="{x:Static p:Resources.ManageYourAccounts_lb}" FontSize="15" FontWeight="Bold" Margin="248,10,373,334"/>
-            <Label Content="{x:Static p:Resources.YourAccounts_lb}"  Height="26" Margin="10,93,702,265" />
-            <Label Content="{x:Static p:Resources.Actions_lb}" Width="87" Height="26" Margin="472,93,253,265" />
+            <Label Content="{x:Static p:Resources.ManageYourAccounts_lb}" HorizontalContentAlignment="Center" FontSize="15" FontWeight="Bold" Margin="248,10,373,334"/>
+            <Label Content="{x:Static p:Resources.YourAccounts_lb}" HorizontalContentAlignment="Left" Height="26" Margin="10,93,702,265" />
+            <Label Content="{x:Static p:Resources.Actions_lb}" Width="87" Height="26" HorizontalContentAlignment="Left" Margin="472,93,253,265" />
             <Button x:Name="Create_btn" Content="{x:Static p:Resources.OpenANewAccount_btn}" Margin="472,193,200,156" Width="140" Height="35" Click="Create_btn_Click"/>
             <Button x:Name="TransferMoney_btn" Content="{x:Static p:Resources.NewTransfer_btn}" Margin="472,124,200,225" Width="140" Height="35" Click="TransferMoney_btn_Click"/>
             <Button x:Name="Exchange_btn" Content="{x:Static p:Resources.Exchange_btn}" Margin="640,193,32,156" Width="140" Height="35" Click="Exchange_btn_Click"/>
             <Button x:Name="CashIn_btn" Content="{x:Static p:Resources.DepositTheCurrency_btn}" Margin="472,260,200,89" Width="140" Height="35" Click="CashIn_btn_Click"/>
             <Button x:Name="CashOut_btn" Content="{x:Static p:Resources.Withdrawal_btn}" Margin="640,124,32,225" Height="35" Width="140" Click="CashOut_btn_Click"/>
             <Button x:Name="DeleteAccount_btn" Content="{x:Static p:Resources.DeleteAnAccount_btn}" Margin="640,260,32,89" Height="35" Width="140" Click="DeleteAccount_btn_Click"/>
-            <Label x:Name="loggedInAs" Content="{x:Static p:Resources.LoggedInAs_lb}"  Margin="610,10,10,339" Height="35" Width="192"/>
+            <Label x:Name="loggedInAs" Content="{x:Static p:Resources.LoggedInAs_lb}" Margin="610,10,10,339" Height="35" Width="192"/>
             <Button x:Name="LoggOff_btn" Content="{x:Static p:Resources.LogOff_btn}" Margin="624,50,97,312"/>
 
 

@@ -4,20 +4,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CurrencyBank.WPF"
+        xmlns:p = "clr-namespace:CurrencyBank.WPF.Properties"
         mc:Ignorable="d"
         Title="NewTransferWindow" Height="384" Width="384">
-    <Grid Margin="20,0,20,0" Background="BlanchedAlmond" Height="322">
-        <Label Content="New Transfer" HorizontalAlignment="Center" Foreground="Black" FontSize="14" FontWeight="Bold" Margin="0,10,0,230"/>
-        <Label Content="From:" HorizontalAlignment="Center" Margin="0,68,0,0" Width="46" Height="242" VerticalAlignment="Top"/>
-        <Label Content="Destination account number:" HorizontalAlignment="Center" VerticalAlignment="Top" Width="164" Margin="0,122,0,0" Height="54"/>
-        <ComboBox x:Name="FromAccount_cbbx" Width="206" Height="25" Margin="49,97,49,200">
-            <ComboBoxItem x:Name="AccountsOfLoggedUser_cbbx"/>
-        </ComboBox>
-        <TextBox x:Name="ToAccount_btn" HorizontalAlignment="Center" Margin="0,151,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Height="25"/>
-        <Label Content="Amount:" HorizontalAlignment="Center" Margin="0,176,0,0" VerticalAlignment="Top" Width="64" Height="52"/>
-        <TextBox  HorizontalAlignment="Center" Margin="0,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Height="25"/>
-        <Button x:Name="Transfer_btn" Margin="174,244,68,53" Content="Transfer" Height="25"/>
-        <Button x:Name="Back_btn" Content="Go back" Height="25" Margin="69,244,175,53" RenderTransformOrigin="0.512,0.401"/>
+    <Border Background="Bisque" Height="364" Width="364" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="20" Margin="20,0,20,0">
+        <Grid Margin="20,0,20,0" Background="BlanchedAlmond" Height="344" Width="344" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label Content="{x:Static p:Resources.NewTransfer_lb}" HorizontalContentAlignment="Center" FontSize="14" FontWeight="Bold" Margin="0,10,0,302"/>
+            <Label Content="{x:Static p:Resources.From_lb}" HorizontalContentAlignment="Center" Margin="0,57,0,262" Height="25"/>
+            <Label Content="{x:Static p:Resources.DestinationAccNr_lb}" HorizontalContentAlignment="Center" Margin="0,121,0,198" Height="25"/>
+            <ComboBox x:Name="FromAccount_cbbx" Width="206" Height="25" Margin="69,87,69,232">
+                <ComboBoxItem x:Name="AccountsOfLoggedUser_cbbx"/>
+            </ComboBox>
+            <TextBox x:Name="ToAccount_btn" HorizontalAlignment="Center" Margin="0,151,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Height="25"/>
+            <Label Content="{x:Static p:Resources.Amount_lb}" HorizontalContentAlignment="Center" Margin="0,178,0,141" Height="25"/>
+            <TextBox  HorizontalAlignment="Center" Margin="0,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Height="25"/>
+            <Button x:Name="Transfer_btn" Margin="173,253,69,66" Content="{x:Static p:Resources.Transfer_btn}" Height="25"/>
+            <Button x:Name="Back_btn" Content="{x:Static p:Resources.Back_btn}" Height="25" Margin="69,253,175,66" RenderTransformOrigin="0.512,0.401"/>
 
-    </Grid>
+        </Grid>
+    </Border>
 </Window>

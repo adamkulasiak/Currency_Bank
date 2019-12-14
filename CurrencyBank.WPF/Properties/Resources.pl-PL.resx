@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AccountId_lb" xml:space="preserve">
-    <value>Id</value>
+    <value>ID konta</value>
   </data>
   <data name="AccountNumber_lb" xml:space="preserve">
     <value>Numer konta</value>
@@ -126,8 +126,29 @@
   <data name="Actions_lb" xml:space="preserve">
     <value>Akcje</value>
   </data>
+  <data name="Amount_lb" xml:space="preserve">
+    <value>Kwota</value>
+  </data>
+  <data name="AreYouSure_lb" xml:space="preserve">
+    <value>Czy na pewno chcesz usunąć powyższe konto?</value>
+  </data>
+  <data name="Back_btn" xml:space="preserve">
+    <value>Cofnij</value>
+  </data>
   <data name="Balance_lb" xml:space="preserve">
     <value>Stan konta</value>
+  </data>
+  <data name="ChooseCurrency_lb" xml:space="preserve">
+    <value>Wybierz walutę</value>
+  </data>
+  <data name="ChooseId_lb" xml:space="preserve">
+    <value>Wybierz ID konta</value>
+  </data>
+  <data name="ChooseTargetCurrency_lb" xml:space="preserve">
+    <value>Waluta docelowa</value>
+  </data>
+  <data name="ChooseYourCurrency_lb" xml:space="preserve">
+    <value>Twoja waluta</value>
   </data>
   <data name="CreateYourAccount_lb" xml:space="preserve">
     <value>Utwórz konto</value>
@@ -138,17 +159,41 @@
   <data name="DeleteAnAccount_btn" xml:space="preserve">
     <value>Usuń konto</value>
   </data>
+  <data name="DeleteAnAcc_lb" xml:space="preserve">
+    <value>Usuń Konto</value>
+  </data>
+  <data name="Delete_btn" xml:space="preserve">
+    <value>Usuń</value>
+  </data>
   <data name="DepositTheCurrency_btn" xml:space="preserve">
     <value>Wpłata</value>
+  </data>
+  <data name="Deposit_btn" xml:space="preserve">
+    <value>Wpłać</value>
+  </data>
+  <data name="Deposit_lb" xml:space="preserve">
+    <value>Wpłata</value>
+  </data>
+  <data name="DestinationAccNr_lb" xml:space="preserve">
+    <value>Numer konta odbiorcy</value>
   </data>
   <data name="Email_lb" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="ExchangeTheCurrency_lb" xml:space="preserve">
+    <value>Wymiana Waluty</value>
+  </data>
   <data name="Exchange_btn" xml:space="preserve">
     <value>Wymiana walut</value>
   </data>
+  <data name="Exchange_btn1" xml:space="preserve">
+    <value>Wymień</value>
+  </data>
   <data name="Firstname_lb" xml:space="preserve">
     <value>Imię</value>
+  </data>
+  <data name="From_lb" xml:space="preserve">
+    <value>ID konta nadawcy</value>
   </data>
   <data name="Lastname_lb" xml:space="preserve">
     <value>Nazwisko</value>
@@ -174,8 +219,17 @@
   <data name="NewTransfer_btn" xml:space="preserve">
     <value>Nowy przelew</value>
   </data>
+  <data name="NewTransfer_lb" xml:space="preserve">
+    <value>Nowy Przelew</value>
+  </data>
   <data name="OpenANewAccount_btn" xml:space="preserve">
     <value>Otwórz nowe konto</value>
+  </data>
+  <data name="OpenANewAccount_lb" xml:space="preserve">
+    <value>Otwórz Nowe Konto</value>
+  </data>
+  <data name="Open_btn" xml:space="preserve">
+    <value>Otwórz</value>
   </data>
   <data name="Password_lb" xml:space="preserve">
     <value>Hasło</value>
@@ -189,11 +243,20 @@
   <data name="Register_lb" xml:space="preserve">
     <value>Zarejestruj się</value>
   </data>
+  <data name="Transfer_btn" xml:space="preserve">
+    <value>Wykonaj</value>
+  </data>
   <data name="Username_lb" xml:space="preserve">
     <value>Nazwa użytkownika</value>
   </data>
   <data name="Withdrawal_btn" xml:space="preserve">
     <value>Wypłata</value>
+  </data>
+  <data name="Withdrawal_lb" xml:space="preserve">
+    <value>Wypłata</value>
+  </data>
+  <data name="Withdraw_btn" xml:space="preserve">
+    <value>Wypłać</value>
   </data>
   <data name="YourAccounts_lb" xml:space="preserve">
     <value>Twoje konta</value>

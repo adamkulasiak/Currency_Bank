@@ -18,7 +18,7 @@ namespace CurrencyBank.WPF
         {
             string lang = "";
             var lines = File.ReadAllLines(@"C:\Database\lang.txt");
-            for (var i = 0; i < lines.Length; i += 1)
+            for (var i = 0; i < lines.Length; i++)
             {
                 lang = lines[i];
             }

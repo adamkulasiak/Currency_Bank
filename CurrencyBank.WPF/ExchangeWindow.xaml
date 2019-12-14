@@ -4,13 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CurrencyBank.WPF"
+        xmlns:p = "clr-namespace:CurrencyBank.WPF.Properties"
         mc:Ignorable="d"
         Title="ExchangeWindow" Height="400" Width="400">
-    <Border Background="Bisque" Height="360" CornerRadius="20" Margin="20,0,20,0">
-        <Grid Margin="0,20,0,10" Background="BlanchedAlmond" Height="330">
-            <Label Content="Choose Your currency:" Height="30" Margin="97,55,97,245"/>
-            <Label Content="Choose target currency:" Margin="96,120,96,176"/>
-            <ComboBox x:Name="ExchangeFrom_lb" Height="25" Width="206" Margin="67,90,67,215" >
+    <Border Background="Bisque" Height="360" Width="350" CornerRadius="20" Margin="20,0,20,0">
+        <Grid Margin="0,20,0,10" Background="BlanchedAlmond" Height="330" Width="330">
+            <Label Content="{x:Static p:Resources.ChooseYourCurrency_lb}" HorizontalContentAlignment="Center" Height="30" Margin="98,55,96,245"/>
+            <Label Content="{x:Static p:Resources.ChooseTargetCurrency_lb}" HorizontalContentAlignment="Center" Margin="96,120,96,176"/>
+            <ComboBox x:Name="ExchangeFrom_lb" Height="25" Width="206" Margin="62,85,62,220" >
 
                 <ComboBoxItem Content="PLN"/>
                 <ComboBoxItem Content="GBP"/>
@@ -20,7 +21,7 @@
                 <ComboBoxItem Content="EUR"/>
 
             </ComboBox>
-            <ComboBox x:Name="ExchangeTo_lb" Height="25" Width="206" Margin="67,159,67,146" >
+            <ComboBox x:Name="ExchangeTo_lb" Height="25" Width="206" Margin="62,159,62,146" >
 
                 <ComboBoxItem Content="PLN"/>
                 <ComboBoxItem Content="GBP"/>
@@ -30,11 +31,11 @@
                 <ComboBoxItem Content="EUR"/>
 
             </ComboBox>
-            <Label Content="Amount:" Height="30" Margin="130,189,130,111" />
-            <TextBox Margin="67,224,67,81" TextWrapping="Wrap" Width="206" Height="25"/>
-            <Button x:Name="Exchange_btn" Content="Transfer" Height="25" Margin="175,277,65,28" Width="100"/>
-            <Button x:Name="Back_btn" Content="Go back" Height="25" Margin="67,277,170,28" Width="100"/>
-            <Label Content="Exchange the currency" Height="30" FontSize="14" FontWeight="Bold" Margin="96,10,77,290" />
+            <Label Content="{x:Static p:Resources.Amount_lb}" HorizontalContentAlignment="Center" Height="30" Margin="130,189,130,111" />
+            <TextBox Margin="62,224,62,81" TextWrapping="Wrap" Width="206" Height="25"/>
+            <Button x:Name="Exchange_btn" Content="{x:Static p:Resources.Exchange_btn1}" Height="25" Margin="168,277,62,28" Width="100"/>
+            <Button x:Name="Back_btn" Content="{x:Static p:Resources.Back_btn}" Height="25" Margin="62,277,168,28" Width="100"/>
+            <Label Content="{x:Static p:Resources.ExchangeTheCurrency_lb}" HorizontalContentAlignment="Center" Height="30" FontSize="14" FontWeight="Bold" Margin="86,10,86,290" />
 
         </Grid>
     </Border>
