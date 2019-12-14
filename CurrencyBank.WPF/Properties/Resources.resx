@@ -117,16 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Login" xml:space="preserve">
-    <value>Login</value>
+  <data name="CreateYourAccount_lb" xml:space="preserve">
+    <value>Create Your Account</value>
   </data>
-  <data name="LogIntoYourAccount" xml:space="preserve">
+  <data name="Email_lb" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Firstname_lb" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="Lastname_lb" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="LogIntoYourAccount_lb" xml:space="preserve">
     <value>Log Into Your Account</value>
   </data>
-  <data name="Password" xml:space="preserve">
+  <data name="Login_btn" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Login_lb" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Password_lb" xml:space="preserve">
     <value>Password</value>
   </data>
-  <data name="Username" xml:space="preserve">
-    <value>Username</value>
+  <data name="Pesel_lb" xml:space="preserve">
+    <value>Pesel</value>
+  </data>
+  <data name="Register_btn" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Register_lb" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Username_lb" xml:space="preserve">
+    <value>User Name</value>
   </data>
 </root>

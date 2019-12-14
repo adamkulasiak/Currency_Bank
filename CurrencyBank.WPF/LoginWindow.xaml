@@ -10,15 +10,15 @@
         <Border Background="Bisque" CornerRadius="20" Margin="20">
             <StackPanel Orientation="Vertical" Margin="20" Background="BlanchedAlmond">
 
-            <Label Content="{x:Static p:Resources.LogIntoYourAccount}" HorizontalAlignment="Center" Foreground="Black" FontSize="14" FontWeight="Bold"></Label>
+            <Label Content="{x:Static p:Resources.LogIntoYourAccount_lb}" HorizontalAlignment="Center" Foreground="Black" FontSize="14" FontWeight="Bold"></Label>
                 <Separator Margin="10"></Separator>
 
-                <Label Content="{x:Static p:Resources.Username}" HorizontalAlignment="Center"></Label>
+            <Label Content="{x:Static p:Resources.Login_lb}" HorizontalAlignment="Center"></Label>
                 <TextBox x:Name="UserName_tb" TextAlignment="Center" TextWrapping="Wrap" Width="200" Height="25"/>
-                <Label Content="{x:Static p:Resources.Password}" HorizontalAlignment="Center"></Label>
+            <Label Content="{x:Static p:Resources.Password_lb}" HorizontalAlignment="Center"></Label>
                 <PasswordBox x:Name="password_tb"  Width="200" Height="25"/>
 
-            <Button x:Name="Login_btn" Margin="15" Content="{x:Static p:Resources.Login}" Height="25" HorizontalAlignment="Center" Width="100" Click="Login_btn_Click"/>
+            <Button x:Name="Login_btn" Margin="15" Content="{x:Static p:Resources.Login_btn}" Height="25" HorizontalAlignment="Center" Width="100" Click="Login_btn_Click"/>
 
             </StackPanel>
         </Border>

@@ -61,38 +61,110 @@ namespace CurrencyBank.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create Your Account.
+        /// </summary>
+        public static string CreateYourAccount_lb {
+            get {
+                return ResourceManager.GetString("CreateYourAccount_lb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string Email_lb {
+            get {
+                return ResourceManager.GetString("Email_lb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First Name.
+        /// </summary>
+        public static string Firstname_lb {
+            get {
+                return ResourceManager.GetString("Firstname_lb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last Name.
+        /// </summary>
+        public static string Lastname_lb {
+            get {
+                return ResourceManager.GetString("Lastname_lb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login.
         /// </summary>
-        public static string Login {
+        public static string Login_btn {
             get {
-                return ResourceManager.GetString("Login", resourceCulture);
+                return ResourceManager.GetString("Login_btn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        public static string Login_lb {
+            get {
+                return ResourceManager.GetString("Login_lb", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Log Into Your Account.
         /// </summary>
-        public static string LogIntoYourAccount {
+        public static string LogIntoYourAccount_lb {
             get {
-                return ResourceManager.GetString("LogIntoYourAccount", resourceCulture);
+                return ResourceManager.GetString("LogIntoYourAccount_lb", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
-        public static string Password {
+        public static string Password_lb {
             get {
-                return ResourceManager.GetString("Password", resourceCulture);
+                return ResourceManager.GetString("Password_lb", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Username.
+        ///   Looks up a localized string similar to Pesel.
         /// </summary>
-        public static string Username {
+        public static string Pesel_lb {
             get {
-                return ResourceManager.GetString("Username", resourceCulture);
+                return ResourceManager.GetString("Pesel_lb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Register.
+        /// </summary>
+        public static string Register_btn {
+            get {
+                return ResourceManager.GetString("Register_btn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Register.
+        /// </summary>
+        public static string Register_lb {
+            get {
+                return ResourceManager.GetString("Register_lb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Name.
+        /// </summary>
+        public static string Username_lb {
+            get {
+                return ResourceManager.GetString("Username_lb", resourceCulture);
             }
         }
     }
