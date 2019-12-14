@@ -89,5 +89,13 @@ namespace CurrencyBank.WPF
             DeleteAccount deleteAccount = new DeleteAccount();
             deleteAccount.Show();
         }
+
+        private void LoggOff_btn_Click(object sender, RoutedEventArgs e)
+        {
+            _loggedInUser.Dispose();
+            var login = new LoginWindow();
+            login.Show();
+            this.Close();
+        }
     }
 }

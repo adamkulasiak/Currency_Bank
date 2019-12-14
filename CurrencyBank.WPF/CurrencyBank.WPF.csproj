@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="64.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="9.0.0" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.0.1">
@@ -19,6 +23,10 @@
   <ItemGroup>
     <ProjectReference Include="..\CurrencyBank.Commons\CurrencyBank.Commons.csproj" />
     <ProjectReference Include="..\Database\CurrencyBank.Database.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="64.png" />
   </ItemGroup>
 
   <ItemGroup>
