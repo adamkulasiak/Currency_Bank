@@ -16,8 +16,8 @@
 
             </ComboBox>
             <Label Content="{x:Static p:Resources.AreYouSure_lb}" HorizontalContentAlignment="Center" Margin="46,118,46,86"/>
-            <Button x:Name="DeleteAcc_btn" Margin="67,154,173,51" Content="{x:Static p:Resources.Delete_btn}" Height="25" Width="100"/>
-            <Button x:Name="Back_btn" Content="{x:Static p:Resources.Back_btn}" Height="25" Width="100" Margin="173,154,67,51"/>
+            <Button x:Name="DeleteAcc_btn" Margin="67,154,173,51" Content="{x:Static p:Resources.Delete_btn}" Height="25" Width="100" Click="DeleteAcc_btn_Click"/>
+            <Button x:Name="Back_btn" Content="{x:Static p:Resources.Back_btn}" Height="25" Width="100" Margin="173,154,67,51" Click="Back_btn_Click"/>
 
         </Grid>
     </Border>

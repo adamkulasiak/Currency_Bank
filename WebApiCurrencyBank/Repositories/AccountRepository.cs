@@ -31,7 +31,7 @@ namespace CurrencyBank.API.Repositories
         /// <returns></returns>
         public async Task<List<Account>> GetAccountForUser(int userId)
         {
-            var accounts = await _context.Accounts.Where(u => u.UserId == userId).ToListAsync();
+            var accounts = await _context.Accounts.Where(u => u.UserId == userId && !u.IsDeleted).ToListAsync();
 
             if (accounts is null)
                 return null;
