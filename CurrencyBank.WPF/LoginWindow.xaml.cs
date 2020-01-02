@@ -34,7 +34,7 @@ namespace CurrencyBank.WPF
             password_tb.Password = "test12345";
         }
 
-        private void Login_btn_Click(object sender, RoutedEventArgs e)
+        private async void Login_btn_Click(object sender, RoutedEventArgs e)
         {
             var userLoginDto = new UserLoginDto()
             {
@@ -42,7 +42,7 @@ namespace CurrencyBank.WPF
                 Password = password_tb.Password
             };
 
-            var response = _authService.Login(userLoginDto);
+            var response = await _authService.Login(userLoginDto);
 
             if (response.IsSuccessStatusCode)
             {

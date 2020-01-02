@@ -49,7 +49,15 @@ namespace CurrencyBank.WPF
 
             var response = await _accountService.DeleteAccount(_loggedInUser.Token, id);
 
-            MessageBox.Show(response.ToString());
+            if (response.IsSuccessStatusCode)
+            {
+                _loggedInUser.Accounts.Remove(_loggedInUser.Accounts.Where(a => a.Id == id).FirstOrDefault());
+                MessageBox.Show("Konto zostało usunięte");
+            }
+            else
+            {
+                MessageBox.Show("Błąd przy usuwaniu");
+            }
         }
 
         private void Back_btn_Click(object sender, RoutedEventArgs e)
