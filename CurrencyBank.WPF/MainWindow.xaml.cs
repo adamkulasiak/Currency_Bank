@@ -56,7 +56,7 @@ namespace CurrencyBank.WPF
 
         private void Create_btn_Click(object sender, RoutedEventArgs e)
         {
-            AccountOpeningWindow accountOpeningWindow = new AccountOpeningWindow();
+            AccountOpeningWindow accountOpeningWindow = new AccountOpeningWindow(_loggedInUser);
             accountOpeningWindow.Show();
         }
 
@@ -68,7 +68,7 @@ namespace CurrencyBank.WPF
 
         private void CashOut_btn_Click(object sender, RoutedEventArgs e)
         {
-            WithdrawalWindow withdrawalWindow = new WithdrawalWindow();
+            WithdrawalWindow withdrawalWindow = new WithdrawalWindow(_loggedInUser);
             withdrawalWindow.Show();
         }
 
@@ -86,7 +86,7 @@ namespace CurrencyBank.WPF
 
         private void DeleteAccount_btn_Click(object sender, RoutedEventArgs e)
         {
-            DeleteAccount deleteAccount = new DeleteAccount();
+            DeleteAccount deleteAccount = new DeleteAccount(_loggedInUser);
             deleteAccount.Show();
         }
 

@@ -1,5 +1,8 @@
-﻿using System;
+﻿using CurrencyBank.WPF.Models;
+using CurrencyBank.WPF.Services;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,9 +20,41 @@ namespace CurrencyBank.WPF
     /// </summary>
     public partial class DeleteAccount : Window
     {
+        private AccountService _accountService;
+        private LoggedInUser _loggedInUser;
         public DeleteAccount()
         {
             InitializeComponent();
+            _accountService = new AccountService();
+        }
+
+        public DeleteAccount(LoggedInUser loggedInUser) : this()
+        {
+            _loggedInUser = loggedInUser;
+            this.SetView();
+        }
+
+        private void SetView()
+        {
+            foreach (var account in _loggedInUser.Accounts)
+            {
+                string acnt = $"{account.Id} - {account.Currency}";
+                AccID_cbbx.Items.Add(acnt);
+            }
+        }
+
+        private async void DeleteAcc_btn_Click(object sender, RoutedEventArgs e)
+        {
+            int id = int.Parse(AccID_cbbx.Text.Where(Char.IsDigit).ToArray());
+
+            var response = await _accountService.DeleteAccount(_loggedInUser.Token, id);
+
+            MessageBox.Show(response.ToString());
+        }
+
+        private void Back_btn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

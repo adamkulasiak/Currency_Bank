@@ -18,6 +18,5 @@ namespace CurrencyBank.WPF.Services
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             return _client.PostAsJsonAsync(_baseUrl + "/login", userLoginDto).Result;
         }
-        
     }
 }
