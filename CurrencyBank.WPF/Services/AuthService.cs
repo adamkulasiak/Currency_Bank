@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace CurrencyBank.WPF.Services
 {
@@ -13,10 +14,11 @@ namespace CurrencyBank.WPF.Services
         private static readonly HttpClient _client = new HttpClient();
         private const string _baseUrl = "http://localhost:5000/api/auth";
 
-        public HttpResponseMessage Login(UserLoginDto userLoginDto)
+        public async Task<HttpResponseMessage> Login(UserLoginDto userLoginDto)
         {
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            return _client.PostAsJsonAsync(_baseUrl + "/login", userLoginDto).Result;
+            return await _client.PostAsJsonAsync(_baseUrl + "/login", userLoginDto);
+            
         }
     }
 }

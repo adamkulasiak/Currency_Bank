@@ -58,5 +58,17 @@ namespace CurrencyBank.WPF.Services
 
             return response;
         }
+
+        public async Task<HttpResponseMessage> ExchangeMoney(string token, int sourceAccountId, int destinationAccountId, decimal ammount)
+        {
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string url = $"{_baseUrl}/exchange?sourceAccountId={sourceAccountId}&destinationAccountId={destinationAccountId}&ammount={ammount}";
+
+            HttpResponseMessage response = await _client.PutAsync(url, null);
+
+            return response;
+        }
     }
 }

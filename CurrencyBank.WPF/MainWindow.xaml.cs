@@ -62,7 +62,7 @@ namespace CurrencyBank.WPF
 
         private void TransferMoney_btn_Click(object sender, RoutedEventArgs e)
         {
-            NewTransferWindow newTransferWindow = new NewTransferWindow();
+            NewTransferWindow newTransferWindow = new NewTransferWindow(_loggedInUser);
             newTransferWindow.Show();
         }
 
@@ -74,7 +74,7 @@ namespace CurrencyBank.WPF
 
         private void Exchange_btn_Click(object sender, RoutedEventArgs e)
         {
-            ExchangeWindow exchangeWindow = new ExchangeWindow();
+            ExchangeWindow exchangeWindow = new ExchangeWindow(_loggedInUser);
             exchangeWindow.Show();
         }
 
