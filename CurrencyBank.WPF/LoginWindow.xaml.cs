@@ -71,6 +71,5 @@ namespace CurrencyBank.WPF
                 MessageBox.Show("Try again.");
             }
         }
-
     }
 }
