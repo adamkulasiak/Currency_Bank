@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Z.EntityFramework.Plus;
 
 namespace CurrencyBank.API.Repositories
 {
@@ -19,12 +20,12 @@ namespace CurrencyBank.API.Repositories
 
         public async Task<User> GetUser(int id)
         {
-            return await _context.Users.Include(x => x.Accounts).FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Users.IncludeFilter(x => x.Accounts.Where(y => !y.IsDeleted)).FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<IEnumerable<User>> GetUsers()
         {
-            return await _context.Users.Include(x => x.Accounts).ToListAsync();
+            return await _context.Users.IncludeFilter(x => x.Accounts.Where(y => !y.IsDeleted)).ToListAsync();
         }
 
         public async Task<User> UpdateUser(User user)

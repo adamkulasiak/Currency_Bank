@@ -7,6 +7,7 @@ using CurrencyBank.Database.Data;
 using CurrencyBank.Database.Models;
 using Microsoft.EntityFrameworkCore;
 using CurrencyBank.API.Interfaces;
+using Z.EntityFramework.Plus;
 
 namespace CurrencyBank.API.Repositories
 {
@@ -20,7 +21,9 @@ namespace CurrencyBank.API.Repositories
 
         public async Task<User> Login(string username, string password)
         {
-            var user = await _context.Users.Include(x => x.Accounts).FirstOrDefaultAsync(x => x.UserName == username);
+            var user = await _context.Users.IncludeFilter(x => x.Accounts.Where(y => !y.IsDeleted)).FirstOrDefaultAsync(x => x.UserName == username);
+
+            var sql = user.ToString();
 
             if (user == null) return null;
 
