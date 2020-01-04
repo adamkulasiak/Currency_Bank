@@ -32,21 +32,28 @@ namespace CurrencyBank.WPF
         public WithdrawalWindow(LoggedInUser loggedInUser) : this()
         {
             _loggedInUser = loggedInUser;
+            SetView();
         }
 
-        private void AccountID_btn_TextChanged(object sender, TextChangedEventArgs e)
+        private void SetView()
         {
-
+            var accounts = _loggedInUser.Accounts.ToList();
+            foreach (var account in accounts)
+            {
+                AccountID_cbx.Items.Add($"{account.Id} - {account.Currency}");
+            }
         }
 
         private void Back_btn_Click(object sender, RoutedEventArgs e)
         {
+            MainWindow mainWindow = new MainWindow(_loggedInUser);
+            mainWindow.Show();
             this.Close();
         }
 
         private async void Withdraw_btn_Click(object sender, RoutedEventArgs e)
         {
-            var id = int.Parse(AccountID_txt.Text);
+            var id = int.Parse((AccountID_cbx.Text).Where(Char.IsDigit).ToArray());
             var ammount = decimal.Parse(Amount_txt.Text);
 
             var response = await _accountService.Withdrawal(_loggedInUser.Token, id, ammount);
@@ -54,9 +61,9 @@ namespace CurrencyBank.WPF
             if (response.IsSuccessStatusCode)
             {
                 JObject json = JObject.Parse(response.Content.ReadAsStringAsync().Result);
-                var account = _loggedInUser.Accounts.Where(x => x.Id == id).FirstOrDefault();
-                account.Balance = (decimal)json.SelectToken("balance");
-                this.Close();
+                var account = json.ToObject<Account>();
+                _loggedInUser.Accounts.Remove(_loggedInUser.Accounts.Where(a => a.Id == id).FirstOrDefault());
+                _loggedInUser.Accounts.Add(account);
                 MessageBox.Show($"You have {account.Balance}");
             }
         }

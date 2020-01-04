@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Linq;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace CurrencyBank.WPF
 {
@@ -46,17 +48,38 @@ namespace CurrencyBank.WPF
 
         private async void Exchange_btn_Click(object sender, RoutedEventArgs e)
         {
+            Exchange_btn.IsEnabled = false;
+
             int from = int.Parse(ExchangeFrom_lb.Text.Where(Char.IsDigit).ToArray());
             int to = int.Parse(ExchangeTo_lb.Text.Where(Char.IsDigit).ToArray());
             decimal ammount = decimal.Parse(Ammount_txt.Text);
 
             var response = await _accountService.ExchangeMoney(_loggedInUser.Token, from, to, ammount);
 
-            MessageBox.Show(response.ToString());
+            if (response.IsSuccessStatusCode)
+            {
+                JArray jArray = JArray.Parse(response.Content.ReadAsStringAsync().Result);
+                var accounts = JsonConvert.DeserializeObject<List<Account>>(jArray.ToString());
+
+                var accToRemove = _loggedInUser.Accounts.Where(x => x.Id == from || x.Id == to).ToList();
+                foreach (var acc in accToRemove)
+                {
+                    _loggedInUser.Accounts.Remove(acc);
+                }
+
+                foreach (var acc in accounts)
+                {
+                    _loggedInUser.Accounts.Add(acc);
+                }
+
+                MessageBox.Show("OK");
+            }
         }
 
         private void Back_btn_Click(object sender, RoutedEventArgs e)
         {
+            MainWindow mainWindow = new MainWindow(_loggedInUser);
+            mainWindow.Show();
             this.Close();
         }
     }

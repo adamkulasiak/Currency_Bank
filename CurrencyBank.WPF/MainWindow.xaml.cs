@@ -57,36 +57,42 @@ namespace CurrencyBank.WPF
         private void Create_btn_Click(object sender, RoutedEventArgs e)
         {
             AccountOpeningWindow accountOpeningWindow = new AccountOpeningWindow(_loggedInUser);
+            this.Close();
             accountOpeningWindow.Show();
         }
 
         private void TransferMoney_btn_Click(object sender, RoutedEventArgs e)
         {
             NewTransferWindow newTransferWindow = new NewTransferWindow(_loggedInUser);
+            this.Close();
             newTransferWindow.Show();
         }
 
         private void CashOut_btn_Click(object sender, RoutedEventArgs e)
         {
             WithdrawalWindow withdrawalWindow = new WithdrawalWindow(_loggedInUser);
+            this.Close();
             withdrawalWindow.Show();
         }
 
         private void Exchange_btn_Click(object sender, RoutedEventArgs e)
         {
             ExchangeWindow exchangeWindow = new ExchangeWindow(_loggedInUser);
+            this.Close();
             exchangeWindow.Show();
         }
 
         private void CashIn_btn_Click(object sender, RoutedEventArgs e)
         {
-            DepositCashIn depositCashIn = new DepositCashIn();
+            DepositCashIn depositCashIn = new DepositCashIn(_loggedInUser);
+            this.Close();
             depositCashIn.Show();
         }
 
         private void DeleteAccount_btn_Click(object sender, RoutedEventArgs e)
         {
             DeleteAccount deleteAccount = new DeleteAccount(_loggedInUser);
+            this.Close();
             deleteAccount.Show();
         }
 

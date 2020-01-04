@@ -70,5 +70,29 @@ namespace CurrencyBank.WPF.Services
 
             return response;
         }
+
+        public async Task<HttpResponseMessage> TransferMoney(string token, int principalAccountId, string destinationAccountNumber, decimal ammount)
+        {
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string url = $"{_baseUrl}/transferMoney?principalAccountId={principalAccountId}&destinationAccountNumber={destinationAccountNumber}&ammount={ammount}";
+
+            HttpResponseMessage response = await _client.PostAsync(url, null);
+
+            return response;
+        }
+
+        public async Task<HttpResponseMessage> CashInMoney(string token, int accountId, decimal ammount)
+        {
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            string url = $"{_baseUrl}/cashIn?accountId={accountId}&ammount={ammount}";
+
+            HttpResponseMessage response = await _client.PutAsync(url, null);
+
+            return response;
+        }
     }
 }

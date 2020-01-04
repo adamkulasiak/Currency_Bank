@@ -197,7 +197,7 @@ namespace CurrencyBank.API.Repositories
                 if (sourceAccount.Currency != destinationAccount.Currency)
                 {
                     var rate = await _exchangeRateRepo.ChangeMoney(sourceAccount.Currency, destinationAccount.Currency);
-                    ammountToAdd = ammount * rate;
+                    ammountToAdd = decimal.Round(ammount * rate, 2);
                 }
                 destinationAccount.Balance += ammountToAdd;
                 try

@@ -13,7 +13,7 @@
 
             <Label x:Name="Withdrawal_lbl" Content="{x:Static p:Resources.Withdrawal_lb}" HorizontalContentAlignment="Center" FontSize="14" Height="30" FontWeight="Bold" Margin="0,10,0,255"/>
             <Label Content="{x:Static p:Resources.AccountId_lb}" HorizontalContentAlignment="Center" Margin="0,68,0,202" Height="25"/>
-            <TextBox x:Name="AccountID_txt" HorizontalAlignment="Center" Margin="0,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Height="25" TextChanged="AccountID_btn_TextChanged"/>
+            <ComboBox x:Name="AccountID_cbx" HorizontalAlignment="Center" Margin="0,98,0,0" VerticalAlignment="Top" Width="206" Height="25"></ComboBox>
             <Label Content="{x:Static p:Resources.Amount_lb}" HorizontalContentAlignment="Center" Margin="0,128,0,142" Height="25"/>
             <TextBox x:Name="Amount_txt" HorizontalAlignment="Center" Margin="0,158,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Height="25"/>
             <Button x:Name="Withdraw_btn" Margin="152,179,46,20" Content="{x:Static p:Resources.Withdraw_btn}" Height="25" Width="100" Click="Withdraw_btn_Click"/>

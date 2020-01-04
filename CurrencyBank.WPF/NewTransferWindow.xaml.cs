@@ -1,5 +1,7 @@
 ﻿using CurrencyBank.WPF.Models;
 using CurrencyBank.WPF.Services;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,9 +46,39 @@ namespace CurrencyBank.WPF
             
         }
 
-        private void Transfer_btn_Click(object sender, RoutedEventArgs e)
+        private async void Transfer_btn_Click(object sender, RoutedEventArgs e)
         {
+            Transfer_btn.IsEnabled = false;
 
+            var principalAccountId = int.Parse((FromAccount_cbbx.Text).Where(Char.IsDigit).ToArray());
+            var destinationAccountNumber = ToAccount_btn.Text;
+            var ammount = decimal.Parse(Ammount_Txt.Text);
+
+            var response = await _accountService.TransferMoney(_loggedInUser.Token, principalAccountId, destinationAccountNumber, ammount);
+
+            if (response.IsSuccessStatusCode)
+            {
+                JArray jArray = JArray.Parse(response.Content.ReadAsStringAsync().Result);
+                var accounts = JsonConvert.DeserializeObject<List<Account>>(jArray.ToString());
+
+                _loggedInUser.Accounts.Remove(_loggedInUser.Accounts.Where(x => x.Id == principalAccountId).FirstOrDefault());
+                _loggedInUser.Accounts.Add(accounts[0]);
+
+                if (accounts[1].UserId == _loggedInUser.Id)
+                {
+                    _loggedInUser.Accounts.Remove(_loggedInUser.Accounts.Where(x => x.AccountNumber == destinationAccountNumber).FirstOrDefault());
+                    _loggedInUser.Accounts.Add(accounts[1]);
+                }
+
+                MessageBox.Show("OK");
+            }
+        }
+
+        private void Back_btn_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow(_loggedInUser);
+            mainWindow.Show();
+            this.Close();
         }
     }
 }

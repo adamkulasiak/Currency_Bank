@@ -36,6 +36,7 @@ namespace CurrencyBank.WPF
 
         private void SetView()
         {
+            AccID_cbbx.Items.Clear();
             foreach (var account in _loggedInUser.Accounts)
             {
                 string acnt = $"{account.Id} - {account.Currency}";
@@ -52,6 +53,8 @@ namespace CurrencyBank.WPF
             if (response.IsSuccessStatusCode)
             {
                 _loggedInUser.Accounts.Remove(_loggedInUser.Accounts.Where(a => a.Id == id).FirstOrDefault());
+                SetView();
+                AccID_cbbx.Items.Refresh();
                 MessageBox.Show("Konto zostało usunięte");
             }
             else
@@ -62,6 +65,8 @@ namespace CurrencyBank.WPF
 
         private void Back_btn_Click(object sender, RoutedEventArgs e)
         {
+            MainWindow mainWindow = new MainWindow(_loggedInUser);
+            mainWindow.Show();
             this.Close();
         }
     }

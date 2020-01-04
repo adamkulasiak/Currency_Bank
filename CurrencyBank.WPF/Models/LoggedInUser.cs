@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace CurrencyBank.WPF.Models
@@ -9,14 +10,31 @@ namespace CurrencyBank.WPF.Models
         {
             Accounts = new List<Account>();
         }
+        [JsonProperty("id")]
         public int Id { get; set; }
+
+        [JsonProperty("firstName")]
         public string FirstName { get; set; }
+
+        [JsonProperty("lastName")]
         public string LastName { get; set; }
+
+        [JsonProperty("userName")]
         public string UserName { get; set; }
+
+        [JsonProperty("email")]
         public string Email { get; set; }
+
+        [JsonProperty("pesel")]
         public string Pesel { get; set; }
+
+        [JsonProperty("createdDate")]
         public DateTime CreatedDate { get; set; }
+
+        [JsonProperty("token")]
         public string Token { get; set; }
+
+        [JsonProperty("accounts")]
         public List<Account> Accounts { get; set; }
 
 

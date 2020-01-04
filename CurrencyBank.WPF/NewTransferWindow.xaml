@@ -16,9 +16,9 @@
             </ComboBox>
             <TextBox x:Name="ToAccount_btn" HorizontalAlignment="Center" Margin="0,151,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Height="25"/>
             <Label Content="{x:Static p:Resources.Amount_lb}" HorizontalContentAlignment="Center" Margin="0,178,0,141" Height="25"/>
-            <TextBox  HorizontalAlignment="Center" Margin="0,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Height="25"/>
+            <TextBox x:Name="Ammount_Txt"  HorizontalAlignment="Center" Margin="0,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Height="25"/>
             <Button x:Name="Transfer_btn" Margin="173,253,69,66" Content="{x:Static p:Resources.Transfer_btn}" Height="25" Click="Transfer_btn_Click"/>
-            <Button x:Name="Back_btn" Content="{x:Static p:Resources.Back_btn}" Height="25" Margin="69,253,175,66" RenderTransformOrigin="0.512,0.401"/>
+            <Button x:Name="Back_btn" Content="{x:Static p:Resources.Back_btn}" Height="25" Margin="69,253,175,66" RenderTransformOrigin="0.512,0.401" Click="Back_btn_Click"/>
 
         </Grid>
     </Border>

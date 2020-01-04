@@ -47,19 +47,8 @@ namespace CurrencyBank.WPF
             if (response.IsSuccessStatusCode)
             {
                 JObject json = JObject.Parse(response.Content.ReadAsStringAsync().Result);
-
-                var loggedInUser = new LoggedInUser()
-                {
-                    Id = (int)json.SelectToken("userToReturn.id"),
-                    FirstName = (string)json.SelectToken("userToReturn.firstName"),
-                    LastName = (string)json.SelectToken("userToReturn.lastName"),
-                    UserName = (string)json.SelectToken("userToReturn.userName"),
-                    Email = (string)json.SelectToken("userToReturn.email"),
-                    Pesel = (string)json.SelectToken("userToReturn.pesel"),
-                    CreatedDate = (DateTime)json.SelectToken("userToReturn.createdDate"),
-                    Token = (string)json.SelectToken("userToReturn.token"),
-                    Accounts = json.SelectToken("userToReturn.accounts").ToObject<List<Account>>()
-                };
+                JObject jsonObj = (JObject)json["userToReturn"];
+                var loggedInUser = jsonObj.ToObject<LoggedInUser>();
 
                 //open main window
                 MainWindow mainWindow = new MainWindow(loggedInUser);

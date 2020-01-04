@@ -1,6 +1,7 @@
 ﻿using CurrencyBank.WPF.Dto;
 using CurrencyBank.WPF.Models;
 using CurrencyBank.WPF.Services;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -32,28 +33,43 @@ namespace CurrencyBank.WPF
         {
             InitializeComponent();
             _loggedInUser = loggedInUser;
+            SetView();
         }
 
-        private void Currency_lb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void SetView()
         {
-
+            foreach (var currency in Enum.GetValues(typeof(Currency)))
+            {
+                Currency_cbx.Items.Add(currency);
+            }
         }
 
         private void Back_btn_Click(object sender, RoutedEventArgs e)
         {
+            MainWindow mainWindow = new MainWindow(_loggedInUser);
+            mainWindow.Show();
             this.Close();
         }
 
         private async void OpenAcc_btn_Click(object sender, RoutedEventArgs e)
         {
-            Enum.TryParse(Currency_lb.Text, out Currency currency);
+            OpenAcc_btn.IsEnabled = false;
+
+            Enum.TryParse(Currency_cbx.Text, out Currency currency);
             var accountToCreateDto = new AccountToCreateDto
             {
                 Currency = currency
             };
             var response = await _accountService.OpenAccount(_loggedInUser.Token, accountToCreateDto);
 
-            MessageBox.Show(response.ToString());
+            if (response.IsSuccessStatusCode)
+            {
+                JObject json = JObject.Parse(response.Content.ReadAsStringAsync().Result);
+                var account = json.ToObject<Account>();
+                _loggedInUser.Accounts.Add(account);
+            }
+
+            MessageBox.Show("OK");
         }
     }
 }
