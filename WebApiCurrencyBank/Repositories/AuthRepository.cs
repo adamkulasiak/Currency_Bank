@@ -8,6 +8,8 @@ using CurrencyBank.Database.Models;
 using Microsoft.EntityFrameworkCore;
 using CurrencyBank.API.Interfaces;
 using Z.EntityFramework.Plus;
+using CurrencyBank.Commons;
+using CurrencyBank.API.Helpers.Exceptions;
 
 namespace CurrencyBank.API.Repositories
 {
@@ -40,13 +42,28 @@ namespace CurrencyBank.API.Repositories
             user.PasswordHash = PasswordHash;
             user.PasswordSalt = PasswordSalt;
 
+            if ((_context.Users.Any(x => x.Email == user.Email)) || (EmailValidator.IsEmailValid(user.Email) == false))
+            {
+                throw new EmailException("Email is not valid or exists user with the same email");
+            }
+
+            if (_context.Users.Any(x => x.Pesel == user.Pesel) || PeselValidator.IsPeselValid(user.Pesel) == false)
+            {
+                throw new PeselException("Pesel is not valid or exists user with the same pesel");
+            }
+
+            if (_context.Users.Any(x => x.UserName == user.UserName))
+            {
+                throw new UsernameException("User with this username already exists");
+            }
+
             try
             {
                 await _context.Users.AddAsync(user);
                 await _context.SaveChangesAsync();
                 return user;
             }
-            catch (Exception e)
+            catch (DbUpdateException e)
             {
                 return null;
             }

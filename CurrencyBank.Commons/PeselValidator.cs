@@ -13,7 +13,7 @@ namespace CurrencyBank.Commons
         /// <returns>true jeżeli jest poprawny, w przeciwnym wypadku false</returns>
         public static bool IsPeselValid(string pesel)
         {
-            int.TryParse(pesel, out int parsedPesel);
+            long.TryParse(pesel, out long parsedPesel);
             if (parsedPesel == 0)
                 return false;
 

@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using CurrencyBank.API.Dtos;
 using CurrencyBank.API.Interfaces;
+using CurrencyBank.API.Helpers.Exceptions;
 
 namespace CurrencyBank.API.Controllers
 {
@@ -45,18 +46,22 @@ namespace CurrencyBank.API.Controllers
             userRegisterDto.UserName = userRegisterDto.UserName.ToLower();
 
             if (await _repo.UserExists(userRegisterDto.UserName))
-                return BadRequest("Taki użytkownik juz istnieje");
+                return BadRequest("The same username already exists");
 
             var userToCreate = _mapper.Map<User>(userRegisterDto);
-
-            var createdUser = _repo.Register(userToCreate, userRegisterDto.Password);
-
-            if (createdUser.Result == null)
+            try
             {
-                return BadRequest("Wystąpił błąd");
+                var createdUser = _repo.Register(userToCreate, userRegisterDto.Password);
+                if (createdUser.Result == null)
+                {
+                    return BadRequest("Error occured");
+                }
+                return Created("", createdUser);
             }
-
-            return Created("", createdUser);
+            catch (Exception e)
+            {
+                return BadRequest(e.InnerException.Message.ToString());
+            }
         }
 
         /// <summary>

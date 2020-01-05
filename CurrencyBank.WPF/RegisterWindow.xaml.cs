@@ -73,7 +73,7 @@ namespace CurrencyBank.WPF
             }
             else
             {
-                MessageBox.Show("Wystąpił błąd. Spróbuj ponownie");
+                MessageBox.Show(response.Content.ReadAsStringAsync().Result.ToString());
                 Register_btn.IsEnabled = true;
             }
 
