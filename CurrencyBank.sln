@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrencyBank.API", "WebApiC
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installer", "Installer", "{CB494C12-86CE-4495-AA69-35A6FBE15CAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceInstall", "ServiceInstall\ServiceInstall.csproj", "{689799CC-CEC1-4697-A147-271F4486F839}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceInstall", "ServiceInstall\ServiceInstall.csproj", "{689799CC-CEC1-4697-A147-271F4486F839}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstallerAPI", "InstallerAPI\InstallerAPI.csproj", "{55E0988F-8245-4A6F-AC9A-1BF990050611}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,12 +49,17 @@ Global
 		{689799CC-CEC1-4697-A147-271F4486F839}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{689799CC-CEC1-4697-A147-271F4486F839}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{689799CC-CEC1-4697-A147-271F4486F839}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55E0988F-8245-4A6F-AC9A-1BF990050611}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55E0988F-8245-4A6F-AC9A-1BF990050611}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55E0988F-8245-4A6F-AC9A-1BF990050611}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55E0988F-8245-4A6F-AC9A-1BF990050611}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{689799CC-CEC1-4697-A147-271F4486F839} = {CB494C12-86CE-4495-AA69-35A6FBE15CAF}
+		{55E0988F-8245-4A6F-AC9A-1BF990050611} = {CB494C12-86CE-4495-AA69-35A6FBE15CAF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {65E3D74E-933F-4716-8515-423AAE44EDA9}

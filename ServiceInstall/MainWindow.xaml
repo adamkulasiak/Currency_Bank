@@ -10,7 +10,7 @@
     <Grid>
         <Button x:Name="ChooseFileBtn" Content="Choose file" HorizontalAlignment="Left" Margin="35,84,0,0" VerticalAlignment="Top" Height="35" Width="120" Click="ChooseFileBtn_Click"/>
         <Label Content="CurrencyBank service management" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontSize="25" FontWeight="Bold"/>
-        <ComboBox HorizontalAlignment="Left" Margin="-210,269,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="95,149,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="600" Height="260"/>
 
     </Grid>
 </Window>

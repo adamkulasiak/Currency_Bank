@@ -1,3 +1,3 @@
-sc stop "CurrencyBankAPI"
-sc delete "CurrencyBankAPI"
+sc stop "CurrencyBank.API"
+sc delete "CurrencyBank.API"
 pause
