@@ -60,5 +60,13 @@ namespace CurrencyBank.WPF
                 MessageBox.Show("Try again.");
             }
         }
+
+        private void Register_btn_Click(object sender, RoutedEventArgs e)
+        {
+            RegisterWindow register = new RegisterWindow();
+            this.Close();
+            register.Show();
+
+        }
     }
 }

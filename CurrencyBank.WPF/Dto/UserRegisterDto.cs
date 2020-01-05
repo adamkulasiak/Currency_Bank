@@ -1,17 +1,14 @@
-﻿using CurrencyBank.Database.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace CurrencyBank.API.Dtos
+namespace CurrencyBank.WPF.Dto
 {
     public class UserRegisterDto
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-
         [Required]
         public string UserName { get; set; }
         [Required]
@@ -21,6 +18,5 @@ namespace CurrencyBank.API.Dtos
         [Required]
         [StringLength(12, MinimumLength = 8)]
         public string Password { get; set; }
-        //public Languages Language { get; set; }
     }
 }

@@ -231,6 +231,9 @@
   <data name="Open_btn" xml:space="preserve">
     <value>Otwórz</value>
   </data>
+  <data name="OrRegister_btn" xml:space="preserve">
+    <value>Zarejestruj się</value>
+  </data>
   <data name="Password_lb" xml:space="preserve">
     <value>Hasło</value>
   </data>

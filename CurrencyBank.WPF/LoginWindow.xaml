@@ -7,22 +7,21 @@
         xmlns:p = "clr-namespace:CurrencyBank.WPF.Properties"
         mc:Ignorable="d"
         Title="Login" Height="350" Width="450" Background="Azure" Icon="64.png">
-        <Border Background="Bisque" CornerRadius="20" Margin="20">
-            <StackPanel Orientation="Vertical" Margin="20" Background="BlanchedAlmond">
+    <Border Background="Bisque" CornerRadius="20" Margin="20">
+        <StackPanel Orientation="Vertical" Margin="20" Background="BlanchedAlmond">
 
             <Label Content="{x:Static p:Resources.LogIntoYourAccount_lb}" HorizontalAlignment="Center" Foreground="Black" FontSize="14" FontWeight="Bold"></Label>
-                <Separator Margin="10"></Separator>
+            <Separator Margin="10"></Separator>
 
             <Label Content="{x:Static p:Resources.Login_lb}" HorizontalAlignment="Center"></Label>
-                <TextBox x:Name="UserName_tb" TextAlignment="Center" TextWrapping="Wrap" Width="200" Height="25"/>
+            <TextBox x:Name="UserName_tb" TextAlignment="Center" TextWrapping="Wrap" Width="200" Height="25"/>
             <Label Content="{x:Static p:Resources.Password_lb}" HorizontalAlignment="Center"></Label>
-                <PasswordBox x:Name="password_tb"  Width="200" Height="25"/>
-
-            <Button x:Name="Login_btn" Margin="15" Content="{x:Static p:Resources.Login_btn}" Height="25" HorizontalAlignment="Center" Width="100" Click="Login_btn_Click"/>
-            <ComboBox x:Name="Lang_cbbx" Width="120" Height="23" Margin="0" HorizontalAlignment="Left"/>
+            <PasswordBox x:Name="password_tb"  Width="200" Height="25"/>
+            <Button x:Name="Login_btn" Content="{x:Static p:Resources.Login_btn}" Margin="10" Height="25" Width="100" Click="Login_btn_Click"/>
+            <Button x:Name="Register_btn" Content="{x:Static p:Resources.OrRegister_btn}" Height="25" Width="100" Click="Register_btn_Click"/>
 
         </StackPanel>
-        </Border>
+    </Border>
 
 
 </Window>

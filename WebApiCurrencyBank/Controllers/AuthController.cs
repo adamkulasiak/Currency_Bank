@@ -51,6 +51,11 @@ namespace CurrencyBank.API.Controllers
 
             var createdUser = _repo.Register(userToCreate, userRegisterDto.Password);
 
+            if (createdUser.Result == null)
+            {
+                return BadRequest("Wystąpił błąd");
+            }
+
             return Created("", createdUser);
         }
 

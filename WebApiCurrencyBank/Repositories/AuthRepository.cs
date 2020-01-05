@@ -40,9 +40,16 @@ namespace CurrencyBank.API.Repositories
             user.PasswordHash = PasswordHash;
             user.PasswordSalt = PasswordSalt;
 
-            await _context.Users.AddAsync(user);
-            await _context.SaveChangesAsync();
-            return user;
+            try
+            {
+                await _context.Users.AddAsync(user);
+                await _context.SaveChangesAsync();
+                return user;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
 
         public async Task<bool> UserExists(string username)

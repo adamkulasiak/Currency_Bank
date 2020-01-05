@@ -403,6 +403,15 @@ namespace CurrencyBank.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Or  Register.
+        /// </summary>
+        public static string OrRegister_btn {
+            get {
+                return ResourceManager.GetString("OrRegister_btn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         public static string Password_lb {

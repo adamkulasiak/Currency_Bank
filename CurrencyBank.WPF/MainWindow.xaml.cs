@@ -23,13 +23,11 @@ namespace CurrencyBank.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        private AccountService _accountService;
         private LoggedInUser _loggedInUser;
         
         public MainWindow()
         {
             InitializeComponent();
-            _accountService = new AccountService();
         }
 
         public MainWindow(LoggedInUser loggedInUser) : this()

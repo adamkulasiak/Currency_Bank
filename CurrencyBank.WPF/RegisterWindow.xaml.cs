@@ -1,4 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using CurrencyBank.WPF.Dto;
+using CurrencyBank.WPF.Models;
+using CurrencyBank.WPF.Services;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -21,64 +25,58 @@ namespace CurrencyBank.WPF
     /// </summary>
     public partial class RegisterWindow : Window
     {
-        //private static readonly HttpClient client = new HttpClient();
-        //public RegisterWindow()
-        //{
-        //    InitializeComponent();
-        //}
+        private AuthService _authService;
+        public RegisterWindow()
+        {
+            InitializeComponent();
+            _authService = new AuthService();
+        }
 
-        //private void CreateRegisterForm()
-        //{
-        //    FirstName_tb.Text = "";
-        //    LastName_tb.Text = "";
-        //    UserName_tb.Text = "";
-        //    Email_tb.Text = "";
-        //    Pesel_tb.Text = "";
-        //    password_tb.Password = "";
-        //}
-        private void Register_btn_Click(object sender, RoutedEventArgs e) { }
-        //private async void Register_btn_Click(object sender, RoutedEventArgs e)
-        //{
-        //Register_btn.IsEnabled = false;
-        //var user = new UserRegisterDto()
-        //{
-        //    FirstName = FirstName_tb.Text,
-        //    LastName = LastName_tb.Text,
-        //    UserName = UserName_tb.Text,
-        //    Email = Email_tb.Text,
-        //    Pesel = Pesel_tb.Text,
-        //    Password = password_tb.Password
-        //};
+        private void CreateRegisterForm()
+        {
+            FirstName_tb.Text = "";
+            LastName_tb.Text = "";
+            UserName_tb.Text = "";
+            Email_tb.Text = "";
+            Pesel_tb.Text = "";
+            password_tb.Password = "";
+        }
+        private async void Register_btn_Click(object sender, RoutedEventArgs e)
+        {
+            Register_btn.IsEnabled = false;
+            var userRegisterDto = new UserRegisterDto()
+            {
+                FirstName = FirstName_tb.Text,
+                LastName = LastName_tb.Text,
+                UserName = UserName_tb.Text,
+                Email = Email_tb.Text,
+                Pesel = Pesel_tb.Text,
+                Password = password_tb.Password
+            };
 
-        //var val = new Dictionary<string, string>
-        //{
-        //    {"FirstName",user.FirstName },
-        //    {"LastName",user.LastName },
-        //    {"UserName",user.UserName},
-        //    {"Email",user.Email },
-        //    {"Pesel",user.Pesel },
-        //    {"Password",user.Password },
-        //};
+            var response = await _authService.Register(userRegisterDto);
 
-        //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        //var response = client.PostAsJsonAsync("http://localhost:5000/api/auth/register", user).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                MessageBox.Show("Pomyślnie zarejestrowano");
 
-        //MessageBox.Show(response);
+                var userLoginDto = new UserLoginDto { UserName = UserName_tb.Text, Password = password_tb.Password };
+                var resp = await _authService.Login(userLoginDto);
 
-        //if (result is null)
-        //{
-        //    MessageBox.Show("Error");
-        //    Register_btn.IsEnabled = true;
-        //}
-        //else
-        //{
-        //    MessageBox.Show("Success");
-        //    this.CreateRegisterForm();
-        //    Register_btn.IsEnabled = true;
-        //    this.Hide();
-        //    MainWindow mw = new MainWindow();
-        //    mw.Show();
-        //}
-        //}
+                JObject json = JObject.Parse(resp.Content.ReadAsStringAsync().Result);
+                JObject jsonObj = (JObject)json["userToReturn"];
+                var loggedInUser = jsonObj.ToObject<LoggedInUser>();
+
+                MainWindow mainWindow = new MainWindow(loggedInUser);
+                this.Close();
+                mainWindow.Show();
+            }
+            else
+            {
+                MessageBox.Show("Wystąpił błąd. Spróbuj ponownie");
+                Register_btn.IsEnabled = true;
+            }
+
+        }
     }
 }
