@@ -58,7 +58,7 @@ namespace CurrencyBank.WPF
 
             if (response.IsSuccessStatusCode)
             {
-                MessageBox.Show("Pomyślnie zarejestrowano");
+                MessageBox.Show(Properties.Resources.Info_registerSuccessful);
 
                 var userLoginDto = new UserLoginDto { UserName = UserName_tb.Text, Password = password_tb.Password };
                 var resp = await _authService.Login(userLoginDto);

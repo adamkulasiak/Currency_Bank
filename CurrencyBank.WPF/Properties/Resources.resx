@@ -180,6 +180,9 @@
   <data name="Email_lb" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="Error_deleteingAccount" xml:space="preserve">
+    <value>Not allowed to delete account with over 0 balance. Withdraw?</value>
+  </data>
   <data name="ExchangeTheCurrency_lb" xml:space="preserve">
     <value>Exchange the Currency</value>
   </data>
@@ -194,6 +197,9 @@
   </data>
   <data name="From_lb" xml:space="preserve">
     <value>From</value>
+  </data>
+  <data name="Info_registerSuccessful" xml:space="preserve">
+    <value>Registration successful</value>
   </data>
   <data name="Lastname_lb" xml:space="preserve">
     <value>Last Name</value>

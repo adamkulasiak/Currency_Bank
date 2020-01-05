@@ -180,6 +180,9 @@
   <data name="Email_lb" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="Error_deleteingAccount" xml:space="preserve">
+    <value>Nie można usunąć konta z dodatnim balansem. Czy chcesz wypłacić?</value>
+  </data>
   <data name="ExchangeTheCurrency_lb" xml:space="preserve">
     <value>Wymiana Waluty</value>
   </data>
@@ -194,6 +197,9 @@
   </data>
   <data name="From_lb" xml:space="preserve">
     <value>ID konta nadawcy</value>
+  </data>
+  <data name="Info_registerSuccessful" xml:space="preserve">
+    <value>Rejestracja udana</value>
   </data>
   <data name="Lastname_lb" xml:space="preserve">
     <value>Nazwisko</value>

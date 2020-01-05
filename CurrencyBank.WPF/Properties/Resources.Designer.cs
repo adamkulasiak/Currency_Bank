@@ -250,6 +250,15 @@ namespace CurrencyBank.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not allowed to delete account with over 0 balance. Withdraw?.
+        /// </summary>
+        public static string Error_deleteingAccount {
+            get {
+                return ResourceManager.GetString("Error_deleteingAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exchange.
         /// </summary>
         public static string Exchange_btn {
@@ -291,6 +300,15 @@ namespace CurrencyBank.WPF.Properties {
         public static string From_lb {
             get {
                 return ResourceManager.GetString("From_lb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Registration successful.
+        /// </summary>
+        public static string Info_registerSuccessful {
+            get {
+                return ResourceManager.GetString("Info_registerSuccessful", resourceCulture);
             }
         }
         

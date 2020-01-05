@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using CurrencyBank.API.Dtos;
 using CurrencyBank.API.Interfaces;
+using CurrencyBank.API.Helpers.Exceptions;
 
 namespace CurrencyBank.API.Controllers
 {
@@ -143,12 +144,20 @@ namespace CurrencyBank.API.Controllers
         [HttpDelete("deleteAccount")]
         public async Task<IActionResult> DeleteAccount([FromQuery]int accountId)
         {
-            var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            var result = await _accountRepo.DeleteAccount(currentUserId, accountId);
-
-            if (result) return Ok("Konto zostało usunięte");
-            else return BadRequest("Błąd przy usuwaniu");
-            
+            try
+            {
+                var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                await _accountRepo.DeleteAccount(currentUserId, accountId);
+                return Ok("Account has been succesfully deleted");
+            }
+            catch (DeleteAccountException e)
+            {
+                return BadRequest(e.Message);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Error occured");
+            }
         }
     }
 }

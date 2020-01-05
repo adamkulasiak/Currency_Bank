@@ -8,6 +8,7 @@ using CurrencyBank.Database.Data;
 using CurrencyBank.Database.Models;
 using Microsoft.EntityFrameworkCore;
 using CurrencyBank.API.Interfaces;
+using CurrencyBank.API.Helpers.Exceptions;
 
 namespace CurrencyBank.API.Repositories
 {
@@ -127,6 +128,11 @@ namespace CurrencyBank.API.Repositories
         public async Task<bool> DeleteAccount(int userId, int accountId)
         {
             var account = await _context.Accounts.FirstOrDefaultAsync(x => x.Id == accountId);
+            if (account.Balance != 0)
+            {
+                throw new DeleteAccountException("Not allowed to delete account with over 0 balance");
+            }
+
             if (account?.UserId != userId)
                 return false;
 
