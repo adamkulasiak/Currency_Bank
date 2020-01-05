@@ -38,7 +38,6 @@
             // 
             // btnInstall
             // 
-            this.btnInstall.Enabled = false;
             this.btnInstall.Location = new System.Drawing.Point(212, 18);
             this.btnInstall.Name = "btnInstall";
             this.btnInstall.Size = new System.Drawing.Size(75, 23);
@@ -76,7 +75,6 @@
             // 
             // btnUninstall
             // 
-            this.btnUninstall.Enabled = false;
             this.btnUninstall.Location = new System.Drawing.Point(308, 18);
             this.btnUninstall.Name = "btnUninstall";
             this.btnUninstall.Size = new System.Drawing.Size(75, 23);
