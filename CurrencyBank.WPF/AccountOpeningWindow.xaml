@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CurrencyBank.WPF"
         mc:Ignorable="d"
         xmlns:p = "clr-namespace:CurrencyBank.WPF.Properties"
-        Title="Open new account" Height="300" Width="400">
+        Title="Open new account" Height="300" Width="400" Icon="64.png">
     <Border Background="Bisque" Height="250" CornerRadius="20" Margin="20,0,20,0">
 
         <Grid Margin="10,10,10,10" Width="350" Height="240" Background="BlanchedAlmond">

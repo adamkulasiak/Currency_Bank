@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CurrencyBank.WPF"
         mc:Ignorable="d"
         xmlns:p = "clr-namespace:CurrencyBank.WPF.Properties"
-        Title="WithdrawalWindow" Height="340" Width="378">
+        Title="WithdrawalWindow" Height="340" Width="378" Icon="64.png">
     <Border Background="Bisque" Height="318" Width="358" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="20">
 
         <Grid Margin="20" Height="295" Width="338" HorizontalAlignment="Center" VerticalAlignment="Center" Background="BlanchedAlmond">

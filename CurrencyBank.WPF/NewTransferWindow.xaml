@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CurrencyBank.WPF"
         xmlns:p = "clr-namespace:CurrencyBank.WPF.Properties"
         mc:Ignorable="d"
-        Title="NewTransferWindow" Height="384" Width="384">
+        Title="NewTransferWindow" Height="384" Width="384" Icon="64.png">
     <Border Background="Bisque" Height="364" Width="364" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="20" Margin="20,0,20,0">
         <Grid Margin="20,0,20,0" Background="BlanchedAlmond" Height="344" Width="344" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label Content="{x:Static p:Resources.NewTransfer_lb}" HorizontalContentAlignment="Center" FontSize="14" FontWeight="Bold" Margin="0,10,0,302"/>

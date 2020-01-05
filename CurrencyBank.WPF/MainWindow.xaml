@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CurrencyBank.WPF"
         xmlns:p = "clr-namespace:CurrencyBank.WPF.Properties"
         mc:Ignorable="d"
-        Title="User profile" Height="450" Width="900">
+        Title="User profile" Height="450" Width="900" Icon="64.png">
     <Border Background="Bisque" CornerRadius="20" Margin="20">
         <Grid  Margin="10,0,10,0" Background="BlanchedAlmond" Height="384">
 

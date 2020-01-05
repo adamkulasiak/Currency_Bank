@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CurrencyBank.WPF"
         xmlns:p = "clr-namespace:CurrencyBank.WPF.Properties"
         mc:Ignorable="d"
-        Title="ExchangeWindow" Height="400" Width="400">
+        Title="ExchangeWindow" Height="400" Width="400" Icon="64.png">
     <Border Background="Bisque" Height="360" Width="350" CornerRadius="20" Margin="20,0,20,0">
         <Grid Margin="0,20,0,10" Background="BlanchedAlmond" Height="330" Width="330">
             <Label Content="{x:Static p:Resources.ChooseYourCurrency_lb}" HorizontalContentAlignment="Center" Height="30" Margin="98,55,96,245"/>
