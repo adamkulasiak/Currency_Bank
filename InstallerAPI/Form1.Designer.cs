@@ -28,72 +28,87 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            this.btnInstall = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtInput = new System.Windows.Forms.TextBox();
-            this.btnRun = new System.Windows.Forms.Button();
+            this.btnChoose = new System.Windows.Forms.Button();
             this.txtOutput = new System.Windows.Forms.TextBox();
+            this.btnUninstall = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // btnInstall
+            // 
+            this.btnInstall.Enabled = false;
+            this.btnInstall.Location = new System.Drawing.Point(212, 18);
+            this.btnInstall.Name = "btnInstall";
+            this.btnInstall.Size = new System.Drawing.Size(75, 23);
+            this.btnInstall.TabIndex = 2;
+            this.btnInstall.Text = "Instaluj";
+            this.btnInstall.UseVisualStyleBackColor = true;
+            this.btnInstall.Click += new System.EventHandler(this.btnInstall_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(13, 23);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(54, 13);
+            this.label1.Size = new System.Drawing.Size(81, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Command";
+            this.label1.Text = "Wybierz usługę";
             // 
-            // txtInput
+            // btnChoose
             // 
-            this.txtInput.Location = new System.Drawing.Point(74, 23);
-            this.txtInput.Name = "txtInput";
-            this.txtInput.Size = new System.Drawing.Size(624, 20);
-            this.txtInput.TabIndex = 1;
-            // 
-            // btnRun
-            // 
-            this.btnRun.Location = new System.Drawing.Point(704, 23);
-            this.btnRun.Name = "btnRun";
-            this.btnRun.Size = new System.Drawing.Size(75, 23);
-            this.btnRun.TabIndex = 2;
-            this.btnRun.Text = "Run";
-            this.btnRun.UseVisualStyleBackColor = true;
-            this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
+            this.btnChoose.Location = new System.Drawing.Point(100, 18);
+            this.btnChoose.Name = "btnChoose";
+            this.btnChoose.Size = new System.Drawing.Size(75, 23);
+            this.btnChoose.TabIndex = 3;
+            this.btnChoose.Text = "Wybierz";
+            this.btnChoose.UseVisualStyleBackColor = true;
+            this.btnChoose.Click += new System.EventHandler(this.btnChoose_Click);
             // 
             // txtOutput
             // 
-            this.txtOutput.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.txtOutput.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.txtOutput.ForeColor = System.Drawing.Color.White;
-            this.txtOutput.Location = new System.Drawing.Point(74, 61);
+            this.txtOutput.Location = new System.Drawing.Point(16, 65);
             this.txtOutput.Multiline = true;
             this.txtOutput.Name = "txtOutput";
-            this.txtOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtOutput.Size = new System.Drawing.Size(624, 377);
-            this.txtOutput.TabIndex = 3;
+            this.txtOutput.Size = new System.Drawing.Size(652, 357);
+            this.txtOutput.TabIndex = 4;
+            // 
+            // btnUninstall
+            // 
+            this.btnUninstall.Enabled = false;
+            this.btnUninstall.Location = new System.Drawing.Point(308, 18);
+            this.btnUninstall.Name = "btnUninstall";
+            this.btnUninstall.Size = new System.Drawing.Size(75, 23);
+            this.btnUninstall.TabIndex = 5;
+            this.btnUninstall.Text = "Odinstaluj";
+            this.btnUninstall.UseVisualStyleBackColor = true;
+            this.btnUninstall.Click += new System.EventHandler(this.btnUninstall_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(704, 450);
+            this.Controls.Add(this.btnUninstall);
             this.Controls.Add(this.txtOutput);
-            this.Controls.Add(this.btnRun);
-            this.Controls.Add(this.txtInput);
+            this.Controls.Add(this.btnChoose);
+            this.Controls.Add(this.btnInstall);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Instalator usługi";
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
+        private System.Windows.Forms.Button btnInstall;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtInput;
-        private System.Windows.Forms.Button btnRun;
+        private System.Windows.Forms.Button btnChoose;
         private System.Windows.Forms.TextBox txtOutput;
+        private System.Windows.Forms.Button btnUninstall;
     }
 }
 
