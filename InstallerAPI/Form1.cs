@@ -26,8 +26,8 @@ namespace InstallerAPI
             InitializeComponent();
             FillCombobox();
 
-            if (!Directory.Exists(@"C:\Database"))
-                Directory.CreateDirectory(@"C:\Database");
+            if (!Directory.Exists(@"C:\temp"))
+                Directory.CreateDirectory(@"C:\temp");
             using (StreamWriter writetext = new StreamWriter(@"C:\temp\uninstallCurrrencyBank.bat"))
             {
                 writetext.WriteLine($"sc stop CurrencyBankAPI");
