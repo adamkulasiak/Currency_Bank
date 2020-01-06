@@ -210,6 +210,10 @@ namespace InstallerAPI
             {
                 try
                 {
+                    if (!Directory.Exists(@"C:\Database"))
+                    {
+                        Directory.CreateDirectory(@"C:\Database");
+                    }
                     if (File.Exists(@"C:\Database\CurrencyBankDb.db"))
                     {
                         File.Delete(@"C:\Database\CurrencyBankDb.db");
