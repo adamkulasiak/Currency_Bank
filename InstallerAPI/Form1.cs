@@ -26,13 +26,19 @@ namespace InstallerAPI
             InitializeComponent();
             FillCombobox();
 
-            if (!Directory.Exists(@"C:\temp"))
-                Directory.CreateDirectory(@"C:\temp");
+            CreateDirectory(@"C:\temp");
+
             using (StreamWriter writetext = new StreamWriter(@"C:\temp\uninstallCurrrencyBank.bat"))
             {
                 writetext.WriteLine($"sc stop CurrencyBankAPI");
                 writetext.WriteLine("sc delete CurrencyBankAPI");
             }
+        }
+
+        private void CreateDirectory(string dir)
+        {
+            if (!Directory.Exists(dir))
+                Directory.CreateDirectory(dir);
         }
 
         private void FillCombobox()
@@ -97,10 +103,8 @@ namespace InstallerAPI
             if (_filePath.Length > 0)
             {
                 txtOutput.AppendText("Wybrany plik: "+ _filePath + Environment.NewLine);
-                if (!Directory.Exists(@"C:\temp"))
-                {
-                    Directory.CreateDirectory(@"C:\temp");
-                }
+                CreateDirectory(@"C:\temp");
+                
                 using (StreamWriter writetext = new StreamWriter(@"C:\temp\installCurrrencyBank.bat"))
                 {
                     writetext.WriteLine($"sc create CurrencyBankAPI binPath={_filePath}");
@@ -121,10 +125,7 @@ namespace InstallerAPI
         {
             var result = RunScript(@"C:\temp\installCurrrencyBank.bat");
 
-            if (!Directory.Exists(@"C:\temp"))
-            {
-                Directory.CreateDirectory(@"C:\temp");
-            }
+            CreateDirectory(@"C:\temp");
             using (StreamWriter writetext = new StreamWriter(@"C:\temp\uninstallCurrrencyBank.bat"))
             {
                 writetext.WriteLine($"sc stop CurrencyBankAPI");
@@ -210,10 +211,7 @@ namespace InstallerAPI
             {
                 try
                 {
-                    if (!Directory.Exists(@"C:\Database"))
-                    {
-                        Directory.CreateDirectory(@"C:\Database");
-                    }
+                    CreateDirectory(@"C:\Database");
                     if (File.Exists(@"C:\Database\CurrencyBankDb.db"))
                     {
                         File.Delete(@"C:\Database\CurrencyBankDb.db");
@@ -232,9 +230,8 @@ namespace InstallerAPI
         private void btnSetLanguage_Click(object sender, EventArgs e)
         {
             string path = @"C:\Database";
-            
-            if (!Directory.Exists(path))
-                Directory.CreateDirectory(path);
+
+            CreateDirectory(path);
 
             try
             {
