@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Runspaces;
+using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,6 +19,7 @@ namespace InstallerAPI
     public partial class Form1 : Form
     {
         private string _filePath;
+        private string _filePathDotnetCore;
         public Form1()
         {
             InitializeComponent();
@@ -27,7 +29,7 @@ namespace InstallerAPI
         {
             string exe = script;
             var psi = new ProcessStartInfo();
-            psi.CreateNoWindow = false;
+            psi.CreateNoWindow = true;
             psi.FileName = @"cmd.exe";
             psi.Verb = "runas";
             psi.Arguments = "/C " + exe;
@@ -45,12 +47,24 @@ namespace InstallerAPI
             }
             finally
             {
-                File.Delete(script);
+                //File.Delete(script);
             }
         }
 
         private void btnChoose_Click(object sender, EventArgs e)
         {
+            try
+            {
+                File.Delete(@"C:\temp\installCurrrencyBank.bat");
+                File.Delete(@"C:\temp\startService.bat");
+                File.Delete(@"C:\temp\stopService.bat");
+                File.Delete(@"C:\temp\uninstallCurrrencyBank.bat");
+            }
+            catch (Exception)
+            {
+
+            }
+
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.ShowDialog();
             _filePath = openFileDialog.FileName;
@@ -65,7 +79,14 @@ namespace InstallerAPI
                 {
                     writetext.WriteLine($"sc create CurrencyBankAPI binPath={_filePath}");
                     writetext.WriteLine("sc start CurrencyBankAPI");
-                    writetext.WriteLine("pause");
+                }
+                using (StreamWriter writetext = new StreamWriter(@"C:\temp\startService.bat"))
+                {
+                    writetext.WriteLine("sc start CurrencyBankAPI");
+                }
+                using (StreamWriter writetext = new StreamWriter(@"C:\temp\stopService.bat"))
+                {
+                    writetext.WriteLine("sc stop CurrencyBankAPI");
                 }
             }
         }
@@ -82,13 +103,75 @@ namespace InstallerAPI
             {
                 writetext.WriteLine($"sc stop CurrencyBankAPI");
                 writetext.WriteLine("sc delete CurrencyBankAPI");
-                writetext.WriteLine("pause");
             }
         }
 
         private void btnUninstall_Click(object sender, EventArgs e)
         {
             var result = RunScript(@"C:\temp\uninstallCurrrencyBank.bat");
+        }
+
+        private void btnCheckStatus_Click(object sender, EventArgs e)
+        {
+            string command = "Get-Service -Displayname \"CurrencyBankAPI\"";
+            txtPSOutput.Clear();
+            txtPSOutput.Text = RunPowershellScript(command);
+            if (string.IsNullOrEmpty(txtPSOutput.Text))
+            {
+                txtPSOutput.Text = "Usługa nie jest zainstalowana";
+            }
+        }
+
+        private string RunPowershellScript(string script)
+        {
+            Runspace runspace = RunspaceFactory.CreateRunspace();
+            runspace.Open();
+            Pipeline pipeline = runspace.CreatePipeline();
+            pipeline.Commands.AddScript(script);
+            pipeline.Commands.Add("Out-String");
+            Collection<PSObject> results = pipeline.Invoke();
+            runspace.Close();
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (PSObject psObject in results)
+            {
+                stringBuilder.Append(psObject.ToString());
+            }
+            return stringBuilder.ToString();
+        }
+
+        private void btnStartService_Click(object sender, EventArgs e)
+        {
+            RunScript(@"C:\temp\startService.bat");
+        }
+
+        private void btnStopService_Click(object sender, EventArgs e)
+        {
+            RunScript(@"C:\temp\stopService.bat");
+        }
+
+        private void btnDotnetCoreCheck_Click(object sender, EventArgs e)
+        {
+            string command = @"dotnet --info";
+            txtPSOutput.Clear();
+            txtPSOutput.Text = RunPowershellScript(command);
+            if (string.IsNullOrEmpty(txtPSOutput.Text))
+            {
+                txtPSOutput.Text = "Brak zainstalowanych pakietów dotnet core";
+            }
+        }
+
+        private void btn_installRuntime_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.ShowDialog();
+            _filePathDotnetCore = openFileDialog.FileName;
+
+            if (_filePathDotnetCore.Length > 0)
+            {
+                string command = $"Start-Process -Wait -FilePath \"{_filePathDotnetCore}\" -ArgumentList \" / S / v / qn\" -passthru";
+                txtPSOutput.Clear();
+                txtPSOutput.Text = RunPowershellScript(command);
+            }
         }
     }
 }
