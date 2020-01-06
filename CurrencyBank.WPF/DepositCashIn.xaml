@@ -15,7 +15,7 @@
             <Label Content="{x:Static p:Resources.AccountId_lb}" HorizontalContentAlignment="Center" Margin="109,50,109,169"/>
             <ComboBox x:Name="AccountID_cbx" Margin="0,84,0,141" Width="206" Height="25"></ComboBox>
             <Label Content="{x:Static p:Resources.Amount_lb}" HorizontalContentAlignment="Center" Margin="124,119,124,105" Height="26"/>
-            <TextBox x:Name="Amount_txt" Margin="52,145,52,80" TextWrapping="Wrap" Width="206" Height="25"/>
+            <TextBox x:Name="Amount_txt" PreviewTextInput="NumberValidationTextBox" Margin="52,145,52,80" TextWrapping="Wrap" Width="206" Height="25"/>
             <Button x:Name="CashIn_btn" Margin="158,187,52,38" Content="{x:Static p:Resources.Deposit_btn}" Height="25" Width="100" Click="CashIn_btn_Click"/>
             <Button x:Name="Back_btn" Content="{x:Static p:Resources.Back_btn}" Height="25" Width="100" Margin="52,187,158,38" Click="Back_btn_Click"/>
         </Grid>

@@ -49,31 +49,44 @@ namespace CurrencyBank.WPF
         private async void Exchange_btn_Click(object sender, RoutedEventArgs e)
         {
             Exchange_btn.IsEnabled = false;
-
-            int from = int.Parse(ExchangeFrom_lb.Text.Where(Char.IsDigit).ToArray());
-            int to = int.Parse(ExchangeTo_lb.Text.Where(Char.IsDigit).ToArray());
-            decimal ammount = decimal.Parse(Ammount_txt.Text);
-
-            var response = await _accountService.ExchangeMoney(_loggedInUser.Token, from, to, ammount);
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                JArray jArray = JArray.Parse(response.Content.ReadAsStringAsync().Result);
-                var accounts = JsonConvert.DeserializeObject<List<Account>>(jArray.ToString());
+                int from = int.Parse(ExchangeFrom_lb.Text.Where(Char.IsDigit).ToArray());
+                int to = int.Parse(ExchangeTo_lb.Text.Where(Char.IsDigit).ToArray());
+                decimal ammount = decimal.Parse(Ammount_txt.Text);
 
-                var accToRemove = _loggedInUser.Accounts.Where(x => x.Id == from || x.Id == to).ToList();
-                foreach (var acc in accToRemove)
+                var response = await _accountService.ExchangeMoney(_loggedInUser.Token, from, to, ammount);
+
+                if (response.IsSuccessStatusCode)
                 {
-                    _loggedInUser.Accounts.Remove(acc);
-                }
+                    JArray jArray = JArray.Parse(response.Content.ReadAsStringAsync().Result);
+                    var accounts = JsonConvert.DeserializeObject<List<Account>>(jArray.ToString());
 
-                foreach (var acc in accounts)
+                    var accToRemove = _loggedInUser.Accounts.Where(x => x.Id == from || x.Id == to).ToList();
+                    foreach (var acc in accToRemove)
+                    {
+                        _loggedInUser.Accounts.Remove(acc);
+                    }
+
+                    foreach (var acc in accounts)
+                    {
+                        _loggedInUser.Accounts.Add(acc);
+                    }
+
+                    MessageBox.Show("Pomyślnie wymieniono");
+                }
+                else
                 {
-                    _loggedInUser.Accounts.Add(acc);
+                    MessageBox.Show("Błąd podczas wymiany");
+                    Exchange_btn.IsEnabled = true;
                 }
-
-                MessageBox.Show("OK");
             }
+            catch (FormatException)
+            {
+                MessageBox.Show("Wybierz wartości z list");
+                Exchange_btn.IsEnabled = true;
+            }
+            
         }
 
         private void Back_btn_Click(object sender, RoutedEventArgs e)

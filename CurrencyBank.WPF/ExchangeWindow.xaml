@@ -22,7 +22,6 @@
             <Button x:Name="Exchange_btn" Content="{x:Static p:Resources.Exchange_btn1}" Height="25" Margin="168,277,62,28" Width="100" Click="Exchange_btn_Click"/>
             <Button x:Name="Back_btn" Content="{x:Static p:Resources.Back_btn}" Height="25" Margin="62,277,168,28" Width="100" Click="Back_btn_Click"/>
             <Label Content="{x:Static p:Resources.ExchangeTheCurrency_lb}" HorizontalContentAlignment="Center" Height="30" FontSize="14" FontWeight="Bold" Margin="86,10,86,290" />
-
         </Grid>
     </Border>
 </Window>

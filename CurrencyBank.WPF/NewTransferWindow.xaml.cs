@@ -50,28 +50,42 @@ namespace CurrencyBank.WPF
         {
             Transfer_btn.IsEnabled = false;
 
-            var principalAccountId = int.Parse((FromAccount_cbbx.Text).Where(Char.IsDigit).ToArray());
-            var destinationAccountNumber = ToAccount_btn.Text;
-            var ammount = decimal.Parse(Ammount_Txt.Text);
-
-            var response = await _accountService.TransferMoney(_loggedInUser.Token, principalAccountId, destinationAccountNumber, ammount);
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                JArray jArray = JArray.Parse(response.Content.ReadAsStringAsync().Result);
-                var accounts = JsonConvert.DeserializeObject<List<Account>>(jArray.ToString());
+                var principalAccountId = int.Parse((FromAccount_cbbx.Text).Where(Char.IsDigit).ToArray());
+                var destinationAccountNumber = ToAccount_btn.Text;
+                var ammount = decimal.Parse(Ammount_Txt.Text);
 
-                _loggedInUser.Accounts.Remove(_loggedInUser.Accounts.Where(x => x.Id == principalAccountId).FirstOrDefault());
-                _loggedInUser.Accounts.Add(accounts[0]);
+                var response = await _accountService.TransferMoney(_loggedInUser.Token, principalAccountId, destinationAccountNumber, ammount);
 
-                if (accounts[1].UserId == _loggedInUser.Id)
+                if (response.IsSuccessStatusCode)
                 {
-                    _loggedInUser.Accounts.Remove(_loggedInUser.Accounts.Where(x => x.AccountNumber == destinationAccountNumber).FirstOrDefault());
-                    _loggedInUser.Accounts.Add(accounts[1]);
-                }
+                    JArray jArray = JArray.Parse(response.Content.ReadAsStringAsync().Result);
+                    var accounts = JsonConvert.DeserializeObject<List<Account>>(jArray.ToString());
 
-                MessageBox.Show("OK");
+                    _loggedInUser.Accounts.Remove(_loggedInUser.Accounts.Where(x => x.Id == principalAccountId).FirstOrDefault());
+                    _loggedInUser.Accounts.Add(accounts[0]);
+
+                    if (accounts[1].UserId == _loggedInUser.Id)
+                    {
+                        _loggedInUser.Accounts.Remove(_loggedInUser.Accounts.Where(x => x.AccountNumber == destinationAccountNumber).FirstOrDefault());
+                        _loggedInUser.Accounts.Add(accounts[1]);
+                    }
+
+                    MessageBox.Show("Operacja udana");
+                }
+                else
+                {
+                    MessageBox.Show(response.Content.ReadAsStringAsync().Result.ToString());
+                    Transfer_btn.IsEnabled = true;
+                }
             }
+            catch (FormatException err)
+            {
+                MessageBox.Show("Wypełnij poprawnie pola");
+                Transfer_btn.IsEnabled = true;
+            }
+            
         }
 
         private void Back_btn_Click(object sender, RoutedEventArgs e)

@@ -75,10 +75,6 @@ namespace InstallerAPI
             {
                 return false;
             }
-            finally
-            {
-                //File.Delete(script);
-            }
         }
 
         private void btnChoose_Click(object sender, EventArgs e)

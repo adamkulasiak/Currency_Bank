@@ -74,7 +74,7 @@ namespace CurrencyBank.API.Controllers
         {
             var userFromRepo = await _repo.Login(userLoginDto.UserName.ToLower(), userLoginDto.Password);
 
-            if (userFromRepo == null) return Unauthorized();
+            if (userFromRepo == null) return Unauthorized("Bad login or password");
 
             var userToReturn = _mapper.Map<UserToReturnDto>(userFromRepo);
 
