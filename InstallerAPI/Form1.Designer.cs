@@ -40,6 +40,9 @@
             this.btnStopService = new System.Windows.Forms.Button();
             this.btnDotnetCoreCheck = new System.Windows.Forms.Button();
             this.btn_installRuntime = new System.Windows.Forms.Button();
+            this.btnDbCopy = new System.Windows.Forms.Button();
+            this.cbxLanguage = new System.Windows.Forms.ComboBox();
+            this.btnSetLanguage = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnInstall
@@ -150,11 +153,42 @@
             this.btn_installRuntime.UseVisualStyleBackColor = true;
             this.btn_installRuntime.Click += new System.EventHandler(this.btn_installRuntime_Click);
             // 
+            // btnDbCopy
+            // 
+            this.btnDbCopy.Location = new System.Drawing.Point(343, 18);
+            this.btnDbCopy.Name = "btnDbCopy";
+            this.btnDbCopy.Size = new System.Drawing.Size(113, 23);
+            this.btnDbCopy.TabIndex = 12;
+            this.btnDbCopy.Text = "Kopiuj baze danych";
+            this.btnDbCopy.UseVisualStyleBackColor = true;
+            this.btnDbCopy.Click += new System.EventHandler(this.btnDbCopy_Click);
+            // 
+            // cbxLanguage
+            // 
+            this.cbxLanguage.FormattingEnabled = true;
+            this.cbxLanguage.Location = new System.Drawing.Point(475, 20);
+            this.cbxLanguage.Name = "cbxLanguage";
+            this.cbxLanguage.Size = new System.Drawing.Size(121, 21);
+            this.cbxLanguage.TabIndex = 13;
+            // 
+            // btnSetLanguage
+            // 
+            this.btnSetLanguage.Location = new System.Drawing.Point(602, 20);
+            this.btnSetLanguage.Name = "btnSetLanguage";
+            this.btnSetLanguage.Size = new System.Drawing.Size(75, 23);
+            this.btnSetLanguage.TabIndex = 14;
+            this.btnSetLanguage.Text = "Ustaw język";
+            this.btnSetLanguage.UseVisualStyleBackColor = true;
+            this.btnSetLanguage.Click += new System.EventHandler(this.btnSetLanguage_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(704, 450);
+            this.Controls.Add(this.btnSetLanguage);
+            this.Controls.Add(this.cbxLanguage);
+            this.Controls.Add(this.btnDbCopy);
             this.Controls.Add(this.btn_installRuntime);
             this.Controls.Add(this.btnDotnetCoreCheck);
             this.Controls.Add(this.btnStopService);
@@ -187,6 +221,9 @@
         private System.Windows.Forms.Button btnStopService;
         private System.Windows.Forms.Button btnDotnetCoreCheck;
         private System.Windows.Forms.Button btn_installRuntime;
+        private System.Windows.Forms.Button btnDbCopy;
+        private System.Windows.Forms.ComboBox cbxLanguage;
+        private System.Windows.Forms.Button btnSetLanguage;
     }
 }
 

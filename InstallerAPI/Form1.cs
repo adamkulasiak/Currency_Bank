@@ -20,9 +20,31 @@ namespace InstallerAPI
     {
         private string _filePath;
         private string _filePathDotnetCore;
+        private string _filePathDb;
         public Form1()
         {
             InitializeComponent();
+            FillCombobox();
+        }
+
+        private void FillCombobox()
+        {
+            cbxLanguage.ValueMember ="Name";
+            cbxLanguage.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            cbxLanguage.Items.Add(new Item(1, "pl-PL"));
+            cbxLanguage.Items.Add(new Item(2, "en"));
+        }
+
+        private class Item
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public Item(int id, string name)
+            {
+                Id = id;
+                Name = name;
+            }
         }
 
         private bool RunScript(string script)
@@ -172,6 +194,50 @@ namespace InstallerAPI
                 txtPSOutput.Clear();
                 txtPSOutput.Text = RunPowershellScript(command);
             }
+        }
+
+        private void btnDbCopy_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.ShowDialog();
+            _filePathDb = openFileDialog.FileName;
+
+            if (_filePathDb.Length > 0)
+            {
+                try
+                {
+                    if (File.Exists(@"C:\Database\CurrencyBankDb.db"))
+                    {
+                        File.Delete(@"C:\Database\CurrencyBankDb.db");
+                    }
+                    File.Copy(_filePathDb, @"C:\Database\CurrencyBankDb.db");
+                    txtOutput.AppendText("Baza danych skopiowana pomyślnie" + Environment.NewLine);
+                }
+                catch (Exception err)
+                {
+                    txtOutput.AppendText("Błąd podczas kopiowania bazy danych" + Environment.NewLine);
+                    txtOutput.AppendText(err.ToString());
+                }
+            }
+        }
+
+        private void btnSetLanguage_Click(object sender, EventArgs e)
+        {
+            string path = @"C:\Database";
+            
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+
+            try
+            {
+                
+                using (StreamWriter sw = new StreamWriter(@"C:\Database\lang.txt"))
+                {
+                    sw.WriteLine(cbxLanguage.Text);
+                }
+                txtOutput.AppendText("Język dla aplikacji WPF został ustawiony pomyślnie" + Environment.NewLine);
+            }
+            catch (Exception ) { txtOutput.AppendText("Błąd podczas ustawiania języka" + Environment.NewLine); return; }
         }
     }
 }

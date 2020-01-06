@@ -79,14 +79,25 @@ namespace CurrencyBank.API
 
         private void CreateDatabaseDirectory()
         {
-            string path = @"C:\CurrencyBank.Database";
+            string path = @"C:\Database";
 
             if (Directory.Exists(path))
+            {
+                using (StreamWriter sw = new StreamWriter(@"C:\Database\lang.txt"))
+                {
+                    sw.WriteLine("pl-PL");
+                }
                 return;
+            }
+                
             try
             {
                 Directory.CreateDirectory(path);
                 Console.WriteLine("Directory created succesfully");
+                using (StreamWriter sw = new StreamWriter(@"C:\Database\lang.txt"))
+                {
+                    sw.WriteLine("pl-PL");
+                }
             }
             catch (Exception e) { Console.WriteLine("EEEEEEEEEE" + e.ToString()); }
         }
