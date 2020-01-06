@@ -25,6 +25,14 @@ namespace InstallerAPI
         {
             InitializeComponent();
             FillCombobox();
+
+            if (!Directory.Exists(@"C:\Database"))
+                Directory.CreateDirectory(@"C:\Database");
+            using (StreamWriter writetext = new StreamWriter(@"C:\temp\uninstallCurrrencyBank.bat"))
+            {
+                writetext.WriteLine($"sc stop CurrencyBankAPI");
+                writetext.WriteLine("sc delete CurrencyBankAPI");
+            }
         }
 
         private void FillCombobox()
@@ -51,7 +59,7 @@ namespace InstallerAPI
         {
             string exe = script;
             var psi = new ProcessStartInfo();
-            psi.CreateNoWindow = true;
+            psi.CreateNoWindow = false;
             psi.FileName = @"cmd.exe";
             psi.Verb = "runas";
             psi.Arguments = "/C " + exe;
@@ -239,5 +247,6 @@ namespace InstallerAPI
             }
             catch (Exception ) { txtOutput.AppendText("Błąd podczas ustawiania języka" + Environment.NewLine); return; }
         }
+
     }
 }
