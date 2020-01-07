@@ -61,6 +61,15 @@ namespace CurrencyBank.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Account successfully deleted..
+        /// </summary>
+        public static string AccountDeleted_msg {
+            get {
+                return ResourceManager.GetString("AccountDeleted_msg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Account ID.
         /// </summary>
         public static string AccountId_lb {
@@ -124,11 +133,29 @@ namespace CurrencyBank.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Successfully added: .
+        /// </summary>
+        public static string CashAdded_msg {
+            get {
+                return ResourceManager.GetString("CashAdded_msg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Choose the currency.
         /// </summary>
         public static string ChooseCurrency_lb {
             get {
                 return ResourceManager.GetString("ChooseCurrency_lb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select from the enlisted values..
+        /// </summary>
+        public static string ChooseFromTheList_msg {
+            get {
+                return ResourceManager.GetString("ChooseFromTheList_msg", resourceCulture);
             }
         }
         
@@ -277,6 +304,24 @@ namespace CurrencyBank.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exchanged successfully.
+        /// </summary>
+        public static string ExchangedSuccesfully_msg {
+            get {
+                return ResourceManager.GetString("ExchangedSuccesfully_msg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An exchange error occured..
+        /// </summary>
+        public static string ExchangeError_msg {
+            get {
+                return ResourceManager.GetString("ExchangeError_msg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exchange the Currency.
         /// </summary>
         public static string ExchangeTheCurrency_lb {
@@ -309,6 +354,15 @@ namespace CurrencyBank.WPF.Properties {
         public static string Info_registerSuccessful {
             get {
                 return ResourceManager.GetString("Info_registerSuccessful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter valid data..
+        /// </summary>
+        public static string InvalidData_msg {
+            get {
+                return ResourceManager.GetString("InvalidData_msg", resourceCulture);
             }
         }
         
@@ -475,6 +529,15 @@ namespace CurrencyBank.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Transfered successfully.
+        /// </summary>
+        public static string TransferedSuccessfully_msg {
+            get {
+                return ResourceManager.GetString("TransferedSuccessfully_msg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User Name.
         /// </summary>
         public static string Username_lb {
@@ -507,6 +570,15 @@ namespace CurrencyBank.WPF.Properties {
         public static string Withdrawal_lb {
             get {
                 return ResourceManager.GetString("Withdrawal_lb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have: .
+        /// </summary>
+        public static string WithdrawedSuccessfully_msg {
+            get {
+                return ResourceManager.GetString("WithdrawedSuccessfully_msg", resourceCulture);
             }
         }
         

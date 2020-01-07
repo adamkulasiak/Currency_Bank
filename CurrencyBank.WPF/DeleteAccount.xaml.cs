@@ -63,7 +63,7 @@ namespace CurrencyBank.WPF
                     _loggedInUser.Accounts.Remove(_loggedInUser.Accounts.Where(a => a.Id == id).FirstOrDefault());
                     SetView();
                     AccID_cbbx.Items.Refresh();
-                    MessageBox.Show("Konto zostało usunięte");
+                    MessageBox.Show(Properties.Resources.AccountDeleted_msg);
                 }
                 else
                 {
@@ -83,7 +83,7 @@ namespace CurrencyBank.WPF
             }
             catch (FormatException err)
             {
-                MessageBox.Show("Wybierz konto z listy");
+                MessageBox.Show(Properties.Resources.ChooseFromTheList_msg);
                 DeleteAcc_btn.IsEnabled = true;
             }
             

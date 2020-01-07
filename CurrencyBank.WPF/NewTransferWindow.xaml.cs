@@ -72,7 +72,7 @@ namespace CurrencyBank.WPF
                         _loggedInUser.Accounts.Add(accounts[1]);
                     }
 
-                    MessageBox.Show("Operacja udana");
+                    MessageBox.Show(Properties.Resources.TransferedSuccessfully_msg);
                 }
                 else
                 {
@@ -82,7 +82,7 @@ namespace CurrencyBank.WPF
             }
             catch (FormatException err)
             {
-                MessageBox.Show("Wypełnij poprawnie pola");
+                MessageBox.Show(Properties.Resources.InvalidData_msg);
                 Transfer_btn.IsEnabled = true;
             }
             

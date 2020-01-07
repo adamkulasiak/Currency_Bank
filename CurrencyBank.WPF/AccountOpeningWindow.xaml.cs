@@ -59,7 +59,7 @@ namespace CurrencyBank.WPF
 
             if (currency == 0)
             {
-                MessageBox.Show("Wybierz wartość z listy");
+                MessageBox.Show(Properties.Resources.ChooseFromTheList_msg);
                 OpenAcc_btn.IsEnabled = true;
                 return;
             }

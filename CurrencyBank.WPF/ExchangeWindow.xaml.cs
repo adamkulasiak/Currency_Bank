@@ -73,17 +73,17 @@ namespace CurrencyBank.WPF
                         _loggedInUser.Accounts.Add(acc);
                     }
 
-                    MessageBox.Show("Pomyślnie wymieniono");
+                    MessageBox.Show(Properties.Resources.ExchangedSuccesfully_msg);
                 }
                 else
                 {
-                    MessageBox.Show("Błąd podczas wymiany");
+                    MessageBox.Show(Properties.Resources.ExchangeError_msg);
                     Exchange_btn.IsEnabled = true;
                 }
             }
             catch (FormatException)
             {
-                MessageBox.Show("Wybierz wartości z list");
+                MessageBox.Show(Properties.Resources.ChooseFromTheList_msg);
                 Exchange_btn.IsEnabled = true;
             }
             

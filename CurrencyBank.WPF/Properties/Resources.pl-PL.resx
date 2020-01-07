@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccountDeleted_msg" xml:space="preserve">
+    <value>Pomyślnie usunięto konto.</value>
+  </data>
   <data name="AccountId_lb" xml:space="preserve">
     <value>ID konta</value>
   </data>
@@ -138,8 +141,14 @@
   <data name="Balance_lb" xml:space="preserve">
     <value>Stan konta</value>
   </data>
+  <data name="CashAdded_msg" xml:space="preserve">
+    <value>Pomyślnie dodano: </value>
+  </data>
   <data name="ChooseCurrency_lb" xml:space="preserve">
     <value>Wybierz walutę</value>
+  </data>
+  <data name="ChooseFromTheList_msg" xml:space="preserve">
+    <value>Proszę wybrać wartość z listy.</value>
   </data>
   <data name="ChooseId_lb" xml:space="preserve">
     <value>Wybierz ID konta</value>
@@ -183,6 +192,12 @@
   <data name="Error_deleteingAccount" xml:space="preserve">
     <value>Nie można usunąć konta z dodatnim balansem. Czy chcesz wypłacić?</value>
   </data>
+  <data name="ExchangedSuccesfully_msg" xml:space="preserve">
+    <value>Waluta wymieniona pomyślnie.</value>
+  </data>
+  <data name="ExchangeError_msg" xml:space="preserve">
+    <value>Nastąpił błąd podczas wymiany.</value>
+  </data>
   <data name="ExchangeTheCurrency_lb" xml:space="preserve">
     <value>Wymiana Waluty</value>
   </data>
@@ -200,6 +215,9 @@
   </data>
   <data name="Info_registerSuccessful" xml:space="preserve">
     <value>Rejestracja udana</value>
+  </data>
+  <data name="InvalidData_msg" xml:space="preserve">
+    <value>Proszę wprowadzić poprawne dane.</value>
   </data>
   <data name="Lastname_lb" xml:space="preserve">
     <value>Nazwisko</value>
@@ -252,6 +270,9 @@
   <data name="Register_lb" xml:space="preserve">
     <value>Zarejestruj się</value>
   </data>
+  <data name="TransferedSuccessfully_msg" xml:space="preserve">
+    <value>Przelew pomyślnie zlecony.</value>
+  </data>
   <data name="Transfer_btn" xml:space="preserve">
     <value>Wykonaj</value>
   </data>
@@ -263,6 +284,9 @@
   </data>
   <data name="Withdrawal_lb" xml:space="preserve">
     <value>Wypłata</value>
+  </data>
+  <data name="WithdrawedSuccessfully_msg" xml:space="preserve">
+    <value>Balans po wypłacie: </value>
   </data>
   <data name="Withdraw_btn" xml:space="preserve">
     <value>Wypłać</value>

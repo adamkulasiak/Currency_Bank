@@ -65,7 +65,7 @@ namespace CurrencyBank.WPF
                 var account = json.ToObject<Account>();
                 _loggedInUser.Accounts.Remove(_loggedInUser.Accounts.Where(a => a.Id == id).FirstOrDefault());
                 _loggedInUser.Accounts.Add(account);
-                MessageBox.Show($"You have {account.Balance}");
+                MessageBox.Show(Properties.Resources.WithdrawedSuccessfully_msg + $"{account.Balance}");
             }
             else
             {

@@ -63,7 +63,7 @@ namespace CurrencyBank.WPF
                     _loggedInUser.Accounts.Remove(_loggedInUser.Accounts.Where(a => a.Id == accountId).FirstOrDefault());
                     _loggedInUser.Accounts.Add(account);
 
-                    MessageBox.Show($"Pomyślnie dodano: {ammount}");
+                    MessageBox.Show(Properties.Resources.CashAdded_msg + $"{ammount}");
                 }
                 else
                 {
@@ -72,7 +72,7 @@ namespace CurrencyBank.WPF
             }
             catch(FormatException err)
             {
-                MessageBox.Show("Wprowadź poprawne wartości");
+                MessageBox.Show(Properties.Resources.InvalidData_msg);
                 CashIn_btn.IsEnabled = true;
             }   
         }
