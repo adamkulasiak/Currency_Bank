@@ -109,7 +109,7 @@ namespace CurrencyBank.API.Repositories
                 return null;
 
             if (account.Balance < ammount)
-                return null;
+                throw new BalanceException("You don't have enough money");
             account.Balance -= ammount;
             try
             {

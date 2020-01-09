@@ -25,8 +25,6 @@ namespace CurrencyBank.API.Repositories
         {
             var user = await _context.Users.IncludeFilter(x => x.Accounts.Where(y => !y.IsDeleted)).FirstOrDefaultAsync(x => x.UserName == username);
 
-            var sql = user.ToString();
-
             if (user == null) return null;
 
             if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt)) return null;
@@ -63,7 +61,7 @@ namespace CurrencyBank.API.Repositories
                 await _context.SaveChangesAsync();
                 return user;
             }
-            catch (DbUpdateException e)
+            catch (DbUpdateException)
             {
                 return null;
             }

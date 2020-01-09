@@ -53,33 +53,40 @@ namespace CurrencyBank.WPF
         private async void DeleteAcc_btn_Click(object sender, RoutedEventArgs e)
         {
             DeleteAcc_btn.IsEnabled = false;
-
-            int id = int.Parse(AccID_cbbx.Text.Where(Char.IsDigit).ToArray());
-
-            var response = await _accountService.DeleteAccount(_loggedInUser.Token, id);
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                _loggedInUser.Accounts.Remove(_loggedInUser.Accounts.Where(a => a.Id == id).FirstOrDefault());
-                SetView();
-                AccID_cbbx.Items.Refresh();
-                MessageBox.Show("Konto zostało usunięte");
-            }
-            else
-            {
-                var errorMsg = response.Content.ReadAsStringAsync().Result.ToString();
-                MessageBoxResult result = MessageBox.Show(
-                                                     Properties.Resources.Error_deleteingAccount,
-                                                     "Confirmation window",
-                                                     MessageBoxButton.YesNo);
-                if (result == MessageBoxResult.Yes)
+                int id = int.Parse(AccID_cbbx.Text.Where(Char.IsDigit).ToArray());
+                var response = await _accountService.DeleteAccount(_loggedInUser.Token, id);
+
+                if (response.IsSuccessStatusCode)
                 {
-                    WithdrawalWindow withdrawalWindow = new WithdrawalWindow(_loggedInUser);
-                    this.Close();
-                    withdrawalWindow.Show();
+                    _loggedInUser.Accounts.Remove(_loggedInUser.Accounts.Where(a => a.Id == id).FirstOrDefault());
+                    SetView();
+                    AccID_cbbx.Items.Refresh();
+                    MessageBox.Show(Properties.Resources.AccountDeleted_msg);
                 }
+                else
+                {
+                    var errorMsg = response.Content.ReadAsStringAsync().Result.ToString();
+                    MessageBoxResult result = MessageBox.Show(
+                                                         Properties.Resources.Error_deleteingAccount,
+                                                         "Confirmation window",
+                                                         MessageBoxButton.YesNo);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        WithdrawalWindow withdrawalWindow = new WithdrawalWindow(_loggedInUser);
+                        this.Close();
+                        withdrawalWindow.Show();
+                    }
+                }
+                DeleteAcc_btn.IsEnabled = true;
             }
-            DeleteAcc_btn.IsEnabled = true;
+            catch (FormatException err)
+            {
+                MessageBox.Show(Properties.Resources.ChooseFromTheList_msg);
+                DeleteAcc_btn.IsEnabled = true;
+            }
+            
         }
 
         private void Back_btn_Click(object sender, RoutedEventArgs e)

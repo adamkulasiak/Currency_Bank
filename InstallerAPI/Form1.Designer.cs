@@ -34,11 +34,24 @@
             this.btnChoose = new System.Windows.Forms.Button();
             this.txtOutput = new System.Windows.Forms.TextBox();
             this.btnUninstall = new System.Windows.Forms.Button();
+            this.txtPSOutput = new System.Windows.Forms.TextBox();
+            this.btnCheckStatus = new System.Windows.Forms.Button();
+            this.btnStartService = new System.Windows.Forms.Button();
+            this.btnStopService = new System.Windows.Forms.Button();
+            this.btnDotnetCoreCheck = new System.Windows.Forms.Button();
+            this.btn_installRuntime = new System.Windows.Forms.Button();
+            this.btnDbCopy = new System.Windows.Forms.Button();
+            this.cbxLanguage = new System.Windows.Forms.ComboBox();
+            this.btnSetLanguage = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnInstall
             // 
-            this.btnInstall.Location = new System.Drawing.Point(212, 18);
+            this.btnInstall.Location = new System.Drawing.Point(181, 18);
             this.btnInstall.Name = "btnInstall";
             this.btnInstall.Size = new System.Drawing.Size(75, 23);
             this.btnInstall.TabIndex = 2;
@@ -70,12 +83,12 @@
             this.txtOutput.Location = new System.Drawing.Point(16, 65);
             this.txtOutput.Multiline = true;
             this.txtOutput.Name = "txtOutput";
-            this.txtOutput.Size = new System.Drawing.Size(652, 357);
+            this.txtOutput.Size = new System.Drawing.Size(652, 110);
             this.txtOutput.TabIndex = 4;
             // 
             // btnUninstall
             // 
-            this.btnUninstall.Location = new System.Drawing.Point(308, 18);
+            this.btnUninstall.Location = new System.Drawing.Point(262, 18);
             this.btnUninstall.Name = "btnUninstall";
             this.btnUninstall.Size = new System.Drawing.Size(75, 23);
             this.btnUninstall.TabIndex = 5;
@@ -83,16 +96,159 @@
             this.btnUninstall.UseVisualStyleBackColor = true;
             this.btnUninstall.Click += new System.EventHandler(this.btnUninstall_Click);
             // 
+            // txtPSOutput
+            // 
+            this.txtPSOutput.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.txtPSOutput.ForeColor = System.Drawing.SystemColors.Window;
+            this.txtPSOutput.Location = new System.Drawing.Point(16, 234);
+            this.txtPSOutput.Multiline = true;
+            this.txtPSOutput.Name = "txtPSOutput";
+            this.txtPSOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtPSOutput.Size = new System.Drawing.Size(652, 204);
+            this.txtPSOutput.TabIndex = 6;
+            // 
+            // btnCheckStatus
+            // 
+            this.btnCheckStatus.Location = new System.Drawing.Point(15, 205);
+            this.btnCheckStatus.Name = "btnCheckStatus";
+            this.btnCheckStatus.Size = new System.Drawing.Size(94, 23);
+            this.btnCheckStatus.TabIndex = 7;
+            this.btnCheckStatus.Text = "Sprawdź status";
+            this.btnCheckStatus.UseVisualStyleBackColor = true;
+            this.btnCheckStatus.Click += new System.EventHandler(this.btnCheckStatus_Click);
+            // 
+            // btnStartService
+            // 
+            this.btnStartService.Location = new System.Drawing.Point(115, 205);
+            this.btnStartService.Name = "btnStartService";
+            this.btnStartService.Size = new System.Drawing.Size(75, 23);
+            this.btnStartService.TabIndex = 8;
+            this.btnStartService.Text = "Start";
+            this.btnStartService.UseVisualStyleBackColor = true;
+            this.btnStartService.Click += new System.EventHandler(this.btnStartService_Click);
+            // 
+            // btnStopService
+            // 
+            this.btnStopService.Location = new System.Drawing.Point(196, 205);
+            this.btnStopService.Name = "btnStopService";
+            this.btnStopService.Size = new System.Drawing.Size(75, 23);
+            this.btnStopService.TabIndex = 9;
+            this.btnStopService.Text = "Stop";
+            this.btnStopService.UseVisualStyleBackColor = true;
+            this.btnStopService.Click += new System.EventHandler(this.btnStopService_Click);
+            // 
+            // btnDotnetCoreCheck
+            // 
+            this.btnDotnetCoreCheck.Location = new System.Drawing.Point(277, 205);
+            this.btnDotnetCoreCheck.Name = "btnDotnetCoreCheck";
+            this.btnDotnetCoreCheck.Size = new System.Drawing.Size(227, 23);
+            this.btnDotnetCoreCheck.TabIndex = 10;
+            this.btnDotnetCoreCheck.Text = "Sprawdź zainstalowane wersje .NET Core";
+            this.btnDotnetCoreCheck.UseVisualStyleBackColor = true;
+            this.btnDotnetCoreCheck.Click += new System.EventHandler(this.btnDotnetCoreCheck_Click);
+            // 
+            // btn_installRuntime
+            // 
+            this.btn_installRuntime.Location = new System.Drawing.Point(511, 205);
+            this.btn_installRuntime.Name = "btn_installRuntime";
+            this.btn_installRuntime.Size = new System.Drawing.Size(120, 23);
+            this.btn_installRuntime.TabIndex = 11;
+            this.btn_installRuntime.Text = "Zainstaluj .NET Core";
+            this.btn_installRuntime.UseVisualStyleBackColor = true;
+            this.btn_installRuntime.Click += new System.EventHandler(this.btn_installRuntime_Click);
+            // 
+            // btnDbCopy
+            // 
+            this.btnDbCopy.Location = new System.Drawing.Point(343, 18);
+            this.btnDbCopy.Name = "btnDbCopy";
+            this.btnDbCopy.Size = new System.Drawing.Size(113, 23);
+            this.btnDbCopy.TabIndex = 12;
+            this.btnDbCopy.Text = "Kopiuj baze danych";
+            this.btnDbCopy.UseVisualStyleBackColor = true;
+            this.btnDbCopy.Click += new System.EventHandler(this.btnDbCopy_Click);
+            // 
+            // cbxLanguage
+            // 
+            this.cbxLanguage.FormattingEnabled = true;
+            this.cbxLanguage.Location = new System.Drawing.Point(475, 20);
+            this.cbxLanguage.Name = "cbxLanguage";
+            this.cbxLanguage.Size = new System.Drawing.Size(121, 21);
+            this.cbxLanguage.TabIndex = 13;
+            // 
+            // btnSetLanguage
+            // 
+            this.btnSetLanguage.Location = new System.Drawing.Point(602, 20);
+            this.btnSetLanguage.Name = "btnSetLanguage";
+            this.btnSetLanguage.Size = new System.Drawing.Size(75, 23);
+            this.btnSetLanguage.TabIndex = 14;
+            this.btnSetLanguage.Text = "Ustaw język";
+            this.btnSetLanguage.UseVisualStyleBackColor = true;
+            this.btnSetLanguage.Click += new System.EventHandler(this.btnSetLanguage_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label2.Location = new System.Drawing.Point(374, 2);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(14, 13);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "1";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label3.Location = new System.Drawing.Point(125, 2);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(14, 13);
+            this.label3.TabIndex = 16;
+            this.label3.Text = "2";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label4.Location = new System.Drawing.Point(208, 2);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(14, 13);
+            this.label4.TabIndex = 17;
+            this.label4.Text = "3";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label5.Location = new System.Drawing.Point(526, 2);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(14, 13);
+            this.label5.TabIndex = 18;
+            this.label5.Text = "4";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(704, 450);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.btnSetLanguage);
+            this.Controls.Add(this.cbxLanguage);
+            this.Controls.Add(this.btnDbCopy);
+            this.Controls.Add(this.btn_installRuntime);
+            this.Controls.Add(this.btnDotnetCoreCheck);
+            this.Controls.Add(this.btnStopService);
+            this.Controls.Add(this.btnStartService);
+            this.Controls.Add(this.btnCheckStatus);
+            this.Controls.Add(this.txtPSOutput);
             this.Controls.Add(this.btnUninstall);
             this.Controls.Add(this.txtOutput);
             this.Controls.Add(this.btnChoose);
             this.Controls.Add(this.btnInstall);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Instalator usługi";
@@ -107,6 +263,19 @@
         private System.Windows.Forms.Button btnChoose;
         private System.Windows.Forms.TextBox txtOutput;
         private System.Windows.Forms.Button btnUninstall;
+        private System.Windows.Forms.TextBox txtPSOutput;
+        private System.Windows.Forms.Button btnCheckStatus;
+        private System.Windows.Forms.Button btnStartService;
+        private System.Windows.Forms.Button btnStopService;
+        private System.Windows.Forms.Button btnDotnetCoreCheck;
+        private System.Windows.Forms.Button btn_installRuntime;
+        private System.Windows.Forms.Button btnDbCopy;
+        private System.Windows.Forms.ComboBox cbxLanguage;
+        private System.Windows.Forms.Button btnSetLanguage;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
     }
 }
 

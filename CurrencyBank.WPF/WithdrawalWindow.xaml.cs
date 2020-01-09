@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -54,7 +55,7 @@ namespace CurrencyBank.WPF
         private async void Withdraw_btn_Click(object sender, RoutedEventArgs e)
         {
             var id = int.Parse((AccountID_cbx.Text).Where(Char.IsDigit).ToArray());
-            var ammount = decimal.Parse(Amount_txt.Text);
+            var ammount = decimal.Parse(Amount_txt.Text.Replace(" ", string.Empty));
 
             var response = await _accountService.Withdrawal(_loggedInUser.Token, id, ammount);
 
@@ -64,8 +65,18 @@ namespace CurrencyBank.WPF
                 var account = json.ToObject<Account>();
                 _loggedInUser.Accounts.Remove(_loggedInUser.Accounts.Where(a => a.Id == id).FirstOrDefault());
                 _loggedInUser.Accounts.Add(account);
-                MessageBox.Show($"You have {account.Balance}");
+                MessageBox.Show(Properties.Resources.WithdrawedSuccessfully_msg + $"{account.Balance}");
             }
+            else
+            {
+                MessageBox.Show(response.Content.ReadAsStringAsync().Result.ToString());
+            }
+        }
+
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

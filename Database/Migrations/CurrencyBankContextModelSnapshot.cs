@@ -91,7 +91,7 @@ namespace CurrencyBank.Database.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("INTEGER");
 
-                    b.Property<byte>("Language")
+                    b.Property<byte?>("Language")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("LastName")

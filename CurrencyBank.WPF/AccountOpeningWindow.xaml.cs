@@ -56,6 +56,13 @@ namespace CurrencyBank.WPF
             OpenAcc_btn.IsEnabled = false;
 
             Enum.TryParse(Currency_cbx.Text, out Currency currency);
+
+            if (currency == 0)
+            {
+                MessageBox.Show(Properties.Resources.ChooseFromTheList_msg);
+                OpenAcc_btn.IsEnabled = true;
+                return;
+            }
             var accountToCreateDto = new AccountToCreateDto
             {
                 Currency = currency

@@ -75,7 +75,7 @@ namespace CurrencyBank.API.Controllers
             var account = await _accountRepo.CashIn(currentUserId, accountId, ammount);
 
             if (account is null)
-                return BadRequest();
+                return BadRequest("Error occured");
 
             return Ok(account);
         }
@@ -90,12 +90,18 @@ namespace CurrencyBank.API.Controllers
         public async Task<IActionResult> CashOut([FromQuery]int accountId, decimal ammount)
         {
             var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            var account = await _accountRepo.CashOut(currentUserId, accountId, ammount);
+            try
+            {
+                var account = await _accountRepo.CashOut(currentUserId, accountId, ammount);
+                if (account is null)
+                    return BadRequest();
 
-            if (account is null)
-                return BadRequest();
-
-            return Ok(account);
+                return Ok(account);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         /// <summary>
@@ -128,12 +134,20 @@ namespace CurrencyBank.API.Controllers
         public async Task<IActionResult> TransferMoney([FromQuery]int principalAccountId, string destinationAccountNumber, decimal ammount)
         {
             var principalId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            var accounts = await _accountRepo.DoTransferMoney(principalId, principalAccountId, destinationAccountNumber, ammount);
+            try
+            {
+                var accounts = await _accountRepo.DoTransferMoney(principalId, principalAccountId, destinationAccountNumber, ammount);
 
-            if (accounts is null)
-                return BadRequest();
+                if (accounts is null)
+                    return BadRequest();
 
-            return Ok(accounts);
+                return Ok(accounts);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Try again");
+            }
+            
         }
 
         /// <summary>

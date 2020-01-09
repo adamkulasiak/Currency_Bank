@@ -16,7 +16,14 @@ namespace CurrencyBank.WPF
     {
         public App()
         {
-            string lang = "";
+            if (!File.Exists(@"C:\Database\lang.txt"))
+            {
+                using (StreamWriter sw = new StreamWriter(@"C:\Database\lang.txt"))
+                {
+                    sw.WriteLine("pl-PL");
+                }
+            }
+                string lang = "";
             var lines = File.ReadAllLines(@"C:\Database\lang.txt");
             for (var i = 0; i < lines.Length; i++)
             {

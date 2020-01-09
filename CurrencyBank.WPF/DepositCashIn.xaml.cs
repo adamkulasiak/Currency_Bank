@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -48,21 +49,38 @@ namespace CurrencyBank.WPF
         {
             CashIn_btn.IsEnabled = false;
 
-            var accountId = int.Parse((AccountID_cbx.Text).Where(Char.IsDigit).ToArray());
-            var ammount = decimal.Parse(Amount_txt.Text);
-
-            var response = await _accountService.CashInMoney(_loggedInUser.Token, accountId, ammount);
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                JObject json = JObject.Parse(response.Content.ReadAsStringAsync().Result);
-                var account = json.ToObject<Account>();
+                var accountId = int.Parse((AccountID_cbx.Text).Where(Char.IsDigit).ToArray());
+                var ammount = decimal.Parse(Amount_txt.Text.Replace(" ", string.Empty));
+                var response = await _accountService.CashInMoney(_loggedInUser.Token, accountId, ammount);
 
-                _loggedInUser.Accounts.Remove(_loggedInUser.Accounts.Where(a => a.Id == accountId).FirstOrDefault());
-                _loggedInUser.Accounts.Add(account);
+                if (response.IsSuccessStatusCode)
+                {
+                    JObject json = JObject.Parse(response.Content.ReadAsStringAsync().Result);
+                    var account = json.ToObject<Account>();
 
-                MessageBox.Show("OK");
+                    _loggedInUser.Accounts.Remove(_loggedInUser.Accounts.Where(a => a.Id == accountId).FirstOrDefault());
+                    _loggedInUser.Accounts.Add(account);
+
+                    MessageBox.Show(Properties.Resources.CashAdded_msg + $"{ammount}");
+                }
+                else
+                {
+                    MessageBox.Show(response.Content.ReadAsStringAsync().Result.ToString());
+                }
             }
+            catch(FormatException err)
+            {
+                MessageBox.Show(Properties.Resources.InvalidData_msg);
+                CashIn_btn.IsEnabled = true;
+            }   
+        }
+
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
 
         private void Back_btn_Click(object sender, RoutedEventArgs e)

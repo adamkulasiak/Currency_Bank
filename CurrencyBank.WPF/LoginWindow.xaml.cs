@@ -57,7 +57,7 @@ namespace CurrencyBank.WPF
             }
             else
             {
-                MessageBox.Show("Try again.");
+                MessageBox.Show(response.Content.ReadAsStringAsync().Result.ToString());
             }
         }
 
