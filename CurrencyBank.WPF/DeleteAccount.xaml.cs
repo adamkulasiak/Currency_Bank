@@ -81,7 +81,7 @@ namespace CurrencyBank.WPF
                 }
                 DeleteAcc_btn.IsEnabled = true;
             }
-            catch (FormatException err)
+            catch (FormatException)
             {
                 MessageBox.Show(Properties.Resources.ChooseFromTheList_msg);
                 DeleteAcc_btn.IsEnabled = true;
