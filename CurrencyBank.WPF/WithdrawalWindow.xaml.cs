@@ -54,23 +54,31 @@ namespace CurrencyBank.WPF
 
         private async void Withdraw_btn_Click(object sender, RoutedEventArgs e)
         {
-            var id = int.Parse((AccountID_cbx.Text).Where(Char.IsDigit).ToArray());
-            var ammount = decimal.Parse(Amount_txt.Text.Replace(" ", string.Empty));
-
-            var response = await _accountService.Withdrawal(_loggedInUser.Token, id, ammount);
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                JObject json = JObject.Parse(response.Content.ReadAsStringAsync().Result);
-                var account = json.ToObject<Account>();
-                _loggedInUser.Accounts.Remove(_loggedInUser.Accounts.Where(a => a.Id == id).FirstOrDefault());
-                _loggedInUser.Accounts.Add(account);
-                MessageBox.Show(Properties.Resources.WithdrawedSuccessfully_msg + $"{account.Balance}");
+                var id = int.Parse((AccountID_cbx.Text).Where(Char.IsDigit).ToArray());
+                var ammount = decimal.Parse(Amount_txt.Text.Replace(" ", string.Empty));
+
+                var response = await _accountService.Withdrawal(_loggedInUser.Token, id, ammount);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    JObject json = JObject.Parse(response.Content.ReadAsStringAsync().Result);
+                    var account = json.ToObject<Account>();
+                    _loggedInUser.Accounts.Remove(_loggedInUser.Accounts.Where(a => a.Id == id).FirstOrDefault());
+                    _loggedInUser.Accounts.Add(account);
+                    MessageBox.Show(Properties.Resources.WithdrawedSuccessfully_msg + $"{account.Balance}");
+                }
+                else
+                {
+                    MessageBox.Show(response.Content.ReadAsStringAsync().Result.ToString());
+                }
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show(response.Content.ReadAsStringAsync().Result.ToString());
+                MessageBox.Show("Error");
             }
+           
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
