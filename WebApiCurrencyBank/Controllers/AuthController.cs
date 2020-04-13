@@ -101,10 +101,9 @@ namespace CurrencyBank.API.Controllers
 
             userToReturn.Token = tokenHandler.WriteToken(token);
 
-            return Ok(new
-            {
+            return Ok(
                 userToReturn
-            });
+            );
         }
     }
 }

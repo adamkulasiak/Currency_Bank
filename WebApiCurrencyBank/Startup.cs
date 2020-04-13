@@ -38,7 +38,7 @@ namespace CurrencyBank.API
             services.AddMvc(option => option.EnableEndpointRouting = false);
             services.AddCors(c =>
             {
-                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+                c.AddPolicy("AllowAll", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             });
             services.AddAutoMapper();
             services.AddTransient<Seed>();
@@ -76,7 +76,7 @@ namespace CurrencyBank.API
             {
                 endpoints.MapControllers();
             });
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            app.UseCors("AllowAll");
             app.UseMvc();
         }
 
