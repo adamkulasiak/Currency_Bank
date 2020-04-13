@@ -1,12 +1,19 @@
 import React from "react";
-import "./App.css";
+import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
+import MainPage from "./views/MainPage";
+import Login from "./views/Login";
+import MainBar from "./components/MainBar";
 
-function App() {
+export default function App() {
   return (
     <div className="App">
-      <header className="App-header">Test</header>
+      <Router>
+        <MainBar />
+        <Switch>
+          <Route path="/" component={MainPage} exact />
+          <Route path="/login" component={Login} />
+        </Switch>
+      </Router>
     </div>
   );
 }
-
-export default App;
