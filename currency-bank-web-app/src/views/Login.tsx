@@ -8,16 +8,14 @@ import {
   Button,
   Grid,
   makeStyles,
+  Backdrop,
+  CircularProgress,
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { UserForLoginDto } from "../interfaces/login/UserForLoginDto";
-import { IUser } from "../interfaces/login/IUser";
-import { post } from "../utils/ApiRequest";
-
-interface ILoginProps {}
+import { connect } from "react-redux";
+import { userActions } from "../_actions/user.actions";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -37,24 +35,32 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: "#fff",
+  },
 }));
 
-export default function Login(props: ILoginProps) {
+interface IProps {
+  loggingIn: boolean;
+  loggedIn: boolean;
+  token: string | null;
+  dispatch: any;
+}
+
+function Login(props: IProps) {
   const classes = useStyles();
 
-  const [login, setLogin] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [login, setLogin] = useState<string>("jkowalski");
+  const [password, setPassword] = useState<string>("test12345");
 
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const obj: UserForLoginDto = {
-      UserName: login,
-      Password: password,
-    };
-    post("/auth/login", obj).then((user) => {
-      console.log(user);
-      localStorage.setItem("token", user.token);
-    });
+
+    const { dispatch } = props;
+    if (login && password) {
+      dispatch(userActions.login(login, password));
+    }
   };
 
   return (
@@ -104,6 +110,9 @@ export default function Login(props: ILoginProps) {
           >
             Sign In
           </Button>
+          <Backdrop className={classes.backdrop} open={props.loggingIn}>
+            <CircularProgress color="inherit" />
+          </Backdrop>
           <Grid container>
             <Grid item>
               <Link to="/register">{"Or Sign Up"}</Link>
@@ -114,3 +123,14 @@ export default function Login(props: ILoginProps) {
     </Container>
   );
 }
+
+function mapStateToProps(state: any) {
+  const { loggingIn, loggedIn, token } = state.authentication;
+  return {
+    loggingIn,
+    loggedIn,
+    token,
+  };
+}
+
+export default connect(mapStateToProps)(Login);

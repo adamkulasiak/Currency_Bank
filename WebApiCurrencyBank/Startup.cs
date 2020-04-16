@@ -34,12 +34,16 @@ namespace CurrencyBank.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<CurrencyBankContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+            });
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddControllers().AddNewtonsoftJson();
             services.AddMvc(option => option.EnableEndpointRouting = false);
-            services.AddCors(c =>
-            {
-                c.AddPolicy("AllowAll", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-            });
             services.AddAutoMapper();
             services.AddTransient<Seed>();
             services.AddScoped<IGenericRepository, GenericRepository>();
@@ -67,6 +71,8 @@ namespace CurrencyBank.API
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors("CorsPolicy");
+            app.UseMvc();
             app.UseAuthentication();
             app.UseRouting();
 
@@ -76,8 +82,7 @@ namespace CurrencyBank.API
             {
                 endpoints.MapControllers();
             });
-            app.UseCors("AllowAll");
-            app.UseMvc();
+            
         }
 
         private void CreateDatabaseDirectory()

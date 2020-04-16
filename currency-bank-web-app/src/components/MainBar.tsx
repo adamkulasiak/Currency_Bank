@@ -7,6 +7,8 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import { Link } from "react-router-dom";
+import { userActions } from "../_actions/user.actions";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,8 +24,18 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function MainBar() {
+interface IProps {
+  loggedIn: boolean;
+  dispatch: any;
+}
+
+function MainBar(props: IProps) {
   const classes = useStyles();
+
+  const logout = () => {
+    const { dispatch } = props;
+    dispatch(userActions.logout());
+  };
 
   return (
     <div className={classes.root}>
@@ -41,10 +53,17 @@ export default function MainBar() {
             <Link to="/">Currency Bank</Link>
           </Typography>
           <Button color="inherit">
-            <Link to={`/login`}>Login</Link>
+            {!props.loggedIn && <Link to={`/login`}>Login</Link>}
+            {props.loggedIn && (
+              <Link to={`/login`} onClick={logout}>
+                Logout
+              </Link>
+            )}
           </Button>
         </Toolbar>
       </AppBar>
     </div>
   );
 }
+
+export default connect()(MainBar);
