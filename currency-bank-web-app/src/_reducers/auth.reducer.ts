@@ -13,6 +13,7 @@ const initialState: IAuthState = token
   : { loggedIn: false, loggingIn: false, token: null };
 
 export function authentication(state = initialState, action: any) {
+  console.log(action);
   switch (action.type) {
     case userConstants.LOGIN_REQUEST:
       return {

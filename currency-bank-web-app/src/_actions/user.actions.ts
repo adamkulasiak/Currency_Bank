@@ -15,7 +15,7 @@ function login(username: string, password: string) {
     userService.login(username, password).then(
       (user) => {
         dispatch(success(user));
-        dispatch(alertActions.success("You are successfully logged in"));
+        dispatch(alertActions.success("You have successfully logged in"));
         history.push("/");
       },
       (error) => {
@@ -24,8 +24,8 @@ function login(username: string, password: string) {
       }
     );
   };
-  function request(user: any) {
-    return { type: userConstants.LOGIN_REQUEST, user };
+  function request(username: any) {
+    return { type: userConstants.LOGIN_REQUEST, username };
   }
   function success(token: any) {
     return { type: userConstants.LOGIN_SUCCESS, token };
@@ -38,7 +38,11 @@ function login(username: string, password: string) {
 function logout() {
   return (dispatch: any) => {
     userService.logout();
-    dispatch(alertActions.success("You are successfully logged out"));
-    return { type: userConstants.LOGOUT };
+    dispatch(alertActions.success("You have successfully logged out"));
+    dispatch(handleLogout());
   };
+
+  function handleLogout() {
+    return { type: userConstants.LOGOUT };
+  }
 }
