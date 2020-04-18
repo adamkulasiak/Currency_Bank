@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
-import { AlertType } from "../enums/AlertType";
 
 interface IProps {
+  type: string;
   message: string;
 }
 
@@ -35,7 +35,10 @@ export default function Snack(props: IProps) {
         open={open}
         onClose={handleClose}
       >
-        <Alert onClose={handleClose} severity="success">
+        <Alert
+          onClose={handleClose}
+          severity={props.type === "success" ? "success" : "error"}
+        >
           {props.message}
         </Alert>
       </Snackbar>

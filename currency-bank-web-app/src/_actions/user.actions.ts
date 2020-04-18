@@ -2,9 +2,11 @@ import { userService } from "./../_services/auth.service";
 import { history } from "./../_helpers/history";
 import { alertActions } from "./alert.actions";
 import { userConstants } from "./../_constants/user.constants";
+import { IUserForRegisterDto } from "../interfaces/register/IUserForRegisterDto";
 
 export const userActions = {
   login,
+  register,
   logout,
 };
 
@@ -18,9 +20,10 @@ function login(username: string, password: string) {
         dispatch(alertActions.success("You have successfully logged in"));
         history.push("/");
       },
-      (error) => {
-        dispatch(failure(error));
-        dispatch(alertActions.error(error));
+      () => {
+        const unathorizeMsg = "Bad username or password";
+        dispatch(failure(unathorizeMsg));
+        dispatch(alertActions.error(unathorizeMsg));
       }
     );
   };
@@ -35,11 +38,43 @@ function login(username: string, password: string) {
   }
 }
 
+function register(userForRegister: IUserForRegisterDto) {
+  return (dispatch: any) => {
+    dispatch(registerRequest(userForRegister));
+
+    userService.register(userForRegister).then(
+      () => {
+        dispatch(registerSuccess(userForRegister));
+        dispatch(alertActions.success("You have successfully signed up"));
+        dispatch(login(userForRegister.UserName, userForRegister.Password));
+        history.push("/");
+      },
+      () => {
+        const message = "Registration failed";
+        dispatch(registerFailure(message));
+        dispatch(alertActions.error(message));
+      }
+    );
+  };
+
+  function registerRequest(userForRegister: IUserForRegisterDto) {
+    return { type: userConstants.REGISTER_REQUEST, userForRegister };
+  }
+
+  function registerSuccess(userForRegister: IUserForRegisterDto) {
+    return { type: userConstants.REGISTER_SUCCESS, userForRegister };
+  }
+
+  function registerFailure(errorMessage: string) {
+    return { type: userConstants.REGISTER_FAILURE, errorMessage };
+  }
+}
+
 function logout() {
   return (dispatch: any) => {
     userService.logout();
-    dispatch(alertActions.success("You have successfully logged out"));
     dispatch(handleLogout());
+    dispatch(alertActions.success("You have successfully logged out"));
   };
 
   function handleLogout() {

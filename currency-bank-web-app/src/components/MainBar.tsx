@@ -15,9 +15,6 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       flexGrow: 1,
     },
-    menuButton: {
-      marginRight: theme.spacing(2),
-    },
     title: {
       flexGrow: 1,
     },
@@ -41,25 +38,24 @@ function MainBar(props: IProps) {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton>
           <Typography variant="h6" className={classes.title}>
             <Link to="/">Currency Bank</Link>
           </Typography>
-          <Button color="inherit">
-            {!props.loggedIn && <Link to={`/login`}>Login</Link>}
-            {props.loggedIn && (
-              <Link to={`/login`} onClick={logout}>
-                Logout
-              </Link>
-            )}
-          </Button>
+          {props.loggedIn && (
+            <Button color="inherit" onClick={logout}>
+              Logout
+            </Button>
+          )}
+          {!props.loggedIn && (
+            <>
+              <Button color="inherit">
+                <Link to="/login">Login</Link>
+              </Button>
+              <Button color="inherit">
+                <Link to="/register">Register</Link>
+              </Button>
+            </>
+          )}
         </Toolbar>
       </AppBar>
     </div>

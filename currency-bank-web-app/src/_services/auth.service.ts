@@ -1,7 +1,9 @@
 import { apiHeader } from "../_helpers/api-header";
+import { IUserForRegisterDto } from "../interfaces/register/IUserForRegisterDto";
 
 export const userService = {
   login,
+  register,
   logout,
 };
 
@@ -19,6 +21,21 @@ function login(username: string, password: string) {
     .then((user) => {
       localStorage.setItem("token", JSON.stringify(user.token));
       return user.token;
+    });
+}
+
+function register(userForRegisterDto: IUserForRegisterDto) {
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userForRegisterDto),
+  };
+  return fetch(`http://localhost:5000/api/auth/register`, requestOptions)
+    .then(handleResponse)
+    .then((response) => {
+      return response.result;
     });
 }
 

@@ -7,6 +7,7 @@ import MainBar from "./components/MainBar";
 import { PrivateRoute } from "./components/PrivateRoute";
 import { State } from "./_reducers";
 import Snack from "./components/Snack";
+import Register from "./views/Register";
 
 interface IProps {
   loggedIn: boolean;
@@ -24,8 +25,9 @@ function App(props: IProps) {
         <MainBar loggedIn={props.loggedIn} />
         <PrivateRoute exact path="/" />
         <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
       </Router>
-      {props.message && <Snack message={props.message} />}
+      {props.message && <Snack message={props.message} type={props.type} />}
     </div>
   );
 }

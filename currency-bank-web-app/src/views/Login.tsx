@@ -83,11 +83,12 @@ function Login(props: IProps) {
             margin="normal"
             required
             fullWidth
-            id="email"
+            id="login"
             label="Login"
             name="login"
             autoComplete="login"
             autoFocus
+            value={login}
             onChange={(e) => setLogin(e.target.value)}
           />
           <TextField
@@ -99,6 +100,7 @@ function Login(props: IProps) {
             label="Password"
             type="password"
             id="password"
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <Button

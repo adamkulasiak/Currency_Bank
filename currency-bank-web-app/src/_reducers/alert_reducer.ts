@@ -1,7 +1,7 @@
 import { alertConstants } from "../_constants/alert.contants";
 
 const initialState = {
-  type: null,
+  type: "success",
   message: "",
 };
 
