@@ -1,3 +1,4 @@
+import { IUser } from "./../interfaces/login/IUser";
 import { apiHeader } from "../_helpers/api-header";
 import { IUserForRegisterDto } from "../interfaces/register/IUserForRegisterDto";
 
@@ -18,9 +19,10 @@ function login(username: string, password: string) {
 
   return fetch(`http://localhost:5000/api/auth/login`, requestOptions)
     .then(handleResponse)
-    .then((user) => {
+    .then((user: IUser) => {
       localStorage.setItem("token", JSON.stringify(user.token));
-      return user.token;
+      localStorage.setItem("username", JSON.stringify(user.userName));
+      return user;
     });
 }
 

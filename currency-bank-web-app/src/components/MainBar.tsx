@@ -4,11 +4,13 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import PersonIcon from "@material-ui/icons/Person";
+import Tooltip from "@material-ui/core/Tooltip";
 import { Link } from "react-router-dom";
 import { userActions } from "../_actions/user.actions";
 import { connect } from "react-redux";
+import { IUser } from "../interfaces/login/IUser";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -18,11 +20,17 @@ const useStyles = makeStyles((theme: Theme) =>
     title: {
       flexGrow: 1,
     },
+    iconWithLink: {
+      padding: 10,
+      cursor: "pointer",
+    },
   })
 );
 
 interface IProps {
   loggedIn: boolean;
+  user: IUser | null;
+  username: string | null;
   dispatch: any;
 }
 
@@ -42,9 +50,20 @@ function MainBar(props: IProps) {
             <Link to="/">Currency Bank</Link>
           </Typography>
           {props.loggedIn && (
-            <Button color="inherit" onClick={logout}>
-              Logout
-            </Button>
+            <>
+              <Tooltip title={props?.username}>
+                <PersonIcon
+                  onClick={(e) => alert("user todo")}
+                  className={classes.iconWithLink}
+                />
+              </Tooltip>
+              <Tooltip title="Logout">
+                <ExitToAppIcon
+                  onClick={logout}
+                  className={classes.iconWithLink}
+                />
+              </Tooltip>
+            </>
           )}
           {!props.loggedIn && (
             <>

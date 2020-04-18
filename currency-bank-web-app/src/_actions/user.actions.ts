@@ -1,3 +1,4 @@
+import { IUser } from "./../interfaces/login/IUser";
 import { userService } from "./../_services/auth.service";
 import { history } from "./../_helpers/history";
 import { alertActions } from "./alert.actions";
@@ -12,7 +13,7 @@ export const userActions = {
 
 function login(username: string, password: string) {
   return (dispatch: any) => {
-    dispatch(request({ username }));
+    dispatch(request(username));
 
     userService.login(username, password).then(
       (user) => {
@@ -27,11 +28,11 @@ function login(username: string, password: string) {
       }
     );
   };
-  function request(username: any) {
+  function request(username: string) {
     return { type: userConstants.LOGIN_REQUEST, username };
   }
-  function success(token: any) {
-    return { type: userConstants.LOGIN_SUCCESS, token };
+  function success(user: IUser) {
+    return { type: userConstants.LOGIN_SUCCESS, user };
   }
   function failure(error: string) {
     return { type: userConstants.LOGIN_FAILURE, error };
