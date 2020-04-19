@@ -25,7 +25,7 @@ export default function Snack(props: IProps) {
     setTimeout(() => {
       setOpen(false);
       props.dispatch(alertActions.clear());
-    }, 3000);
+    }, 5000);
   }, [props.message]);
 
   return (

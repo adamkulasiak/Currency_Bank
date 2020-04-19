@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { IUser } from "../interfaces/login/IUser";
 import { authActions } from "../_actions/auth.actions";
+import UserPage from "../views/UserPage";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,6 +38,8 @@ interface IProps {
 function MainBar(props: IProps) {
   const classes = useStyles();
 
+  const [isUserPageOpen, setIsUSerPageOpen] = useState<boolean>(false);
+
   const logout = () => {
     const { dispatch } = props;
     dispatch(authActions.logout());
@@ -53,7 +56,7 @@ function MainBar(props: IProps) {
             <>
               <Tooltip title={props?.username}>
                 <PersonIcon
-                  onClick={e => alert("user todo")}
+                  onClick={e => setIsUSerPageOpen(true)}
                   className={classes.iconWithLink}
                 />
               </Tooltip>
@@ -77,6 +80,11 @@ function MainBar(props: IProps) {
           )}
         </Toolbar>
       </AppBar>
+      <UserPage
+        isOpen={isUserPageOpen}
+        onClose={() => setIsUSerPageOpen(false)}
+        user={props.user}
+      />
     </div>
   );
 }
