@@ -31,7 +31,6 @@ const useStyles = makeStyles((theme: Theme) =>
 interface IProps {
   loggedIn: boolean;
   user: IUser | null;
-  username: string | null;
   dispatch: any;
 }
 
@@ -54,7 +53,7 @@ function MainBar(props: IProps) {
           </Typography>
           {props.loggedIn && (
             <>
-              <Tooltip title={props?.username}>
+              <Tooltip title={props?.user?.userName}>
                 <PersonIcon
                   onClick={e => setIsUSerPageOpen(true)}
                   className={classes.iconWithLink}

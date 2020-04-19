@@ -21,7 +21,7 @@ function login(username: string, password: string) {
     .then(handleResponse)
     .then((user: IUser) => {
       localStorage.setItem("token", JSON.stringify(user.token));
-      localStorage.setItem("username", JSON.stringify(user.userName));
+      localStorage.setItem("user", JSON.stringify(user));
       return user;
     });
 }
@@ -43,7 +43,7 @@ function register(userForRegisterDto: IUserForRegisterDto) {
 
 function logout() {
   localStorage.removeItem("token");
-  localStorage.removeItem("username");
+  localStorage.removeItem("user");
 }
 
 function handleResponse(response: any) {

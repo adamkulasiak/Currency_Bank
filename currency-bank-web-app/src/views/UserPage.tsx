@@ -75,6 +75,7 @@ interface IProps {
 
 export default function UserPage(props: IProps) {
   const { user } = props;
+  const [userId, setUserId] = useState<number>();
   const [username, setUsername] = useState<string>("");
   const [firstname, setFirstname] = useState<string>("");
   const [lastname, setLastname] = useState<string>("");
@@ -82,6 +83,7 @@ export default function UserPage(props: IProps) {
 
   useEffect(() => {
     if (user !== null) {
+      setUserId(user.id);
       setUsername(user.userName);
       setFirstname(user.firstName);
       setLastname(user.lastName);
@@ -96,6 +98,18 @@ export default function UserPage(props: IProps) {
           User Page
         </DialogTitle>
         <DialogContent dividers>
+          <TextField
+            disabled
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="userId"
+            label="User ID"
+            type="text"
+            id="userId"
+            value={userId}
+          />
           <TextField
             variant="outlined"
             margin="normal"
@@ -133,6 +147,7 @@ export default function UserPage(props: IProps) {
             onChange={e => setLastname(e.target.value)}
           />
           <TextField
+            disabled
             variant="outlined"
             margin="normal"
             required
@@ -142,7 +157,6 @@ export default function UserPage(props: IProps) {
             type="text"
             id="pesel"
             value={pesel}
-            onChange={e => setPesel(e.target.value)}
           />
         </DialogContent>
         <DialogActions>

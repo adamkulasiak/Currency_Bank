@@ -2,18 +2,17 @@ import { authConstants } from "../_constants/auth.constants";
 import { IUser } from "../interfaces/login/IUser";
 
 const token = localStorage.getItem("token");
-const username = localStorage.getItem("username");
+const user = localStorage.getItem("user");
 
 export interface IAuthState {
   loggingIn: boolean;
   loggedIn: boolean;
   user: IUser | null;
-  username: string | null;
 }
 
-const initialState: IAuthState = token
-  ? { loggedIn: true, loggingIn: false, username, user: null }
-  : { loggedIn: false, loggingIn: false, username: null, user: null };
+const initialState: IAuthState = user
+  ? { loggedIn: true, loggingIn: false, user: JSON.parse(user) }
+  : { loggedIn: false, loggingIn: false, user: null };
 
 export function authentication(state = initialState, action: any) {
   switch (action.type) {
@@ -21,29 +20,25 @@ export function authentication(state = initialState, action: any) {
       return {
         loggingIn: true,
         loggedIn: false,
-        user: null,
-        username: null
+        user: null
       };
     case authConstants.LOGIN_SUCCESS:
       return {
         loggingIn: false,
         loggedIn: true,
-        user: action.user,
-        username: action.user.userName
+        user: action.user
       };
     case authConstants.LOGIN_FAILURE:
       return {
         loggingIn: false,
         loggedIn: false,
-        user: null,
-        username: null
+        user: null
       };
     case authConstants.LOGOUT:
       return {
         loggingIn: false,
         loggedIn: false,
-        user: null,
-        username: null
+        user: null
       };
     default:
       return state;

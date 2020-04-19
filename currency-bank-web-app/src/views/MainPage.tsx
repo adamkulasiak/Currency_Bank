@@ -7,7 +7,6 @@ import DataTable from "../components/DataTable";
 
 interface IMainPageProps {
   user: IUser | null;
-  username: string | null;
 }
 
 function MainPage(props: IMainPageProps) {
@@ -23,10 +22,9 @@ function MainPage(props: IMainPageProps) {
 }
 
 function mapStateToProps(state: State) {
-  const { user, username } = state.authentication;
+  const { user } = state.authentication;
   return {
-    user,
-    username
+    user
   };
 }
 

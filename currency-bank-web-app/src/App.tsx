@@ -23,7 +23,6 @@ interface IProps {
   loggedIn: boolean;
   loggingIn: boolean;
   user: IUser | null;
-  username: string | null;
   type: string;
   message: string;
   isLoading: boolean;
@@ -35,11 +34,7 @@ function App(props: IProps) {
   return (
     <div className="App">
       <Router history={history}>
-        <MainBar
-          loggedIn={props.loggedIn}
-          user={props.user}
-          username={props.username}
-        />
+        <MainBar loggedIn={props.loggedIn} user={props.user} />
         <PrivateRoute exact path="/" />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
@@ -59,14 +54,13 @@ function App(props: IProps) {
 }
 
 function mapStateToProps(state: State) {
-  const { loggedIn, loggingIn, user, username } = state.authentication;
+  const { loggedIn, loggingIn, user } = state.authentication;
   const { type, message } = state.alert;
   const { isLoading } = state.loading;
   return {
     loggedIn,
     loggingIn,
     user,
-    username,
     type,
     message,
     isLoading
