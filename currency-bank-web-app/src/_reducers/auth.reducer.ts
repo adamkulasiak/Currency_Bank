@@ -13,7 +13,7 @@ export interface IAuthState {
 
 const initialState: IAuthState = token
   ? { loggedIn: true, loggingIn: false, username, user: null }
-  : { loggedIn: false, loggingIn: false, username, user: null };
+  : { loggedIn: false, loggingIn: false, username: null, user: null };
 
 export function authentication(state = initialState, action: any) {
   switch (action.type) {
@@ -22,28 +22,28 @@ export function authentication(state = initialState, action: any) {
         loggingIn: true,
         loggedIn: false,
         user: null,
-        username
+        username: null
       };
     case authConstants.LOGIN_SUCCESS:
       return {
         loggingIn: false,
         loggedIn: true,
         user: action.user,
-        username
+        username: action.user.userName
       };
     case authConstants.LOGIN_FAILURE:
       return {
         loggingIn: false,
         loggedIn: false,
         user: null,
-        username
+        username: null
       };
     case authConstants.LOGOUT:
       return {
         loggingIn: false,
         loggedIn: false,
-        token: null,
-        username
+        user: null,
+        username: null
       };
     default:
       return state;

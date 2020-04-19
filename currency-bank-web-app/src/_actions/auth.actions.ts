@@ -4,6 +4,7 @@ import { history } from "../_helpers/history";
 import { alertActions } from "./alert.actions";
 import { authConstants } from "../_constants/auth.constants";
 import { IUserForRegisterDto } from "../interfaces/register/IUserForRegisterDto";
+import { loadingActions } from "./loading.actions";
 
 export const authActions = {
   login,
@@ -14,17 +15,19 @@ export const authActions = {
 function login(username: string, password: string) {
   return (dispatch: any) => {
     dispatch(request(username));
-
+    dispatch(loadingActions.enableLoading());
     userService.login(username, password).then(
       user => {
         dispatch(success(user));
         dispatch(alertActions.success("You have successfully logged in"));
         history.push("/");
+        dispatch(loadingActions.disableLoading());
       },
       () => {
         const unathorizeMsg = "Bad username or password";
         dispatch(failure(unathorizeMsg));
         dispatch(alertActions.error(unathorizeMsg));
+        dispatch(loadingActions.disableLoading());
       }
     );
   };
@@ -42,18 +45,20 @@ function login(username: string, password: string) {
 function register(userForRegister: IUserForRegisterDto) {
   return (dispatch: any) => {
     dispatch(registerRequest(userForRegister));
-
+    dispatch(loadingActions.enableLoading());
     userService.register(userForRegister).then(
       () => {
         dispatch(registerSuccess(userForRegister));
         dispatch(alertActions.success("You have successfully signed up"));
         dispatch(login(userForRegister.UserName, userForRegister.Password));
         history.push("/");
+        dispatch(loadingActions.disableLoading());
       },
       () => {
         const message = "Registration failed";
         dispatch(registerFailure(message));
         dispatch(alertActions.error(message));
+        dispatch(loadingActions.disableLoading());
       }
     );
   };

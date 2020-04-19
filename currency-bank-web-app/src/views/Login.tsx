@@ -112,9 +112,6 @@ function Login(props: IProps) {
           >
             Sign In
           </Button>
-          <Backdrop className={classes.backdrop} open={props.loggingIn}>
-            <CircularProgress color="inherit" />
-          </Backdrop>
           <Grid container>
             <Grid item>
               <Link to="/register">{"Or Sign Up"}</Link>
