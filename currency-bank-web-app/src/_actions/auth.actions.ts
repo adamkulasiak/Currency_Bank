@@ -9,7 +9,8 @@ import { loadingActions } from "./loading.actions";
 export const authActions = {
   login,
   register,
-  logout
+  logout,
+  refresh,
 };
 
 function login(username: string, password: string) {
@@ -18,7 +19,7 @@ function login(username: string, password: string) {
     dispatch(loadingActions.enableLoading());
     authService
       .login(username, password)
-      .then(user => {
+      .then((user) => {
         dispatch(success(user));
         dispatch(alertActions.success("You have successfully logged in"));
         history.push("/");
@@ -83,5 +84,14 @@ function logout() {
 
   function handleLogout() {
     return { type: authConstants.LOGOUT };
+  }
+}
+
+function refresh() {
+  return (dispatch: any) => {
+    dispatch(handleRefresh());
+  };
+  function handleRefresh() {
+    return { type: authConstants.REFRESH };
   }
 }

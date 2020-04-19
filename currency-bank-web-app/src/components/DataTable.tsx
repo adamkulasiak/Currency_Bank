@@ -31,7 +31,6 @@ export default function DataTable(props: IProps) {
       };
       accountsToDisplay.push(accountToDisplay);
     });
-    console.log(accountsToDisplay);
     return accountsToDisplay;
   };
 

@@ -1,13 +1,21 @@
 import * as React from "react";
 import { Grid, Button } from "@material-ui/core";
 
-interface IProps {}
+interface IProps {
+  createAccountOpen: boolean;
+  onOpenCreateAccountOpen: () => void;
+}
 
 export default function ActionButtons(props: IProps) {
   return (
     <Grid container spacing={4}>
       <Grid item>
-        <Button fullWidth variant="contained" color="primary">
+        <Button
+          fullWidth
+          variant="contained"
+          color="primary"
+          onClick={props.onOpenCreateAccountOpen}
+        >
           Open new account
         </Button>
       </Grid>

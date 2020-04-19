@@ -6,6 +6,8 @@ import { IUser } from "../interfaces/login/IUser";
 import DataTable from "../components/DataTable";
 import ActionButtons from "../components/ActionButtons";
 import logo from "../../src/assets/256.png";
+import { useState } from "react";
+import CreateAccount from "./CreateAccount";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -25,11 +27,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 interface IMainPageProps {
+  dispatch: any;
   user: IUser | null;
 }
 
 function MainPage(props: IMainPageProps) {
   const classes = useStyles();
+
+  const [createAccountOpen, setCreateAccountOpen] = useState<boolean>(false);
   return (
     <Container>
       <Grid container className={classes.container}>
@@ -39,7 +44,15 @@ function MainPage(props: IMainPageProps) {
           </div>
         </Grid>
         <Grid item className={classes.actions}>
-          <ActionButtons></ActionButtons>
+          <ActionButtons
+            createAccountOpen={createAccountOpen}
+            onOpenCreateAccountOpen={() => setCreateAccountOpen(true)}
+          ></ActionButtons>
+          <CreateAccount
+            dispatch={props.dispatch}
+            isOpen={createAccountOpen}
+            onClose={() => setCreateAccountOpen(false)}
+          ></CreateAccount>
         </Grid>
         <Grid item className={classes.datatable}>
           <DataTable accounts={props.user?.accounts} />

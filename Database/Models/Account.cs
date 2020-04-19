@@ -16,7 +16,7 @@ namespace CurrencyBank.Database.Models
         public int UserId { get; set; }
     }
 
-    public enum Currency: byte
+    public enum Currency
     {
         PLN = 1,
         EUR,
