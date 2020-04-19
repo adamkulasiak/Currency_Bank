@@ -1,4 +1,5 @@
-﻿using CurrencyBank.Database.Models;
+﻿using CurrencyBank.API.Dtos;
+using CurrencyBank.Database.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,6 @@ namespace CurrencyBank.API.Interfaces
     {
         Task<User> GetUser(int id);
         Task<IEnumerable<User>> GetUsers();
-        Task<User> UpdateUser(User user);
+        Task<User> UpdateUser(UserForUpdateDto userForUpdateDto);
     }
 }

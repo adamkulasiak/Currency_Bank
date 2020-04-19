@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using CurrencyBank.API.Interfaces;
 using CurrencyBank.API.Dtos;
 using AutoMapper;
+using System.Security.Claims;
 
 namespace CurrencyBank.API.Controllers
 {
@@ -68,18 +69,19 @@ namespace CurrencyBank.API.Controllers
         // PUT: api/User/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        [HttpPut("update")]
+        public async Task<IActionResult> Update([FromBody] UserForUpdateDto userForUpdateDto)
         {
-            if (id != user.Id)
+            var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            if (currentUserId != userForUpdateDto.Id)
                 return BadRequest();
 
-            var updatedUser = await _repo.UpdateUser(user);
-
+            var updatedUser = await _repo.UpdateUser(userForUpdateDto);
+            var userToReturn = _mapper.Map<UserToReturnDto>(updatedUser);
             if (updatedUser == null)
                 return BadRequest();
 
-            return Ok(user);
+            return Ok(userToReturn);
         }
 
         // POST: api/User

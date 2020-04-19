@@ -15,6 +15,9 @@ import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 import { IUser } from "../interfaces/login/IUser";
 import { TextField } from "@material-ui/core";
+import { IUserForUpdateDto } from "../interfaces/user/IUserForUpdateDto";
+import { userService } from "../_services/user.service";
+import { alertActions } from "../_actions/alert.actions";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -68,6 +71,7 @@ const DialogActions = withStyles((theme: Theme) => ({
 }))(MuiDialogActions);
 
 interface IProps {
+  dispatch: any;
   user: IUser | null;
   isOpen: boolean;
   onClose: () => void;
@@ -79,6 +83,7 @@ export default function UserPage(props: IProps) {
   const [username, setUsername] = useState<string>("");
   const [firstname, setFirstname] = useState<string>("");
   const [lastname, setLastname] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
   const [pesel, setPesel] = useState<string>("");
 
   useEffect(() => {
@@ -87,9 +92,24 @@ export default function UserPage(props: IProps) {
       setUsername(user.userName);
       setFirstname(user.firstName);
       setLastname(user.lastName);
+      setEmail(user.email);
       setPesel(user.pesel);
     }
   }, [user]);
+
+  const handleUpdateUser = () => {
+    const userForUpdate: IUserForUpdateDto = {
+      Id: userId ?? 0,
+      UserName: username,
+      FirstName: firstname,
+      LastName: lastname,
+      Email: email
+    };
+    userService.update(userForUpdate).then(() => {
+      props.dispatch(alertActions.success("Changes successfull!"));
+      props.onClose();
+    });
+  };
 
   return (
     <div>
@@ -147,6 +167,18 @@ export default function UserPage(props: IProps) {
             onChange={e => setLastname(e.target.value)}
           />
           <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="email"
+            label="Email"
+            type="text"
+            id="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+          />
+          <TextField
             disabled
             variant="outlined"
             margin="normal"
@@ -160,7 +192,7 @@ export default function UserPage(props: IProps) {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={props.onClose} color="primary">
+          <Button onClick={handleUpdateUser} color="primary">
             Save changes
           </Button>
         </DialogActions>

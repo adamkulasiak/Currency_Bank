@@ -1,4 +1,5 @@
-﻿using CurrencyBank.API.Interfaces;
+﻿using CurrencyBank.API.Dtos;
+using CurrencyBank.API.Interfaces;
 using CurrencyBank.Database.Data;
 using CurrencyBank.Database.Models;
 using Microsoft.EntityFrameworkCore;
@@ -28,8 +29,14 @@ namespace CurrencyBank.API.Repositories
             return await _context.Users.IncludeFilter(x => x.Accounts.Where(y => !y.IsDeleted)).ToListAsync();
         }
 
-        public async Task<User> UpdateUser(User user)
+        public async Task<User> UpdateUser(UserForUpdateDto userForUpdateDto)
         {
+            var user = await _context.Users.IncludeFilter(x => x.Accounts.Where(y => !y.IsDeleted))
+                    .FirstOrDefaultAsync(u => u.Id == userForUpdateDto.Id);
+            user.FirstName = userForUpdateDto.FirstName;
+            user.LastName = userForUpdateDto.LastName;
+            user.UserName = userForUpdateDto.UserName;
+            user.Email = userForUpdateDto.Email;
             _context.Entry(user).State = EntityState.Modified;
 
             if (await base.SaveAll())

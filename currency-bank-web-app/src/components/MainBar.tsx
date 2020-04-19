@@ -80,6 +80,7 @@ function MainBar(props: IProps) {
         </Toolbar>
       </AppBar>
       <UserPage
+        dispatch={props.dispatch}
         isOpen={isUserPageOpen}
         onClose={() => setIsUSerPageOpen(false)}
         user={props.user}

@@ -71,12 +71,12 @@ namespace CurrencyBank.API
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseCors("CorsPolicy");
-            app.UseMvc();
             app.UseAuthentication();
             app.UseRouting();
-
             app.UseAuthorization();
+            app.UseCors("CorsPolicy");
+            app.UseMvc();
+            
             seeder.SeedData();
             app.UseEndpoints(endpoints =>
             {

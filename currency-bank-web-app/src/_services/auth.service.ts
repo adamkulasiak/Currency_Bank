@@ -1,64 +1,32 @@
 import { IUser } from "./../interfaces/login/IUser";
 import { apiHeader } from "../_helpers/api-header";
 import { IUserForRegisterDto } from "../interfaces/register/IUserForRegisterDto";
+import { post } from "../utils/ApiRequest";
 
-export const userService = {
+export const authService = {
   login,
   register,
   logout
 };
 
 function login(username: string, password: string) {
-  const requestOptions = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ UserName: username, Password: password })
-  };
-
-  return fetch(`http://localhost:5000/api/auth/login`, requestOptions)
-    .then(handleResponse)
-    .then((user: IUser) => {
-      localStorage.setItem("token", JSON.stringify(user.token));
-      localStorage.setItem("user", JSON.stringify(user));
-      return user;
-    });
+  return post<IUser>("auth/login", {
+    UserName: username,
+    Password: password
+  }).then(user => {
+    localStorage.setItem("token", JSON.stringify(user.token));
+    localStorage.setItem("user", JSON.stringify(user));
+    return user;
+  });
 }
 
 function register(userForRegisterDto: IUserForRegisterDto) {
-  const requestOptions = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(userForRegisterDto)
-  };
-  return fetch(`http://localhost:5000/api/auth/register`, requestOptions)
-    .then(handleResponse)
-    .then(response => {
-      return response.result;
-    });
+  return post<any>(`/auth/register`, userForRegisterDto).then(response => {
+    return response.result;
+  });
 }
 
 function logout() {
   localStorage.removeItem("token");
   localStorage.removeItem("user");
-}
-
-function handleResponse(response: any) {
-  return response.text().then((text: string) => {
-    const data = text && JSON.parse(text);
-    if (!response.ok) {
-      if (response.status === 401) {
-        logout();
-        window.location.reload(true);
-      }
-
-      const error = (data && data.message) || response.statusText;
-      return Promise.reject(error);
-    }
-
-    return data;
-  });
 }

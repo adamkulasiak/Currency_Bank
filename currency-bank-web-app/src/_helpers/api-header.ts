@@ -1,7 +1,7 @@
 export function apiHeader() {
   const token = localStorage.getItem("token");
   if (token) {
-    return { Authorization: `Bearer ${token}` };
+    return { headers: { Authorization: `Bearer ${JSON.parse(token)}` } };
   } else {
     return {};
   }
