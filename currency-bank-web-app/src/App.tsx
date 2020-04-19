@@ -12,11 +12,11 @@ import { IUser } from "./interfaces/login/IUser";
 import Backdrop from "@material-ui/core/Backdrop";
 import { makeStyles, CircularProgress } from "@material-ui/core";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
-    color: "#fff"
-  }
+    color: "#fff",
+  },
 }));
 
 interface IProps {
@@ -63,7 +63,7 @@ function mapStateToProps(state: State) {
     user,
     type,
     message,
-    isLoading
+    isLoading,
   };
 }
 

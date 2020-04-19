@@ -2,26 +2,36 @@ import * as React from "react";
 import { useState } from "react";
 import { IAccount } from "../interfaces/IAccount";
 import MUIDataTable, { MUIDataTableOptions } from "mui-datatables";
+import { IAccountToDisplay } from "../interfaces/Datatable/IAccountToDisplay";
+import { IColumn } from "../interfaces/Datatable/IColumn";
+import { Currency } from "../enums/Currency";
 
 interface IProps {
   accounts?: IAccount[];
 }
 
 export default function DataTable(props: IProps) {
-  const [columns, setColumns] = useState<string[]>([
-    "Id",
-    "Account number",
-    "Currency",
-    "Balance",
+  const [columns, setColumns] = useState<IColumn[]>([
+    { name: "id", label: "Id" },
+    { name: "accountNumber", label: "Account number" },
+    { name: "currency", label: "Currency" },
+    { name: "balance", label: "Balance" },
   ]);
 
   const getData = () => {
     const { accounts } = props;
-    const accountsToDisplay: any = [];
+    const accountsToDisplay: IAccountToDisplay[] = [];
 
     accounts?.map((a) => {
-      accountsToDisplay.push(Object.values(a));
+      const accountToDisplay: IAccountToDisplay = {
+        id: a.id,
+        accountNumber: a.accountNumber,
+        currency: Currency[a.currency],
+        balance: a.balance,
+      };
+      accountsToDisplay.push(accountToDisplay);
     });
+    console.log(accountsToDisplay);
     return accountsToDisplay;
   };
 

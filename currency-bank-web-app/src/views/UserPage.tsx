@@ -3,7 +3,7 @@ import {
   createStyles,
   Theme,
   withStyles,
-  WithStyles
+  WithStyles,
 } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -18,19 +18,20 @@ import { TextField } from "@material-ui/core";
 import { IUserForUpdateDto } from "../interfaces/user/IUserForUpdateDto";
 import { userService } from "../_services/user.service";
 import { alertActions } from "../_actions/alert.actions";
+import { loadingActions } from "../_actions/loading.actions";
 
 const styles = (theme: Theme) =>
   createStyles({
     root: {
       margin: 0,
-      padding: theme.spacing(2)
+      padding: theme.spacing(2),
     },
     closeButton: {
       position: "absolute",
       right: theme.spacing(1),
       top: theme.spacing(1),
-      color: theme.palette.grey[500]
-    }
+      color: theme.palette.grey[500],
+    },
   });
 
 export interface DialogTitleProps extends WithStyles<typeof styles> {
@@ -59,15 +60,15 @@ const DialogTitle = withStyles(styles)((props: DialogTitleProps) => {
 
 const DialogContent = withStyles((theme: Theme) => ({
   root: {
-    padding: theme.spacing(2)
-  }
+    padding: theme.spacing(2),
+  },
 }))(MuiDialogContent);
 
 const DialogActions = withStyles((theme: Theme) => ({
   root: {
     margin: 0,
-    padding: theme.spacing(1)
-  }
+    padding: theme.spacing(1),
+  },
 }))(MuiDialogActions);
 
 interface IProps {
@@ -98,22 +99,30 @@ export default function UserPage(props: IProps) {
   }, [user]);
 
   const handleUpdateUser = () => {
+    props.dispatch(loadingActions.enableLoading());
     const userForUpdate: IUserForUpdateDto = {
       Id: userId ?? 0,
       UserName: username,
       FirstName: firstname,
       LastName: lastname,
-      Email: email
+      Email: email,
     };
-    userService.update(userForUpdate).then(() => {
-      props.dispatch(alertActions.success("Changes successfull!"));
-      props.onClose();
-    });
+    userService
+      .update(userForUpdate)
+      .then(() => {
+        props.dispatch(alertActions.success("Changes successfull!"));
+        props.onClose();
+      })
+      .finally(() => props.dispatch(loadingActions.disableLoading()));
   };
 
   return (
     <div>
-      <Dialog onClose={props.onClose} open={props.isOpen}>
+      <Dialog
+        onClose={props.onClose}
+        open={props.isOpen}
+        style={{ zIndex: 200 }}
+      >
         <DialogTitle id="user-page-title" onClose={props.onClose}>
           User Page
         </DialogTitle>
@@ -140,7 +149,7 @@ export default function UserPage(props: IProps) {
             type="text"
             id="username"
             value={username}
-            onChange={e => setUsername(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
           />
           <TextField
             variant="outlined"
@@ -152,7 +161,7 @@ export default function UserPage(props: IProps) {
             type="text"
             id="firstname"
             value={firstname}
-            onChange={e => setFirstname(e.target.value)}
+            onChange={(e) => setFirstname(e.target.value)}
           />
           <TextField
             variant="outlined"
@@ -164,7 +173,7 @@ export default function UserPage(props: IProps) {
             type="text"
             id="lastname"
             value={lastname}
-            onChange={e => setLastname(e.target.value)}
+            onChange={(e) => setLastname(e.target.value)}
           />
           <TextField
             variant="outlined"
@@ -176,7 +185,7 @@ export default function UserPage(props: IProps) {
             type="text"
             id="email"
             value={email}
-            onChange={e => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
             disabled

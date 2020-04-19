@@ -12,19 +12,20 @@ import { connect } from "react-redux";
 import { IUser } from "../interfaces/login/IUser";
 import { authActions } from "../_actions/auth.actions";
 import UserPage from "../views/UserPage";
+import logo from "../assets/64.png";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      flexGrow: 1
+      flexGrow: 1,
     },
     title: {
-      flexGrow: 1
+      flexGrow: 1,
     },
     iconWithLink: {
       padding: 10,
-      cursor: "pointer"
-    }
+      cursor: "pointer",
+    },
   })
 );
 
@@ -55,7 +56,7 @@ function MainBar(props: IProps) {
             <>
               <Tooltip title={props?.user?.userName}>
                 <PersonIcon
-                  onClick={e => setIsUSerPageOpen(true)}
+                  onClick={(e) => setIsUSerPageOpen(true)}
                   className={classes.iconWithLink}
                 />
               </Tooltip>

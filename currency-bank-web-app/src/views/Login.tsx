@@ -9,7 +9,7 @@ import {
   Grid,
   makeStyles,
   Backdrop,
-  CircularProgress
+  CircularProgress,
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Link } from "react-router-dom";
@@ -17,28 +17,24 @@ import { useState } from "react";
 import { connect } from "react-redux";
 import { authActions } from "../_actions/auth.actions";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: theme.palette.secondary.main,
   },
   form: {
     width: "100%",
-    marginTop: theme.spacing(1)
+    marginTop: theme.spacing(1),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2)
+    margin: theme.spacing(3, 0, 2),
   },
-  backdrop: {
-    zIndex: theme.zIndex.drawer + 1,
-    color: "#fff"
-  }
 }));
 
 interface IProps {
@@ -76,7 +72,7 @@ function Login(props: IProps) {
         <form
           className={classes.form}
           noValidate
-          onSubmit={e => handleLogin(e)}
+          onSubmit={(e) => handleLogin(e)}
         >
           <TextField
             variant="outlined"
@@ -89,7 +85,7 @@ function Login(props: IProps) {
             autoComplete="login"
             autoFocus
             value={login}
-            onChange={e => setLogin(e.target.value)}
+            onChange={(e) => setLogin(e.target.value)}
           />
           <TextField
             variant="outlined"
@@ -101,7 +97,7 @@ function Login(props: IProps) {
             type="password"
             id="password"
             value={password}
-            onChange={e => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <Button
             type="submit"
@@ -128,7 +124,7 @@ function mapStateToProps(state: any) {
   return {
     loggingIn,
     loggedIn,
-    token
+    token,
   };
 }
 
