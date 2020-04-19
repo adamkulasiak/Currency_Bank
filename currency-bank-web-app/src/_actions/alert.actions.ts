@@ -3,6 +3,7 @@ import { alertConstants } from "./../_constants/alert.contants";
 export const alertActions = {
   success,
   error,
+  clear
 };
 
 function success(message: string) {
@@ -11,4 +12,8 @@ function success(message: string) {
 
 function error(message: string) {
   return { type: alertConstants.ERROR, message };
+}
+
+function clear() {
+  return { type: alertConstants.CLEAR };
 }

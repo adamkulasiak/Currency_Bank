@@ -5,16 +5,16 @@ import { IUserForRegisterDto } from "../interfaces/register/IUserForRegisterDto"
 export const userService = {
   login,
   register,
-  logout,
+  logout
 };
 
 function login(username: string, password: string) {
   const requestOptions = {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     },
-    body: JSON.stringify({ UserName: username, Password: password }),
+    body: JSON.stringify({ UserName: username, Password: password })
   };
 
   return fetch(`http://localhost:5000/api/auth/login`, requestOptions)
@@ -30,19 +30,20 @@ function register(userForRegisterDto: IUserForRegisterDto) {
   const requestOptions = {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     },
-    body: JSON.stringify(userForRegisterDto),
+    body: JSON.stringify(userForRegisterDto)
   };
   return fetch(`http://localhost:5000/api/auth/register`, requestOptions)
     .then(handleResponse)
-    .then((response) => {
+    .then(response => {
       return response.result;
     });
 }
 
 function logout() {
   localStorage.removeItem("token");
+  localStorage.removeItem("username");
 }
 
 function handleResponse(response: any) {

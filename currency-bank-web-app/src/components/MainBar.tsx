@@ -8,22 +8,22 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import PersonIcon from "@material-ui/icons/Person";
 import Tooltip from "@material-ui/core/Tooltip";
 import { Link } from "react-router-dom";
-import { userActions } from "../_actions/user.actions";
 import { connect } from "react-redux";
 import { IUser } from "../interfaces/login/IUser";
+import { authActions } from "../_actions/auth.actions";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      flexGrow: 1,
+      flexGrow: 1
     },
     title: {
-      flexGrow: 1,
+      flexGrow: 1
     },
     iconWithLink: {
       padding: 10,
-      cursor: "pointer",
-    },
+      cursor: "pointer"
+    }
   })
 );
 
@@ -39,7 +39,7 @@ function MainBar(props: IProps) {
 
   const logout = () => {
     const { dispatch } = props;
-    dispatch(userActions.logout());
+    dispatch(authActions.logout());
   };
 
   return (
@@ -53,7 +53,7 @@ function MainBar(props: IProps) {
             <>
               <Tooltip title={props?.username}>
                 <PersonIcon
-                  onClick={(e) => alert("user todo")}
+                  onClick={e => alert("user todo")}
                   className={classes.iconWithLink}
                 />
               </Tooltip>

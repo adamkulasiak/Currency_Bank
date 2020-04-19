@@ -26,7 +26,7 @@ function mapStateToProps(state: State) {
   const { user, username } = state.authentication;
   return {
     user,
-    username,
+    username
   };
 }
 

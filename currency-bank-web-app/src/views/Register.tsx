@@ -7,37 +7,37 @@ import {
   TextField,
   Button,
   Grid,
-  makeStyles,
+  makeStyles
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { connect } from "react-redux";
-import { userActions } from "../_actions/user.actions";
+import { authActions } from "../_actions/auth.actions";
 import { IUserForRegisterDto } from "../interfaces/register/IUserForRegisterDto";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
+    alignItems: "center"
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.secondary.main
   },
   form: {
     width: "100%",
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(1)
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    margin: theme.spacing(3, 0, 2)
   },
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
-    color: "#fff",
-  },
+    color: "#fff"
+  }
 }));
 
 interface IProps {
@@ -62,7 +62,7 @@ function Register(props: IProps) {
       UserName: username,
       Email: email,
       Pesel: pesel,
-      Password: password,
+      Password: password
     };
 
     return obj;
@@ -72,7 +72,7 @@ function Register(props: IProps) {
     e.preventDefault();
 
     const { dispatch } = props;
-    dispatch(userActions.register(createUserForRegister()));
+    dispatch(authActions.register(createUserForRegister()));
   };
 
   return (
@@ -88,7 +88,7 @@ function Register(props: IProps) {
         <form
           className={classes.form}
           noValidate
-          onSubmit={(e) => handleRegister(e)}
+          onSubmit={e => handleRegister(e)}
         >
           <TextField
             variant="outlined"
@@ -101,7 +101,7 @@ function Register(props: IProps) {
             autoComplete="firstname"
             value={firstname}
             autoFocus
-            onChange={(e) => setFirstname(e.target.value)}
+            onChange={e => setFirstname(e.target.value)}
           />
           <TextField
             variant="outlined"
@@ -113,7 +113,7 @@ function Register(props: IProps) {
             name="lastname"
             autoComplete="lastname"
             value={lastname}
-            onChange={(e) => setLastname(e.target.value)}
+            onChange={e => setLastname(e.target.value)}
           />
           <TextField
             variant="outlined"
@@ -125,7 +125,7 @@ function Register(props: IProps) {
             name="username"
             autoComplete="username"
             value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={e => setUsername(e.target.value)}
           />
           <TextField
             variant="outlined"
@@ -137,7 +137,7 @@ function Register(props: IProps) {
             name="email"
             autoComplete="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={e => setEmail(e.target.value)}
           />
           <TextField
             variant="outlined"
@@ -149,7 +149,7 @@ function Register(props: IProps) {
             name="pesel"
             autoComplete="pesel"
             value={pesel}
-            onChange={(e) => setPesel(e.target.value)}
+            onChange={e => setPesel(e.target.value)}
           />
           <TextField
             variant="outlined"
@@ -161,7 +161,7 @@ function Register(props: IProps) {
             type="password"
             id="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={e => setPassword(e.target.value)}
           />
           <TextField
             variant="outlined"
@@ -173,7 +173,7 @@ function Register(props: IProps) {
             type="password"
             id="password2"
             value={password2}
-            onChange={(e) => setPassword2(e.target.value)}
+            onChange={e => setPassword2(e.target.value)}
           />
           <Button
             type="submit"
@@ -200,7 +200,7 @@ function mapStateToProps(state: any) {
   return {
     loggingIn,
     loggedIn,
-    token,
+    token
   };
 }
 

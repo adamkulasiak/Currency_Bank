@@ -33,7 +33,13 @@ function App(props: IProps) {
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
       </Router>
-      {props.message && <Snack message={props.message} type={props.type} />}
+      {props.message && (
+        <Snack
+          dispatch={props.dispatch}
+          message={props.message}
+          type={props.type}
+        />
+      )}
     </div>
   );
 }
@@ -47,7 +53,7 @@ function mapStateToProps(state: State) {
     user,
     username,
     type,
-    message,
+    message
   };
 }
 

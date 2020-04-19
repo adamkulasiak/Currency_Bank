@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
+import { alertActions } from "../_actions/alert.actions";
 
 interface IProps {
   type: string;
   message: string;
+  dispatch: any;
 }
 
 function Alert(props: AlertProps) {
@@ -22,7 +24,8 @@ export default function Snack(props: IProps) {
     setOpen(true);
     setTimeout(() => {
       setOpen(false);
-    }, 4000);
+      props.dispatch(alertActions.clear());
+    }, 3000);
   }, [props.message]);
 
   return (
@@ -30,7 +33,7 @@ export default function Snack(props: IProps) {
       <Snackbar
         anchorOrigin={{
           vertical: "bottom",
-          horizontal: "right",
+          horizontal: "right"
         }}
         open={open}
         onClose={handleClose}

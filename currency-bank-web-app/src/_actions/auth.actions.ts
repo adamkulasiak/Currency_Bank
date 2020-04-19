@@ -1,14 +1,14 @@
-import { IUser } from "./../interfaces/login/IUser";
-import { userService } from "./../_services/auth.service";
-import { history } from "./../_helpers/history";
+import { IUser } from "../interfaces/login/IUser";
+import { userService } from "../_services/auth.service";
+import { history } from "../_helpers/history";
 import { alertActions } from "./alert.actions";
-import { userConstants } from "./../_constants/user.constants";
+import { authConstants } from "../_constants/auth.constants";
 import { IUserForRegisterDto } from "../interfaces/register/IUserForRegisterDto";
 
-export const userActions = {
+export const authActions = {
   login,
   register,
-  logout,
+  logout
 };
 
 function login(username: string, password: string) {
@@ -16,7 +16,7 @@ function login(username: string, password: string) {
     dispatch(request(username));
 
     userService.login(username, password).then(
-      (user) => {
+      user => {
         dispatch(success(user));
         dispatch(alertActions.success("You have successfully logged in"));
         history.push("/");
@@ -29,13 +29,13 @@ function login(username: string, password: string) {
     );
   };
   function request(username: string) {
-    return { type: userConstants.LOGIN_REQUEST, username };
+    return { type: authConstants.LOGIN_REQUEST, username };
   }
   function success(user: IUser) {
-    return { type: userConstants.LOGIN_SUCCESS, user };
+    return { type: authConstants.LOGIN_SUCCESS, user };
   }
   function failure(error: string) {
-    return { type: userConstants.LOGIN_FAILURE, error };
+    return { type: authConstants.LOGIN_FAILURE, error };
   }
 }
 
@@ -59,15 +59,15 @@ function register(userForRegister: IUserForRegisterDto) {
   };
 
   function registerRequest(userForRegister: IUserForRegisterDto) {
-    return { type: userConstants.REGISTER_REQUEST, userForRegister };
+    return { type: authConstants.REGISTER_REQUEST, userForRegister };
   }
 
   function registerSuccess(userForRegister: IUserForRegisterDto) {
-    return { type: userConstants.REGISTER_SUCCESS, userForRegister };
+    return { type: authConstants.REGISTER_SUCCESS, userForRegister };
   }
 
   function registerFailure(errorMessage: string) {
-    return { type: userConstants.REGISTER_FAILURE, errorMessage };
+    return { type: authConstants.REGISTER_FAILURE, errorMessage };
   }
 }
 
@@ -79,6 +79,6 @@ function logout() {
   };
 
   function handleLogout() {
-    return { type: userConstants.LOGOUT };
+    return { type: authConstants.LOGOUT };
   }
 }
