@@ -39,8 +39,6 @@ export function authentication(state = initialState, action: any) {
         loggedIn: false,
         user: null,
       };
-    case authConstants.REFRESH:
-      return state;
     default:
       return state;
   }

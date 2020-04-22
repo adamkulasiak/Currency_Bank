@@ -79,6 +79,7 @@ interface IProps {
   dispatch: any;
   isOpen: boolean;
   onClose: () => void;
+  onRefreshAccounts: () => void;
 }
 
 export default function CreateAccount(props: IProps) {
@@ -120,7 +121,7 @@ export default function CreateAccount(props: IProps) {
       .openNew(newAccount)
       .then(() => {
         props.dispatch(alertActions.success("Account has been created!"));
-        props.dispatch(authActions.refresh());
+        props.onRefreshAccounts();
         props.onClose();
       })
       .finally(() => props.dispatch(loadingActions.disableLoading()));

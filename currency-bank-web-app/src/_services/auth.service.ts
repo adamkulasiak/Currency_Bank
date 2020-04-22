@@ -6,22 +6,23 @@ import { post } from "../utils/ApiRequest";
 export const authService = {
   login,
   register,
-  logout
+  logout,
 };
 
 function login(username: string, password: string) {
   return post<IUser>("auth/login", {
     UserName: username,
-    Password: password
-  }).then(user => {
+    Password: password,
+  }).then((user) => {
     localStorage.setItem("token", JSON.stringify(user.token));
+    delete user.accounts;
     localStorage.setItem("user", JSON.stringify(user));
     return user;
   });
 }
 
 function register(userForRegisterDto: IUserForRegisterDto) {
-  return post<any>(`/auth/register`, userForRegisterDto).then(response => {
+  return post<any>(`/auth/register`, userForRegisterDto).then((response) => {
     return response.result;
   });
 }

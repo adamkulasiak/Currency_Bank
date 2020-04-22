@@ -10,7 +10,6 @@ export const authActions = {
   login,
   register,
   logout,
-  refresh,
 };
 
 function login(username: string, password: string) {
@@ -84,14 +83,5 @@ function logout() {
 
   function handleLogout() {
     return { type: authConstants.LOGOUT };
-  }
-}
-
-function refresh() {
-  return (dispatch: any) => {
-    dispatch(handleRefresh());
-  };
-  function handleRefresh() {
-    return { type: authConstants.REFRESH };
   }
 }

@@ -6,8 +6,11 @@ import { IUser } from "../interfaces/login/IUser";
 import DataTable from "../components/DataTable";
 import ActionButtons from "../components/ActionButtons";
 import logo from "../../src/assets/256.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CreateAccount from "./CreateAccount";
+import { accountService } from "../_services/account.service";
+import { IAccount } from "../interfaces/IAccount";
+import { loadingActions } from "../_actions/loading.actions";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -34,7 +37,20 @@ interface IMainPageProps {
 function MainPage(props: IMainPageProps) {
   const classes = useStyles();
 
+  const [accounts, setAccounts] = useState<IAccount[]>([]);
+  const [refreshAccounts, setRefreshAccounts] = useState<boolean>(false);
   const [createAccountOpen, setCreateAccountOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    props.dispatch(loadingActions.enableLoading());
+    accountService
+      .getAllAccountsForCurrentUser()
+      .then((acc) => {
+        setAccounts(acc);
+      })
+      .finally(() => props.dispatch(loadingActions.disableLoading()));
+  }, [refreshAccounts]);
+
   return (
     <Container>
       <Grid container className={classes.container}>
@@ -52,10 +68,11 @@ function MainPage(props: IMainPageProps) {
             dispatch={props.dispatch}
             isOpen={createAccountOpen}
             onClose={() => setCreateAccountOpen(false)}
+            onRefreshAccounts={() => setRefreshAccounts(!refreshAccounts)}
           ></CreateAccount>
         </Grid>
         <Grid item className={classes.datatable}>
-          <DataTable accounts={props.user?.accounts} />
+          <DataTable accounts={accounts} />
         </Grid>
       </Grid>
     </Container>

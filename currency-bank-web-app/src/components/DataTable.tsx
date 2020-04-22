@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { IAccount } from "../interfaces/IAccount";
 import MUIDataTable, { MUIDataTableOptions } from "mui-datatables";
 import { IAccountToDisplay } from "../interfaces/Datatable/IAccountToDisplay";
@@ -7,7 +7,7 @@ import { IColumn } from "../interfaces/Datatable/IColumn";
 import { Currency } from "../enums/Currency";
 
 interface IProps {
-  accounts?: IAccount[];
+  accounts: IAccount[];
 }
 
 export default function DataTable(props: IProps) {
@@ -19,10 +19,8 @@ export default function DataTable(props: IProps) {
   ]);
 
   const getData = () => {
-    const { accounts } = props;
     const accountsToDisplay: IAccountToDisplay[] = [];
-
-    accounts?.map((a) => {
+    props.accounts.map((a) => {
       const accountToDisplay: IAccountToDisplay = {
         id: a.id,
         accountNumber: a.accountNumber,
