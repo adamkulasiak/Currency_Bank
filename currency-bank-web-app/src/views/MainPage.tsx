@@ -72,7 +72,11 @@ function MainPage(props: IMainPageProps) {
           ></CreateAccount>
         </Grid>
         <Grid item className={classes.datatable}>
-          <DataTable accounts={accounts} />
+          <DataTable
+            dispatch={props.dispatch}
+            accounts={accounts}
+            onRefreshAccounts={() => setRefreshAccounts(!refreshAccounts)}
+          />
         </Grid>
       </Grid>
     </Container>

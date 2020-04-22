@@ -1,7 +1,7 @@
 import { IUser } from "./../interfaces/login/IUser";
 import { apiHeader } from "../_helpers/api-header";
 import { IUserForRegisterDto } from "../interfaces/register/IUserForRegisterDto";
-import { post } from "../utils/ApiRequest";
+import { _post } from "../utils/ApiRequest";
 
 export const authService = {
   login,
@@ -10,7 +10,7 @@ export const authService = {
 };
 
 function login(username: string, password: string) {
-  return post<IUser>("auth/login", {
+  return _post<IUser>("auth/login", {
     UserName: username,
     Password: password,
   }).then((user) => {
@@ -22,7 +22,7 @@ function login(username: string, password: string) {
 }
 
 function register(userForRegisterDto: IUserForRegisterDto) {
-  return post<any>(`/auth/register`, userForRegisterDto).then((response) => {
+  return _post<any>(`/auth/register`, userForRegisterDto).then((response) => {
     return response.result;
   });
 }
@@ -30,4 +30,5 @@ function register(userForRegisterDto: IUserForRegisterDto) {
 function logout() {
   localStorage.removeItem("token");
   localStorage.removeItem("user");
+  localStorage.removeItem("accounts");
 }

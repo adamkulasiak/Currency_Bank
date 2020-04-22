@@ -5,9 +5,14 @@ import MUIDataTable, { MUIDataTableOptions } from "mui-datatables";
 import { IAccountToDisplay } from "../interfaces/Datatable/IAccountToDisplay";
 import { IColumn } from "../interfaces/Datatable/IColumn";
 import { Currency } from "../enums/Currency";
+import { accountService } from "../_services/account.service";
+import { loadingActions } from "../_actions/loading.actions";
+import { alertActions } from "../_actions/alert.actions";
 
 interface IProps {
+  dispatch: any;
   accounts: IAccount[];
+  onRefreshAccounts: () => void;
 }
 
 export default function DataTable(props: IProps) {
@@ -34,6 +39,25 @@ export default function DataTable(props: IProps) {
 
   const options: MUIDataTableOptions = {
     filterType: "checkbox",
+    selectableRows: "single",
+    onRowsDelete: (rowsDeleted: any): boolean => {
+      props.dispatch(loadingActions.enableLoading());
+      const index: number = rowsDeleted.data[0].index;
+      console.log(index);
+      const accountToDelete = props.accounts[index];
+      accountService
+        .deleteAccount(accountToDelete.id)
+        .then((msg) => {
+          props.onRefreshAccounts();
+          props.dispatch(alertActions.success(msg));
+          return false;
+        })
+        .catch(() =>
+          props.dispatch(alertActions.error("Error during deleting account."))
+        )
+        .finally(() => props.dispatch(loadingActions.disableLoading()));
+      return false;
+    },
   };
   return (
     <MUIDataTable
