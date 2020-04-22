@@ -11,7 +11,7 @@ export async function _post<T>(url: string, data: any): Promise<T> {
     .then((response) => response.data);
 }
 
-export async function _put<T>(url: string, data: any): Promise<T> {
+export async function _put<T>(url: string, data?: any): Promise<T> {
   return await axios
     .put(url, data, apiHeader())
     .then((response) => response.data);

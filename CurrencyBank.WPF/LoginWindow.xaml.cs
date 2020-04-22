@@ -47,8 +47,7 @@ namespace CurrencyBank.WPF
             if (response.IsSuccessStatusCode)
             {
                 JObject json = JObject.Parse(response.Content.ReadAsStringAsync().Result);
-                JObject jsonObj = (JObject)json["userToReturn"];
-                var loggedInUser = jsonObj.ToObject<LoggedInUser>();
+                var loggedInUser = json.ToObject<LoggedInUser>();
 
                 //open main window
                 MainWindow mainWindow = new MainWindow(loggedInUser);

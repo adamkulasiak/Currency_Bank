@@ -11,6 +11,8 @@ import CreateAccount from "./CreateAccount";
 import { accountService } from "../_services/account.service";
 import { IAccount } from "../interfaces/IAccount";
 import { loadingActions } from "../_actions/loading.actions";
+import CashOut from "./CashOut";
+import CashIn from "./CashIn";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -40,6 +42,8 @@ function MainPage(props: IMainPageProps) {
   const [accounts, setAccounts] = useState<IAccount[]>([]);
   const [refreshAccounts, setRefreshAccounts] = useState<boolean>(false);
   const [createAccountOpen, setCreateAccountOpen] = useState<boolean>(false);
+  const [cashOutOpen, setCashOutOpen] = useState<boolean>(false);
+  const [cashInOpen, setCashInOpen] = useState<boolean>(false);
 
   useEffect(() => {
     props.dispatch(loadingActions.enableLoading());
@@ -62,14 +66,30 @@ function MainPage(props: IMainPageProps) {
         <Grid item className={classes.actions}>
           <ActionButtons
             createAccountOpen={createAccountOpen}
-            onOpenCreateAccountOpen={() => setCreateAccountOpen(true)}
+            onOpenCreateAccount={() => setCreateAccountOpen(true)}
+            onOpenCashOut={() => setCashOutOpen(true)}
+            onOpenCashIn={() => setCashInOpen(true)}
           ></ActionButtons>
           <CreateAccount
             dispatch={props.dispatch}
             isOpen={createAccountOpen}
             onClose={() => setCreateAccountOpen(false)}
             onRefreshAccounts={() => setRefreshAccounts(!refreshAccounts)}
-          ></CreateAccount>
+          />
+          <CashOut
+            dispatch={props.dispatch}
+            isOpen={cashOutOpen}
+            accounts={accounts}
+            onClose={() => setCashOutOpen(false)}
+            onRefreshAccounts={() => setRefreshAccounts(!refreshAccounts)}
+          />
+          <CashIn
+            dispatch={props.dispatch}
+            isOpen={cashInOpen}
+            accounts={accounts}
+            onClose={() => setCashInOpen(false)}
+            onRefreshAccounts={() => setRefreshAccounts(!refreshAccounts)}
+          />
         </Grid>
         <Grid item className={classes.datatable}>
           <DataTable

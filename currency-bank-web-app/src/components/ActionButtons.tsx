@@ -3,7 +3,9 @@ import { Grid, Button } from "@material-ui/core";
 
 interface IProps {
   createAccountOpen: boolean;
-  onOpenCreateAccountOpen: () => void;
+  onOpenCreateAccount: () => void;
+  onOpenCashOut: () => void;
+  onOpenCashIn: () => void;
 }
 
 export default function ActionButtons(props: IProps) {
@@ -14,7 +16,7 @@ export default function ActionButtons(props: IProps) {
           fullWidth
           variant="contained"
           color="primary"
-          onClick={props.onOpenCreateAccountOpen}
+          onClick={props.onOpenCreateAccount}
         >
           Open new account
         </Button>
@@ -30,12 +32,22 @@ export default function ActionButtons(props: IProps) {
         </Button>
       </Grid>
       <Grid item>
-        <Button fullWidth variant="contained" color="primary">
+        <Button
+          fullWidth
+          variant="contained"
+          color="primary"
+          onClick={props.onOpenCashOut}
+        >
           Withdrawal
         </Button>
       </Grid>
       <Grid item>
-        <Button fullWidth variant="contained" color="primary">
+        <Button
+          fullWidth
+          variant="contained"
+          color="primary"
+          onClick={props.onOpenCashIn}
+        >
           Deposit
         </Button>
       </Grid>
