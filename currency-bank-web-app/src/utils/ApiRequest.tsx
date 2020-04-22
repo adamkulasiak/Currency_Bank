@@ -5,7 +5,7 @@ export async function _get<T>(url: string): Promise<T> {
   return await axios.get(url, apiHeader()).then((response) => response.data);
 }
 
-export async function _post<T>(url: string, data: any): Promise<T> {
+export async function _post<T>(url: string, data?: any): Promise<T> {
   return await axios
     .post(url, data, apiHeader())
     .then((response) => response.data);

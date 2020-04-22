@@ -4,6 +4,7 @@ import { Grid, Button } from "@material-ui/core";
 interface IProps {
   createAccountOpen: boolean;
   onOpenCreateAccount: () => void;
+  onOpenTransfer: () => void;
   onOpenCashOut: () => void;
   onOpenCashIn: () => void;
 }
@@ -22,7 +23,12 @@ export default function ActionButtons(props: IProps) {
         </Button>
       </Grid>
       <Grid item>
-        <Button fullWidth variant="contained" color="primary">
+        <Button
+          fullWidth
+          variant="contained"
+          color="primary"
+          onClick={props.onOpenTransfer}
+        >
           New Transfer
         </Button>
       </Grid>

@@ -18,22 +18,26 @@ interface IProps {
   onRefreshAccounts: () => void;
 }
 
-export default function CashOut(props: IProps) {
-  const [selectedAccountId, setSelectedAccountId] = useState<number>();
+export default function Transfer(props: IProps) {
+  const [sourceAccountId, setSourceAccountId] = useState<number>();
+  const [destinationAccountNumber, setDestinationAccountNumber] = useState<
+    string
+  >("");
   const [ammount, setAmmount] = useState<number>(0);
 
-  const handleCashOut = () => {
+  const handleTransfer = () => {
     props.dispatch(loadingActions.enableLoading());
     accountService
-      .cashOut(selectedAccountId ?? 0, ammount ?? 0)
+      .transfer(sourceAccountId ?? 0, destinationAccountNumber, ammount ?? 0)
       .then(() => {
-        props.dispatch(alertActions.success("Cashout succeeded!"));
+        props.dispatch(alertActions.success("Transfer succeeded!"));
         props.onRefreshAccounts();
         props.onClose();
       })
       .finally(() => {
         props.dispatch(loadingActions.disableLoading());
         setAmmount(0);
+        setDestinationAccountNumber("");
       });
   };
 
@@ -44,18 +48,34 @@ export default function CashOut(props: IProps) {
         open={props.isOpen}
         style={{ zIndex: 200 }}
       >
-        <DialogTitle id="cash-out-title" onClose={props.onClose}>
-          Cash out
+        <DialogTitle id="transfer-title" onClose={props.onClose}>
+          Transfer Money
         </DialogTitle>
         <DialogContent dividers>
           <Autocomplete
             id="accounts-dropdown"
             options={createAccountsDropdown(props.accounts)}
             getOptionLabel={(option) => option.label}
-            onChange={(e: any, v: any) => setSelectedAccountId(v.value)}
+            onChange={(e: any, v: any) => setSourceAccountId(v.value)}
             renderInput={(params) => (
-              <TextField {...params} label="Accounts" variant="outlined" />
+              <TextField
+                {...params}
+                label="Source account"
+                variant="outlined"
+              />
             )}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="destination-account"
+            label="Destination account number"
+            type="text"
+            id="destination-account"
+            value={destinationAccountNumber}
+            onChange={(e) => setDestinationAccountNumber(e.target.value)}
           />
           <TextField
             variant="outlined"
@@ -71,8 +91,8 @@ export default function CashOut(props: IProps) {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => handleCashOut()} color="primary">
-            Proceed
+          <Button onClick={() => handleTransfer()} color="primary">
+            Transfer
           </Button>
         </DialogActions>
       </Dialog>

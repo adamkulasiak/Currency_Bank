@@ -49,7 +49,7 @@ export default function CashIn(props: IProps) {
         </DialogTitle>
         <DialogContent dividers>
           <Autocomplete
-            id="cash-in-dropdown"
+            id="accounts-dropdown"
             options={createAccountsDropdown(props.accounts)}
             getOptionLabel={(option) => option.label}
             onChange={(e: any, v: any) => setSelectedAccountId(v.value)}
