@@ -14,6 +14,7 @@ import { loadingActions } from "../_actions/loading.actions";
 import CashOut from "./CashOut";
 import CashIn from "./CashIn";
 import Transfer from "./Transfer";
+import Exchange from "./Exchange";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -44,6 +45,7 @@ function MainPage(props: IMainPageProps) {
   const [refreshAccounts, setRefreshAccounts] = useState<boolean>(false);
   const [createAccountOpen, setCreateAccountOpen] = useState<boolean>(false);
   const [transferOpen, setTransferOpen] = useState<boolean>(false);
+  const [exchangeOpen, setExchangeOpen] = useState<boolean>(false);
   const [cashOutOpen, setCashOutOpen] = useState<boolean>(false);
   const [cashInOpen, setCashInOpen] = useState<boolean>(false);
 
@@ -70,6 +72,7 @@ function MainPage(props: IMainPageProps) {
             createAccountOpen={createAccountOpen}
             onOpenCreateAccount={() => setCreateAccountOpen(true)}
             onOpenTransfer={() => setTransferOpen(true)}
+            onOpenExchange={() => setExchangeOpen(true)}
             onOpenCashOut={() => setCashOutOpen(true)}
             onOpenCashIn={() => setCashInOpen(true)}
           ></ActionButtons>
@@ -84,6 +87,13 @@ function MainPage(props: IMainPageProps) {
             isOpen={transferOpen}
             accounts={accounts}
             onClose={() => setTransferOpen(false)}
+            onRefreshAccounts={() => setRefreshAccounts(!refreshAccounts)}
+          />
+          <Exchange
+            dispatch={props.dispatch}
+            isOpen={exchangeOpen}
+            accounts={accounts}
+            onClose={() => setExchangeOpen(false)}
             onRefreshAccounts={() => setRefreshAccounts(!refreshAccounts)}
           />
           <CashOut

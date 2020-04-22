@@ -9,6 +9,7 @@ export const accountService = {
   cashOut,
   cashIn,
   transfer,
+  exchange,
 };
 
 function getAllAccountsForCurrentUser() {
@@ -54,6 +55,18 @@ function transfer(
 ) {
   return _post<IAccount[]>(
     `account/transferMoney?principalAccountId=${accountId}&destinationAccountNumber=${destAccountNumber}&ammount=${ammount}`
+  ).then((accounts) => {
+    return accounts;
+  });
+}
+
+function exchange(
+  srcAccountId: number,
+  destAccountId: number,
+  ammount: number
+) {
+  return _put<IAccount[]>(
+    `account/exchange?sourceAccountId=${srcAccountId}&destinationAccountId=${destAccountId}&ammount=${ammount}`
   ).then((accounts) => {
     return accounts;
   });

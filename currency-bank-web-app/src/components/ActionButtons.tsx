@@ -5,6 +5,7 @@ interface IProps {
   createAccountOpen: boolean;
   onOpenCreateAccount: () => void;
   onOpenTransfer: () => void;
+  onOpenExchange: () => void;
   onOpenCashOut: () => void;
   onOpenCashIn: () => void;
 }
@@ -33,7 +34,12 @@ export default function ActionButtons(props: IProps) {
         </Button>
       </Grid>
       <Grid item>
-        <Button fullWidth variant="contained" color="primary">
+        <Button
+          fullWidth
+          variant="contained"
+          color="primary"
+          onClick={props.onOpenExchange}
+        >
           Exchange
         </Button>
       </Grid>
