@@ -1,5 +1,4 @@
 import { IUser } from "./../interfaces/login/IUser";
-import { apiHeader } from "../_helpers/api-header";
 import { IUserForRegisterDto } from "../interfaces/register/IUserForRegisterDto";
 import { _post } from "../utils/ApiRequest";
 

@@ -7,7 +7,7 @@ import TableCell from "@material-ui/core/TableCell";
 import { IHistoryAccounts } from "../interfaces/IHistoryAccounts";
 import { IAccountToDisplay } from "../interfaces/Datatable/IAccountToDisplay";
 import { Currency } from "../enums/Currency";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, Button } from "@material-ui/core";
 const format = require("date-format");
 
 const useStyles = makeStyles((theme) => ({
@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
 interface IProps {
   dispatch: any;
   history: IHistoryAccounts[];
+  onOpenSaveDialog: () => void;
 }
 
 export default function HistoryDataTable(props: IProps) {
@@ -56,6 +57,17 @@ export default function HistoryDataTable(props: IProps) {
     print: false,
     download: false,
     search: false,
+    customToolbar: () => {
+      return (
+        <Button
+          color="primary"
+          variant="contained"
+          onClick={props.onOpenSaveDialog}
+        >
+          Save as PDF
+        </Button>
+      );
+    },
     renderExpandableRow: (rowData, rowMeta) => {
       const colSpan = rowData.length + 1;
       const account = props.history.find((a) => a.id === parseInt(rowData[0]));

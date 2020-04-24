@@ -17,6 +17,7 @@
     "axios": "^0.19.2",
     "date-format": "^3.0.0",
     "history": "^4.10.1",
+    "js-file-download": "^0.4.11",
     "material-ui-confirm": "^2.0.4",
     "mui-datatables": "^2.14.0",
     "react": "^16.13.1",

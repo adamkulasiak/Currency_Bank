@@ -7,6 +7,7 @@ import { State } from "../_reducers";
 import { loadingActions } from "../_actions/loading.actions";
 import { Container, Grid, makeStyles } from "@material-ui/core";
 import HistoryDataTable from "../components/HistoryDatatable";
+import PdfExport from "./PdfExport";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -30,6 +31,7 @@ function HistoryPage(props: IProps) {
   const [history, setHistory] = useState<IHistoryAccounts[] | undefined>(
     undefined
   );
+  const [saveAsPdfOpen, setSaveAsPdfOpen] = useState<boolean>(false);
 
   useEffect(() => {
     props.dispatch(loadingActions.enableLoading());
@@ -46,10 +48,19 @@ function HistoryPage(props: IProps) {
       <Grid container className={classes.container}>
         <Grid item className={classes.datatable}>
           {history !== undefined && (
-            <HistoryDataTable dispatch={props.dispatch} history={history} />
+            <HistoryDataTable
+              dispatch={props.dispatch}
+              history={history}
+              onOpenSaveDialog={() => setSaveAsPdfOpen(true)}
+            />
           )}
         </Grid>
       </Grid>
+      <PdfExport
+        dispatch={props.dispatch}
+        isOpen={saveAsPdfOpen}
+        onClose={() => setSaveAsPdfOpen(false)}
+      />
     </Container>
   );
 }
