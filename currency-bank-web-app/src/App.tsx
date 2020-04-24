@@ -4,13 +4,14 @@ import { history } from "./_helpers/history";
 import { connect } from "react-redux";
 import Login from "./views/Login";
 import MainBar from "./components/MainBar";
-import { PrivateRoute } from "./components/PrivateRoute";
+import { PrivateRouteFirst } from "./components/PrivateRouteFirst";
 import { State } from "./_reducers";
 import Snack from "./components/Snack";
 import Register from "./views/Register";
 import { IUser } from "./interfaces/login/IUser";
 import Backdrop from "@material-ui/core/Backdrop";
 import { makeStyles, CircularProgress } from "@material-ui/core";
+import { PrivateRouteSecond } from "./components/PrivateRouteSecond";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -35,7 +36,8 @@ function App(props: IProps) {
     <div className="App">
       <Router history={history}>
         <MainBar loggedIn={props.loggedIn} user={props.user} />
-        <PrivateRoute exact path="/" />
+        <PrivateRouteFirst exact path="/" />
+        <PrivateRouteSecond path="/history" />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
       </Router>

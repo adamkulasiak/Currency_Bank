@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Grid, Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 interface IProps {
   createAccountOpen: boolean;
@@ -61,6 +62,16 @@ export default function ActionButtons(props: IProps) {
           onClick={props.onOpenCashIn}
         >
           Deposit
+        </Button>
+      </Grid>
+      <Grid item>
+        <Button
+          fullWidth
+          variant="contained"
+          color="primary"
+          onClick={(e) => console.log("history")}
+        >
+          <Link to="/history">History</Link>
         </Button>
       </Grid>
     </Grid>

@@ -1,9 +1,11 @@
 import { IAccount } from "./../interfaces/IAccount";
 import { INewAccount } from "./../interfaces/NewAccount/INewAccount";
 import { _post, _get, _delete, _put } from "../utils/ApiRequest";
+import { IHistoryAccounts } from "../interfaces/IHistoryAccounts";
 
 export const accountService = {
   getAllAccountsForCurrentUser,
+  getHistoryForUserAccounts,
   openNew,
   deleteAccount,
   cashOut,
@@ -14,6 +16,12 @@ export const accountService = {
 
 function getAllAccountsForCurrentUser() {
   return _get<IAccount[]>(`account/getAccounts`).then((a) => {
+    return a;
+  });
+}
+
+function getHistoryForUserAccounts() {
+  return _get<IHistoryAccounts>(`account/getHistory`).then((a) => {
     return a;
   });
 }

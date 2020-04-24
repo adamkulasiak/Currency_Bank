@@ -12,7 +12,6 @@ import { connect } from "react-redux";
 import { IUser } from "../interfaces/login/IUser";
 import { authActions } from "../_actions/auth.actions";
 import UserPage from "../views/UserPage";
-import logo from "../assets/64.png";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
