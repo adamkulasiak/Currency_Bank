@@ -37,6 +37,7 @@ namespace CurrencyBank.API.Repositories
             user.LastName = userForUpdateDto.LastName;
             user.UserName = userForUpdateDto.UserName;
             user.Email = userForUpdateDto.Email;
+            user.PathToPdfFolder = userForUpdateDto.PathToPdfFolder;
             _context.Entry(user).State = EntityState.Modified;
 
             if (await base.SaveAll())

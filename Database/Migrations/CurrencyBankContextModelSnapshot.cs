@@ -125,6 +125,9 @@ namespace CurrencyBank.Database.Migrations
                     b.Property<byte[]>("PasswordSalt")
                         .HasColumnType("BLOB");
 
+                    b.Property<string>("PathToPdfFolder")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Pesel")
                         .HasColumnType("TEXT");
 

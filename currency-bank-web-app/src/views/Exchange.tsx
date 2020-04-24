@@ -35,6 +35,8 @@ export default function Exchange(props: IProps) {
       .finally(() => {
         props.dispatch(loadingActions.disableLoading());
         setAmmount(undefined);
+        setSourceAccountId(undefined);
+        setDestinationAccountId(undefined);
       });
   };
 

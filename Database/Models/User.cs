@@ -26,6 +26,7 @@ namespace CurrencyBank.Database.Models
         public bool IsDeleted { get; set; } = false;
         public Languages? Language { get; set; }
         public virtual ICollection<Account> Accounts { get; set; }
+        public string PathToPdfFolder { get; set; }
     }
 
     public enum Languages: byte

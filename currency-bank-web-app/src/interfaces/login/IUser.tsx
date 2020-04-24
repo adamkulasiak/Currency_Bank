@@ -10,4 +10,5 @@ export interface IUser {
   createdDate: Date;
   token: string;
   accounts: IAccount[];
+  pathToPdfFolder: string;
 }

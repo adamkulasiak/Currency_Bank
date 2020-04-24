@@ -5,10 +5,20 @@
     <StartupObject>CurrencyBank.API.Program</StartupObject>
     <RootNamespace>CurrencyBank.API</RootNamespace>
     <AssemblyName>CurrencyBank.API</AssemblyName>
+	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="libwkhtmltox.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="4.0.1" />
+    <PackageReference Include="DinkToPdf" Version="1.0.8" />
     <PackageReference Include="docfx.console" Version="2.48.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -32,5 +42,39 @@
     <ProjectReference Include="..\CurrencyBank.Commons\CurrencyBank.Commons.csproj" />
     <ProjectReference Include="..\Database\CurrencyBank.Database.csproj" />
   </ItemGroup>
+  
+  <ItemGroup>
+  <None Update="log4net.config">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+  </None>
+  <None Update="wkhtmltox\v0.12.4\32 bit\libwkhtmltox.dll">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+  </None>
+  <None Update="wkhtmltox\v0.12.4\32 bit\libwkhtmltox.dylib">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+  </None>
+  <None Update="wkhtmltox\v0.12.4\32 bit\libwkhtmltox.so">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+  <None Update="wkhtmltox\v0.12.4\64 bit\libwkhtmltox.dll">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+  </None>
+  <None Update="wkhtmltox\v0.12.4\64 bit\libwkhtmltox.dylib">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </None>
+  <None Update="wkhtmltox\v0.12.4\64 bit\libwkhtmltox.so">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </None>
+  <None Update="wwwroot\**\*">
+     <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </None>
+</ItemGroup>
 
 </Project>

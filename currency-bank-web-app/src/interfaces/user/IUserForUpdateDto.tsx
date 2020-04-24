@@ -4,4 +4,5 @@ export interface IUserForUpdateDto {
   LastName: string;
   UserName: string;
   Email: string;
+  PathToPdfFolder: string;
 }

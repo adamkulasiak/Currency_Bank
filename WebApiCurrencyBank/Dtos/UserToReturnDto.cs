@@ -18,5 +18,6 @@ namespace CurrencyBank.API.Dtos
         public string Token { get; set; }
         public Languages Language { get; set; }
         public ICollection<Account> Accounts { get; set; }
+        public string PathToPdfFolder { get; set; }
     }
 }

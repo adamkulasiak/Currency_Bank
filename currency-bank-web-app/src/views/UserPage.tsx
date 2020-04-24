@@ -8,6 +8,7 @@ import { userService } from "../_services/user.service";
 import { alertActions } from "../_actions/alert.actions";
 import { loadingActions } from "../_actions/loading.actions";
 import { DialogTitle, DialogContent, DialogActions } from "../components/Modal";
+import { authActions } from "../_actions/auth.actions";
 
 interface IProps {
   dispatch: any;
@@ -24,6 +25,7 @@ export default function UserPage(props: IProps) {
   const [lastname, setLastname] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [pesel, setPesel] = useState<string>("");
+  const [pathToPdfFolder, setPathToPdfFolder] = useState<string>("");
 
   useEffect(() => {
     if (user !== null) {
@@ -33,6 +35,7 @@ export default function UserPage(props: IProps) {
       setLastname(user.lastName);
       setEmail(user.email);
       setPesel(user.pesel);
+      setPathToPdfFolder(user.pathToPdfFolder);
     }
   }, [user]);
 
@@ -44,6 +47,7 @@ export default function UserPage(props: IProps) {
       FirstName: firstname,
       LastName: lastname,
       Email: email,
+      PathToPdfFolder: pathToPdfFolder,
     };
     userService
       .update(userForUpdate)
@@ -124,6 +128,18 @@ export default function UserPage(props: IProps) {
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="pathToPdfFolder"
+            label="Path to pdf folder"
+            type="text"
+            id="pathToPdfFolder"
+            value={pathToPdfFolder}
+            onChange={(e) => setPathToPdfFolder(e.target.value)}
           />
           <TextField
             disabled
