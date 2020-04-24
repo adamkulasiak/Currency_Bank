@@ -53,9 +53,10 @@ namespace CurrencyBank.API.Repositories
             {
                 var entry = new AccountHistoryDto
                 {
-                    AcoountId = account.Id,
+                    Id = account.Id,
                     AccountNumber = account.AccountNumber,
                     Balance = account.Balance,
+                    Currency = account.Currency,
                     History = await _context.AccountsHistory
                             .Where(a => a.AccountId == account.Id)
                             .Select(a => new AccountHistory

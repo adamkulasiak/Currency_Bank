@@ -21,7 +21,7 @@ function getAllAccountsForCurrentUser() {
 }
 
 function getHistoryForUserAccounts() {
-  return _get<IHistoryAccounts>(`account/getHistory`).then((a) => {
+  return _get<IHistoryAccounts[]>(`account/getHistory`).then((a) => {
     return a;
   });
 }

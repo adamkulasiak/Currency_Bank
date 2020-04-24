@@ -2,20 +2,20 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 import { IAccount } from "../interfaces/IAccount";
 import MUIDataTable, { MUIDataTableOptions } from "mui-datatables";
-import { IAccountToDisplay } from "../interfaces/Datatable/IAccountToDisplay";
 import { IColumn } from "../interfaces/Datatable/IColumn";
+import TableRow from "@material-ui/core/TableRow";
+import TableCell from "@material-ui/core/TableCell";
+import { IHistoryAccounts } from "../interfaces/IHistoryAccounts";
+import { IAccountToDisplay } from "../interfaces/Datatable/IAccountToDisplay";
 import { Currency } from "../enums/Currency";
-import { accountService } from "../_services/account.service";
-import { loadingActions } from "../_actions/loading.actions";
-import { alertActions } from "../_actions/alert.actions";
+const format = require("date-format");
 
 interface IProps {
   dispatch: any;
-  accounts: IAccount[];
-  onRefreshAccounts: () => void;
+  history: IHistoryAccounts[];
 }
 
-export default function DataTable(props: IProps) {
+export default function HistoryDataTable(props: IProps) {
   const [columns] = useState<IColumn[]>([
     { name: "id", label: "Id" },
     { name: "accountNumber", label: "Account number" },
@@ -23,9 +23,11 @@ export default function DataTable(props: IProps) {
     { name: "balance", label: "Balance" },
   ]);
 
+  useEffect(() => {}, [props.history]);
+
   const getData = () => {
     const accountsToDisplay: IAccountToDisplay[] = [];
-    props.accounts.map((a) => {
+    props.history.map((a) => {
       const accountToDisplay: IAccountToDisplay = {
         id: a.id,
         accountNumber: a.accountNumber,
@@ -38,34 +40,30 @@ export default function DataTable(props: IProps) {
   };
 
   const options: MUIDataTableOptions = {
-    filterType: "checkbox",
-    selectableRows: "single",
+    selectableRows: "none",
+    expandableRows: true,
+    onRowsExpand: (currentRowsExpanded: any, allRowsExpanded: any) => {},
+    renderExpandableRow: (rowData, rowMeta) => {
+      const colSpan = rowData.length + 1;
+      const account = props.history.find((a) => a.id === parseInt(rowData[0]));
+      return account?.history.map((h) => (
+        <TableRow>
+          <TableCell colSpan={colSpan}>{`Date: ${format.asString(
+            "dd-MM-yyyy hh:mm:ss",
+            new Date(h.timestamp)
+          )} diff: ${h.ammount} ${Currency[account.currency]}`}</TableCell>
+        </TableRow>
+      ));
+    },
     textLabels: {
       body: {
         noMatch: "You don't have any accounts",
       },
     },
-    onRowsDelete: (rowsDeleted: any): boolean => {
-      props.dispatch(loadingActions.enableLoading());
-      const index: number = rowsDeleted.data[0].index;
-      const accountToDelete = props.accounts[index];
-      accountService
-        .deleteAccount(accountToDelete.id)
-        .then((msg) => {
-          props.onRefreshAccounts();
-          props.dispatch(alertActions.success(msg));
-          return false;
-        })
-        .catch(() =>
-          props.dispatch(alertActions.error("Error during deleting account."))
-        )
-        .finally(() => props.dispatch(loadingActions.disableLoading()));
-      return false;
-    },
   };
   return (
     <MUIDataTable
-      title={"Your accounts"}
+      title={"History"}
       data={getData()}
       columns={columns}
       options={options}

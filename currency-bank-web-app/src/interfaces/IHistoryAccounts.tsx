@@ -1,8 +1,10 @@
 import { IHistory } from "./IHistory";
+import { Currency } from "../enums/Currency";
 
 export interface IHistoryAccounts {
-  accountId: number;
+  id: number;
   accountNumber: string;
   balance: number;
+  currency: Currency;
   history: IHistory[];
 }

@@ -5,6 +5,19 @@ import { accountService } from "../_services/account.service";
 import { connect } from "react-redux";
 import { State } from "../_reducers";
 import { loadingActions } from "../_actions/loading.actions";
+import { Container, Grid, makeStyles } from "@material-ui/core";
+import HistoryDataTable from "../components/HistoryDatatable";
+
+const useStyles = makeStyles((theme) => ({
+  container: {
+    marginTop: 30,
+    textAlign: "center",
+  },
+  datatable: {
+    margin: "auto",
+    width: "100%",
+  },
+}));
 
 export interface IProps {
   dispatch: any;
@@ -12,7 +25,9 @@ export interface IProps {
 }
 
 function HistoryPage(props: IProps) {
-  const [history, setHistory] = useState<IHistoryAccounts | undefined>(
+  const classes = useStyles();
+
+  const [history, setHistory] = useState<IHistoryAccounts[] | undefined>(
     undefined
   );
 
@@ -26,7 +41,17 @@ function HistoryPage(props: IProps) {
       .finally(() => props.dispatch(loadingActions.disableLoading()));
   }, []);
 
-  return <div>History</div>;
+  return (
+    <Container>
+      <Grid container className={classes.container}>
+        <Grid item className={classes.datatable}>
+          {history !== undefined && (
+            <HistoryDataTable dispatch={props.dispatch} history={history} />
+          )}
+        </Grid>
+      </Grid>
+    </Container>
+  );
 }
 
 function mapStateToProps(state: State) {
