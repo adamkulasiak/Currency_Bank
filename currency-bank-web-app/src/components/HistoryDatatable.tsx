@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { IAccount } from "../interfaces/IAccount";
 import MUIDataTable, { MUIDataTableOptions } from "mui-datatables";
 import { IColumn } from "../interfaces/Datatable/IColumn";
 import TableRow from "@material-ui/core/TableRow";
@@ -8,7 +7,17 @@ import TableCell from "@material-ui/core/TableCell";
 import { IHistoryAccounts } from "../interfaces/IHistoryAccounts";
 import { IAccountToDisplay } from "../interfaces/Datatable/IAccountToDisplay";
 import { Currency } from "../enums/Currency";
+import { makeStyles } from "@material-ui/core";
 const format = require("date-format");
+
+const useStyles = makeStyles((theme) => ({
+  tableCell: {
+    padding: 5,
+  },
+  cellValue: {
+    marginLeft: 50,
+  },
+}));
 
 interface IProps {
   dispatch: any;
@@ -16,6 +25,8 @@ interface IProps {
 }
 
 export default function HistoryDataTable(props: IProps) {
+  const classes = useStyles();
+
   const [columns] = useState<IColumn[]>([
     { name: "id", label: "Id" },
     { name: "accountNumber", label: "Account number" },
@@ -42,18 +53,34 @@ export default function HistoryDataTable(props: IProps) {
   const options: MUIDataTableOptions = {
     selectableRows: "none",
     expandableRows: true,
-    onRowsExpand: (currentRowsExpanded: any, allRowsExpanded: any) => {},
+    print: false,
+    download: false,
+    search: false,
     renderExpandableRow: (rowData, rowMeta) => {
       const colSpan = rowData.length + 1;
       const account = props.history.find((a) => a.id === parseInt(rowData[0]));
-      return account?.history.map((h) => (
-        <TableRow>
-          <TableCell colSpan={colSpan}>{`Date: ${format.asString(
-            "dd-MM-yyyy hh:mm:ss",
-            new Date(h.timestamp)
-          )} diff: ${h.ammount} ${Currency[account.currency]}`}</TableCell>
-        </TableRow>
-      ));
+      if (account?.history?.length > 0) {
+        return account?.history.map((h, index) => (
+          <TableRow key={index}>
+            <TableCell className={classes.tableCell} colSpan={colSpan}>
+              <span className={classes.cellValue}>
+                {`Date: ${format.asString(
+                  "dd-MM-yyyy hh:mm:ss",
+                  new Date(h.timestamp)
+                )} ammount: ${h.ammount} ${Currency[account.currency]}`}
+              </span>
+            </TableCell>
+          </TableRow>
+        ));
+      } else {
+        return (
+          <TableRow>
+            <TableCell className={classes.tableCell} colSpan={colSpan}>
+              No history avaliable for this account
+            </TableCell>
+          </TableRow>
+        );
+      }
     },
     textLabels: {
       body: {

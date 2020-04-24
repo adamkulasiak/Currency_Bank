@@ -1,7 +1,6 @@
 import * as React from "react";
 import {
   Container,
-  Avatar,
   Typography,
   CssBaseline,
   TextField,
@@ -9,12 +8,12 @@ import {
   Grid,
   makeStyles,
 } from "@material-ui/core";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { connect } from "react-redux";
 import { authActions } from "../_actions/auth.actions";
 import { IUserForRegisterDto } from "../interfaces/register/IUserForRegisterDto";
+import logo from "../../src/assets/128.png";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -75,9 +74,11 @@ function Register(props: IProps) {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
+        <Grid item xs={12}>
+          <div>
+            <img src={logo} alt="logo" width={128} />
+          </div>
+        </Grid>
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>

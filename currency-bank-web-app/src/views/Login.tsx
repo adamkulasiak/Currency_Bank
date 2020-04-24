@@ -1,21 +1,18 @@
 import * as React from "react";
 import {
   Container,
-  Avatar,
   Typography,
   CssBaseline,
   TextField,
   Button,
   Grid,
   makeStyles,
-  Backdrop,
-  CircularProgress,
 } from "@material-ui/core";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { connect } from "react-redux";
 import { authActions } from "../_actions/auth.actions";
+import logo from "../../src/assets/128.png";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -63,9 +60,11 @@ function Login(props: IProps) {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
+        <Grid item xs={12}>
+          <div>
+            <img src={logo} alt="logo" width={128} />
+          </div>
+        </Grid>
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
