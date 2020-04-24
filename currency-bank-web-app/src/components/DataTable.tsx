@@ -40,10 +40,14 @@ export default function DataTable(props: IProps) {
   const options: MUIDataTableOptions = {
     filterType: "checkbox",
     selectableRows: "single",
+    textLabels: {
+      body: {
+        noMatch: "You don't have any accounts",
+      },
+    },
     onRowsDelete: (rowsDeleted: any): boolean => {
       props.dispatch(loadingActions.enableLoading());
       const index: number = rowsDeleted.data[0].index;
-      console.log(index);
       const accountToDelete = props.accounts[index];
       accountService
         .deleteAccount(accountToDelete.id)

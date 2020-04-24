@@ -10,6 +10,7 @@ namespace CurrencyBank.API.Dtos
     {
         public int AcoountId { get; set; }
         public string AccountNumber { get; set; }
+        public decimal Balance { get; set; }
         public List<AccountHistory> History { get; set; }
     }
 }

@@ -55,6 +55,7 @@ namespace CurrencyBank.API.Repositories
                 {
                     AcoountId = account.Id,
                     AccountNumber = account.AccountNumber,
+                    Balance = account.Balance,
                     History = await _context.AccountsHistory
                             .Where(a => a.AccountId == account.Id)
                             .Select(a => new AccountHistory

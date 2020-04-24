@@ -8,7 +8,7 @@ import { loadingActions } from "../_actions/loading.actions";
 import { accountService } from "../_services/account.service";
 import { alertActions } from "../_actions/alert.actions";
 import { DialogTitle, DialogContent, DialogActions } from "../components/Modal";
-import { createAccountsDropdown } from "../utils/Accounts";
+import { createAccountsDropdown, getOption } from "../utils/Accounts";
 
 interface IProps {
   dispatch: any;
@@ -23,7 +23,7 @@ export default function Transfer(props: IProps) {
   const [destinationAccountNumber, setDestinationAccountNumber] = useState<
     string
   >("");
-  const [ammount, setAmmount] = useState<number>(0);
+  const [ammount, setAmmount] = useState<number>();
 
   const handleTransfer = () => {
     props.dispatch(loadingActions.enableLoading());
@@ -36,7 +36,8 @@ export default function Transfer(props: IProps) {
       })
       .finally(() => {
         props.dispatch(loadingActions.disableLoading());
-        setAmmount(0);
+        setSourceAccountId(undefined);
+        setAmmount(undefined);
         setDestinationAccountNumber("");
       });
   };
@@ -56,7 +57,8 @@ export default function Transfer(props: IProps) {
             id="accounts-dropdown"
             options={createAccountsDropdown(props.accounts)}
             getOptionLabel={(option) => option.label}
-            onChange={(e: any, v: any) => setSourceAccountId(v.value)}
+            onChange={(e: any, v: any) => setSourceAccountId(v?.value)}
+            value={getOption(sourceAccountId ?? 0, props.accounts)}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -74,7 +76,7 @@ export default function Transfer(props: IProps) {
             label="Destination account number"
             type="text"
             id="destination-account"
-            value={destinationAccountNumber}
+            value={destinationAccountNumber || ""}
             onChange={(e) => setDestinationAccountNumber(e.target.value)}
           />
           <TextField
@@ -86,12 +88,22 @@ export default function Transfer(props: IProps) {
             label="Ammount"
             type="number"
             id="ammount"
-            value={ammount}
+            value={ammount || undefined}
             onChange={(e) => setAmmount(parseFloat(e.target.value))}
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => handleTransfer()} color="primary">
+          <Button
+            onClick={() => handleTransfer()}
+            color="primary"
+            disabled={
+              sourceAccountId === undefined ||
+              sourceAccountId === null ||
+              destinationAccountNumber.length === 0 ||
+              ammount === undefined ||
+              isNaN(ammount)
+            }
+          >
             Transfer
           </Button>
         </DialogActions>

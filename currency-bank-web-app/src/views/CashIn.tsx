@@ -8,7 +8,7 @@ import { loadingActions } from "../_actions/loading.actions";
 import { accountService } from "../_services/account.service";
 import { alertActions } from "../_actions/alert.actions";
 import { DialogTitle, DialogContent, DialogActions } from "../components/Modal";
-import { createAccountsDropdown } from "../utils/Accounts";
+import { createAccountsDropdown, getOption } from "../utils/Accounts";
 
 interface IProps {
   dispatch: any;
@@ -20,7 +20,7 @@ interface IProps {
 
 export default function CashIn(props: IProps) {
   const [selectedAccountId, setSelectedAccountId] = useState<number>();
-  const [ammount, setAmmount] = useState<number>(0);
+  const [ammount, setAmmount] = useState<number>();
 
   const handleCashIn = () => {
     props.dispatch(loadingActions.enableLoading());
@@ -33,7 +33,8 @@ export default function CashIn(props: IProps) {
       })
       .finally(() => {
         props.dispatch(loadingActions.disableLoading());
-        setAmmount(0);
+        setSelectedAccountId(undefined);
+        setAmmount(undefined);
       });
   };
 
@@ -53,6 +54,7 @@ export default function CashIn(props: IProps) {
             options={createAccountsDropdown(props.accounts)}
             getOptionLabel={(option) => option.label}
             onChange={(e: any, v: any) => setSelectedAccountId(v.value)}
+            value={getOption(selectedAccountId ?? 0, props.accounts)}
             renderInput={(params) => (
               <TextField {...params} label="Accounts" variant="outlined" />
             )}
@@ -66,12 +68,21 @@ export default function CashIn(props: IProps) {
             label="Ammount"
             type="number"
             id="ammount"
-            value={ammount}
+            value={ammount || undefined}
             onChange={(e) => setAmmount(parseFloat(e.target.value))}
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => handleCashIn()} color="primary">
+          <Button
+            onClick={() => handleCashIn()}
+            color="primary"
+            disabled={
+              selectedAccountId === undefined ||
+              ammount === undefined ||
+              isNaN(ammount) ||
+              ammount <= 0
+            }
+          >
             Proceed
           </Button>
         </DialogActions>

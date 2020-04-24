@@ -60,7 +60,10 @@ export default function CreateAccount(props: IProps) {
         props.onRefreshAccounts();
         props.onClose();
       })
-      .finally(() => props.dispatch(loadingActions.disableLoading()));
+      .finally(() => {
+        props.dispatch(loadingActions.disableLoading());
+        setSelectedCurrency(undefined);
+      });
   };
 
   useEffect(() => {
@@ -83,13 +86,20 @@ export default function CreateAccount(props: IProps) {
             options={getAllCurrencies()}
             getOptionLabel={(option) => option.label}
             onChange={(e: any, v: any) => setSelectedCurrency(v)}
+            value={selectedCurrency}
             renderInput={(params) => (
               <TextField {...params} label="Currencies" variant="outlined" />
             )}
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleOpenAccount} color="primary">
+          <Button
+            onClick={handleOpenAccount}
+            color="primary"
+            disabled={
+              selectedCurrency === undefined || selectedCurrency === null
+            }
+          >
             Open account
           </Button>
         </DialogActions>
