@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CurrencyBank.Database.Migrations
 {
     [DbContext(typeof(CurrencyBankContext))]
-    [Migration("20191127140911_Rates")]
-    partial class Rates
+    [Migration("20200424062307_AccountHistory")]
+    partial class AccountHistory
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,7 +30,7 @@ namespace CurrencyBank.Database.Migrations
                     b.Property<decimal>("Balance")
                         .HasColumnType("TEXT");
 
-                    b.Property<byte>("Currency")
+                    b.Property<int>("Currency")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("DeleteTime")
@@ -49,6 +49,28 @@ namespace CurrencyBank.Database.Migrations
                     b.ToTable("Accounts");
                 });
 
+            modelBuilder.Entity("CurrencyBank.Database.Models.AccountHistory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AccountId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("Ammount")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountId");
+
+                    b.ToTable("AccountsHistory");
+                });
+
             modelBuilder.Entity("CurrencyBank.Database.Models.ExchangeRates", b =>
                 {
                     b.Property<int>("Id")
@@ -58,13 +80,13 @@ namespace CurrencyBank.Database.Migrations
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("TEXT");
 
-                    b.Property<byte>("From")
+                    b.Property<int>("From")
                         .HasColumnType("INTEGER");
 
                     b.Property<decimal>("Rate")
                         .HasColumnType("TEXT");
 
-                    b.Property<byte>("To")
+                    b.Property<int>("To")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -91,6 +113,9 @@ namespace CurrencyBank.Database.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<byte?>("Language")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("LastName")
@@ -127,6 +152,15 @@ namespace CurrencyBank.Database.Migrations
                     b.HasOne("CurrencyBank.Database.Models.User", null)
                         .WithMany("Accounts")
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CurrencyBank.Database.Models.AccountHistory", b =>
+                {
+                    b.HasOne("CurrencyBank.Database.Models.Account", "Account")
+                        .WithMany()
+                        .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -1,4 +1,5 @@
-﻿using CurrencyBank.Database.Models;
+﻿using CurrencyBank.API.Dtos;
+using CurrencyBank.Database.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace CurrencyBank.API.Interfaces
     public interface IAccountRepository
     {
         Task<List<Account>> GetAccountForUser(int userId);
+        Task<List<AccountHistoryDto>> GetAccountsHistoryForUser(int userId);
         Task<Account> Create(int userId, Currency currency);
         Task<Account> CashIn(int userId, int accountId, decimal ammount);
         Task<Account> CashOut(int userId, int accountId, decimal ammount);

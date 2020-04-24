@@ -20,5 +20,6 @@ namespace CurrencyBank.Database.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Account> Accounts { get; set; }
         public DbSet<ExchangeRates> ExchangeRates { get; set; }
+        public DbSet<AccountHistory> AccountsHistory { get; set; }
     }
 }

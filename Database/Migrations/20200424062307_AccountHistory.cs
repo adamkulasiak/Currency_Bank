@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CurrencyBank.Database.Migrations
 {
-    public partial class Rates : Migration
+    public partial class AccountHistory : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,8 +14,8 @@ namespace CurrencyBank.Database.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     DateTime = table.Column<DateTime>(nullable: false),
-                    From = table.Column<byte>(nullable: false),
-                    To = table.Column<byte>(nullable: false),
+                    From = table.Column<int>(nullable: false),
+                    To = table.Column<int>(nullable: false),
                     Rate = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
@@ -38,7 +38,8 @@ namespace CurrencyBank.Database.Migrations
                     PasswordSalt = table.Column<byte[]>(nullable: true),
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     DeletedTime = table.Column<DateTime>(nullable: true),
-                    IsDeleted = table.Column<bool>(nullable: false)
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    Language = table.Column<byte>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -52,7 +53,7 @@ namespace CurrencyBank.Database.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     AccountNumber = table.Column<string>(nullable: true),
-                    Currency = table.Column<byte>(nullable: false),
+                    Currency = table.Column<int>(nullable: false),
                     Balance = table.Column<decimal>(nullable: false),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeleteTime = table.Column<DateTime>(nullable: false),
@@ -69,10 +70,36 @@ namespace CurrencyBank.Database.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "AccountsHistory",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Timestamp = table.Column<DateTime>(nullable: false),
+                    AccountId = table.Column<int>(nullable: false),
+                    Ammount = table.Column<decimal>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AccountsHistory", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AccountsHistory_Accounts_AccountId",
+                        column: x => x.AccountId,
+                        principalTable: "Accounts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Accounts_UserId",
                 table: "Accounts",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AccountsHistory_AccountId",
+                table: "AccountsHistory",
+                column: "AccountId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_Email",
@@ -96,10 +123,13 @@ namespace CurrencyBank.Database.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Accounts");
+                name: "AccountsHistory");
 
             migrationBuilder.DropTable(
                 name: "ExchangeRates");
+
+            migrationBuilder.DropTable(
+                name: "Accounts");
 
             migrationBuilder.DropTable(
                 name: "Users");

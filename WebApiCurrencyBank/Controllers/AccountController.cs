@@ -44,6 +44,16 @@ namespace CurrencyBank.API.Controllers
             return Ok(accounts);
         }
 
+        [HttpGet("getHistory")]
+        public async Task<IActionResult> GetHistory()
+        {
+            var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var history = await _accountRepo.GetAccountsHistoryForUser(currentUserId);
+            if (history is null)
+                return NotFound();
+            return Ok(history);
+        }
+
         /// <summary>
         /// Akcja do dodawania konta dla uzytkownika ktory wywola ta metode
         /// </summary>

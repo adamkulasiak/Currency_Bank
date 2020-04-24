@@ -9,20 +9,25 @@ using CurrencyBank.Database.Models;
 using Microsoft.EntityFrameworkCore;
 using CurrencyBank.API.Interfaces;
 using CurrencyBank.API.Helpers.Exceptions;
+using CurrencyBank.API.Helpers;
+using Z.EntityFramework.Plus;
+using CurrencyBank.API.Dtos;
 
 namespace CurrencyBank.API.Repositories
 {
     /// <summary>
     /// Repozytorium do zarzadzania operacjami na koncie
     /// </summary>
-    public class AccountRepository : IAccountRepository
+    public class AccountRepository : GenericRepository, IAccountRepository
     {
         private readonly CurrencyBankContext _context;
         private readonly IExchangeRate _exchangeRateRepo;
-        public AccountRepository(CurrencyBankContext context, IExchangeRate rate)
+        private readonly HistoryHelper _historyHelper;
+        public AccountRepository(CurrencyBankContext context, IExchangeRate rate): base(context)
         {
             _context = context;
             _exchangeRateRepo = rate;
+            _historyHelper = new HistoryHelper();
         }
         #region public methods
         /// <summary>
@@ -38,6 +43,32 @@ namespace CurrencyBank.API.Repositories
                 return null;
 
             return accounts;
+        }
+
+        public async Task<List<AccountHistoryDto>> GetAccountsHistoryForUser(int userId)
+        {
+            var accounts = await GetAccountForUser(userId);
+            var history = new List<AccountHistoryDto>();
+            foreach (var account in accounts)
+            {
+                var entry = new AccountHistoryDto
+                {
+                    AcoountId = account.Id,
+                    AccountNumber = account.AccountNumber,
+                    History = await _context.AccountsHistory
+                            .Where(a => a.AccountId == account.Id)
+                            .Select(a => new AccountHistory
+                            {
+                                Id = a.Id,
+                                AccountId = a.AccountId,
+                                Timestamp = a.Timestamp,
+                                Ammount = a.Ammount
+                            })
+                            .ToListAsync()
+                };
+                history.Add(entry);
+            }
+            return history;
         }
 
         /// <summary>
@@ -87,9 +118,11 @@ namespace CurrencyBank.API.Repositories
                 return null;
 
             account.Balance += ammount;
+            var history = _historyHelper.Log(account, ammount);
+            Add(history);
             try
             {
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(); 
             }
             catch (DbUpdateException) { return null; }
 
@@ -111,6 +144,8 @@ namespace CurrencyBank.API.Repositories
             if (account.Balance < ammount)
                 throw new BalanceException("You don't have enough money");
             account.Balance -= ammount;
+            var history = _historyHelper.Log(account, -ammount);
+            Add(history);
             try
             {
                 await _context.SaveChangesAsync();
@@ -171,6 +206,14 @@ namespace CurrencyBank.API.Repositories
                 var ammountToAdd = decimal.Round(ammount * rate, 2);
                 var destinationAccountAfter = await CashIn(userId, destinationAccountId, ammountToAdd);
 
+                var history = _historyHelper.Log(sourceAccount, -ammount);
+                var history2 = _historyHelper.Log(destinationAccount, ammountToAdd);
+
+                try
+                {
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateException) { return null; }
                 return new List<Account>
                 {
                     sourceAccountAfter,
@@ -206,6 +249,10 @@ namespace CurrencyBank.API.Repositories
                     ammountToAdd = decimal.Round(ammount * rate, 2);
                 }
                 destinationAccount.Balance += ammountToAdd;
+                var history = _historyHelper.Log(sourceAccount, -ammount);
+                var history2 = _historyHelper.Log(destinationAccount, ammountToAdd);
+                Add(history);
+                Add(history2);
                 try
                 {
                     await _context.SaveChangesAsync();
