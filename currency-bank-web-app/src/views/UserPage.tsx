@@ -40,7 +40,6 @@ export default function UserPage(props: IProps) {
   }, [user]);
 
   const handleUpdateUser = () => {
-    props.dispatch(loadingActions.enableLoading());
     const userForUpdate: IUserForUpdateDto = {
       Id: userId ?? 0,
       UserName: username,
@@ -49,13 +48,7 @@ export default function UserPage(props: IProps) {
       Email: email,
       PathToPdfFolder: pathToPdfFolder,
     };
-    userService
-      .update(userForUpdate)
-      .then(() => {
-        props.dispatch(alertActions.success("Changes successfull!"));
-        props.onClose();
-      })
-      .finally(() => props.dispatch(loadingActions.disableLoading()));
+    props.dispatch(authActions.update(userForUpdate));
   };
 
   return (

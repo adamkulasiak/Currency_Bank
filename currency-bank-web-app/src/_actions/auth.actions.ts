@@ -5,11 +5,14 @@ import { alertActions } from "./alert.actions";
 import { authConstants } from "../_constants/auth.constants";
 import { IUserForRegisterDto } from "../interfaces/register/IUserForRegisterDto";
 import { loadingActions } from "./loading.actions";
+import { IUserForUpdateDto } from "../interfaces/user/IUserForUpdateDto";
+import { userService } from "../_services/user.service";
 
 export const authActions = {
   login,
   register,
   logout,
+  update,
 };
 
 function login(username: string, password: string) {
@@ -83,5 +86,25 @@ function logout() {
 
   function handleLogout() {
     return { type: authConstants.LOGOUT };
+  }
+}
+
+function update(userForUpdate: IUserForUpdateDto) {
+  return (dispatch: any) => {
+    dispatch(loadingActions.enableLoading());
+    userService
+      .update(userForUpdate)
+      .then((user) => {
+        dispatch(handleUpdate(user));
+        dispatch(alertActions.success("Changes successfull!"));
+      })
+      .catch((err) => {
+        dispatch(alertActions.success("Error ocurred!"));
+      });
+    dispatch(loadingActions.disableLoading());
+  };
+
+  function handleUpdate(user: IUser) {
+    return { type: authConstants.UPDATE_SUCCESS, user };
   }
 }
