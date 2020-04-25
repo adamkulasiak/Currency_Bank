@@ -21,22 +21,29 @@ interface IProps {
 export default function Exchange(props: IProps) {
   const [sourceAccountId, setSourceAccountId] = useState<number>();
   const [destinationAccountId, setDestinationAccountId] = useState<number>();
-  const [ammount, setAmmount] = useState<number>();
+  const [ammount, setAmmount] = useState<string>("");
 
   const handleTransfer = () => {
     props.dispatch(loadingActions.enableLoading());
     accountService
-      .exchange(sourceAccountId ?? 0, destinationAccountId ?? 0, ammount ?? 0)
+      .exchange(
+        sourceAccountId ?? 0,
+        destinationAccountId ?? 0,
+        parseFloat(ammount) ?? 0
+      )
       .then(() => {
         props.dispatch(alertActions.success("Exchange succeeded!"));
         props.onRefreshAccounts();
         props.onClose();
+        setAmmount("");
+        setSourceAccountId(undefined);
+        setDestinationAccountId(undefined);
+      })
+      .catch((err) => {
+        props.dispatch(alertActions.error(err.response.data));
       })
       .finally(() => {
         props.dispatch(loadingActions.disableLoading());
-        setAmmount(undefined);
-        setSourceAccountId(undefined);
-        setDestinationAccountId(undefined);
       });
   };
 
@@ -52,7 +59,6 @@ export default function Exchange(props: IProps) {
         </DialogTitle>
         <DialogContent dividers>
           <Autocomplete
-            id="accounts-dropdown"
             style={{ marginBottom: 12 }}
             options={createCustomAccountsDropdown(
               props.accounts,
@@ -72,7 +78,6 @@ export default function Exchange(props: IProps) {
             )}
           />
           <Autocomplete
-            id="accounts-dropdown"
             options={createCustomAccountsDropdown(
               props.accounts,
               sourceAccountId
@@ -99,8 +104,8 @@ export default function Exchange(props: IProps) {
             label="Ammount"
             type="number"
             id="ammount"
-            value={ammount || undefined}
-            onChange={(e) => setAmmount(parseFloat(e.target.value))}
+            value={ammount}
+            onChange={(e) => setAmmount(e.target.value)}
           />
         </DialogContent>
         <DialogActions>
@@ -110,9 +115,8 @@ export default function Exchange(props: IProps) {
             disabled={
               sourceAccountId === undefined ||
               destinationAccountId === undefined ||
-              ammount === undefined ||
-              isNaN(ammount) ||
-              ammount <= 0
+              ammount === "" ||
+              parseFloat(ammount) <= 0
             }
           >
             Transfer

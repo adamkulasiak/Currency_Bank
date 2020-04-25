@@ -20,12 +20,12 @@ interface IProps {
 
 export default function CashIn(props: IProps) {
   const [selectedAccountId, setSelectedAccountId] = useState<number>();
-  const [ammount, setAmmount] = useState<number>();
+  const [ammount, setAmmount] = useState<string>("");
 
   const handleCashIn = () => {
     props.dispatch(loadingActions.enableLoading());
     accountService
-      .cashIn(selectedAccountId ?? 0, ammount ?? 0)
+      .cashIn(selectedAccountId ?? 0, parseFloat(ammount) ?? 0)
       .then(() => {
         props.dispatch(alertActions.success("Cashin succeeded!"));
         props.onRefreshAccounts();
@@ -34,7 +34,7 @@ export default function CashIn(props: IProps) {
       .finally(() => {
         props.dispatch(loadingActions.disableLoading());
         setSelectedAccountId(undefined);
-        setAmmount(undefined);
+        setAmmount("");
       });
   };
 
@@ -53,7 +53,7 @@ export default function CashIn(props: IProps) {
             id="accounts-dropdown"
             options={createAccountsDropdown(props.accounts)}
             getOptionLabel={(option) => option.label}
-            onChange={(e: any, v: any) => setSelectedAccountId(v.value)}
+            onChange={(e: any, v: any) => setSelectedAccountId(v?.value)}
             value={getOption(selectedAccountId ?? 0, props.accounts)}
             renderInput={(params) => (
               <TextField {...params} label="Accounts" variant="outlined" />
@@ -68,8 +68,8 @@ export default function CashIn(props: IProps) {
             label="Ammount"
             type="number"
             id="ammount"
-            value={ammount || undefined}
-            onChange={(e) => setAmmount(parseFloat(e.target.value))}
+            value={ammount}
+            onChange={(e) => setAmmount(e.target.value)}
           />
         </DialogContent>
         <DialogActions>
@@ -78,9 +78,8 @@ export default function CashIn(props: IProps) {
             color="primary"
             disabled={
               selectedAccountId === undefined ||
-              ammount === undefined ||
-              isNaN(ammount) ||
-              ammount <= 0
+              ammount === "" ||
+              parseFloat(ammount) <= 0
             }
           >
             Proceed

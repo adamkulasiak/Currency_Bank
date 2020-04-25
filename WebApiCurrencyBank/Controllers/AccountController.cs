@@ -124,13 +124,20 @@ namespace CurrencyBank.API.Controllers
         [HttpPut("exchange")]
         public async Task<IActionResult> Exchange([FromQuery]int sourceAccountId, int destinationAccountId, decimal ammount)
         {
-            var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            var accounts = await _accountRepo.ExchangeMoney(currentUserId, sourceAccountId, destinationAccountId, ammount);
+            try
+            {
+                var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                var accounts = await _accountRepo.ExchangeMoney(currentUserId, sourceAccountId, destinationAccountId, ammount);
 
-            if (accounts is null)
-                return BadRequest();
+                if (accounts is null)
+                    return BadRequest();
 
-            return Ok(accounts);
+                return Ok(accounts);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         /// <summary>
@@ -153,11 +160,11 @@ namespace CurrencyBank.API.Controllers
 
                 return Ok(accounts);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return BadRequest("Try again");
+                return BadRequest(e.Message);
             }
-            
+
         }
 
         /// <summary>

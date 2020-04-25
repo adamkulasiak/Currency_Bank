@@ -57,7 +57,7 @@ namespace CurrencyBank.API.Controllers
             {
                 PagesCount = true,
                 HtmlContent = PdfUtility.GetHTMLStringAllAccountsForUser(accountsForUser),
-                WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "styles.css") },
+                WebSettings = { DefaultEncoding = "UTF-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "styles.css") },
                 HeaderSettings = { FontName = "Arial", FontSize = 9, Right = "Page [page] of [toPage]", Line = true, Center = $"Generate date: {DateTime.Now}" },
                 FooterSettings = { FontName = "Arial", FontSize = 9, Line = true, Center = "Report Footer" }
             };

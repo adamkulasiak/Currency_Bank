@@ -20,21 +20,24 @@ interface IProps {
 
 export default function CashOut(props: IProps) {
   const [selectedAccountId, setSelectedAccountId] = useState<number>();
-  const [ammount, setAmmount] = useState<number>();
+  const [ammount, setAmmount] = useState<string>("");
 
   const handleCashOut = () => {
     props.dispatch(loadingActions.enableLoading());
     accountService
-      .cashOut(selectedAccountId ?? 0, ammount ?? 0)
+      .cashOut(selectedAccountId ?? 0, parseFloat(ammount) ?? 0)
       .then(() => {
         props.dispatch(alertActions.success("Cashout succeeded!"));
         props.onRefreshAccounts();
         props.onClose();
+        setSelectedAccountId(undefined);
+        setAmmount("");
+      })
+      .catch((err) => {
+        props.dispatch(alertActions.error(err.response.data));
       })
       .finally(() => {
         props.dispatch(loadingActions.disableLoading());
-        setSelectedAccountId(undefined);
-        setAmmount(undefined);
       });
   };
 
@@ -67,8 +70,8 @@ export default function CashOut(props: IProps) {
             label="Ammount"
             type="number"
             id="ammount"
-            value={ammount || undefined}
-            onChange={(e) => setAmmount(parseFloat(e.target.value))}
+            value={ammount}
+            onChange={(e) => setAmmount(e.target.value)}
           />
         </DialogContent>
         <DialogActions>
@@ -77,9 +80,8 @@ export default function CashOut(props: IProps) {
             color="primary"
             disabled={
               selectedAccountId === undefined ||
-              ammount === undefined ||
-              isNaN(ammount) ||
-              ammount <= 0
+              ammount === "" ||
+              parseFloat(ammount) <= 0
             }
           >
             Proceed

@@ -238,6 +238,9 @@ namespace CurrencyBank.API.Repositories
             var sourceAccount = await _context.Accounts.FirstOrDefaultAsync(x => x.Id == principalAccountId);
             var destinationAccount = await _context.Accounts.FirstOrDefaultAsync(x => x.AccountNumber == destinationAccountNumber);
 
+            if (destinationAccount == null)
+                throw new ArgumentException("Destination account number does not exist.");
+
             if (sourceAccount.Id == destinationAccount.Id) return null;
             if (sourceAccount.UserId != principalId) return null;
 

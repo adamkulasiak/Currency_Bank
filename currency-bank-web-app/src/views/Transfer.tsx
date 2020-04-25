@@ -23,22 +23,29 @@ export default function Transfer(props: IProps) {
   const [destinationAccountNumber, setDestinationAccountNumber] = useState<
     string
   >("");
-  const [ammount, setAmmount] = useState<number>();
+  const [ammount, setAmmount] = useState<string>("");
 
   const handleTransfer = () => {
     props.dispatch(loadingActions.enableLoading());
     accountService
-      .transfer(sourceAccountId ?? 0, destinationAccountNumber, ammount ?? 0)
+      .transfer(
+        sourceAccountId ?? 0,
+        destinationAccountNumber,
+        parseFloat(ammount) ?? 0
+      )
       .then(() => {
         props.dispatch(alertActions.success("Transfer succeeded!"));
         props.onRefreshAccounts();
         props.onClose();
+        setSourceAccountId(undefined);
+        setAmmount("");
+        setDestinationAccountNumber("");
+      })
+      .catch((err) => {
+        props.dispatch(alertActions.error(err.response.data));
       })
       .finally(() => {
         props.dispatch(loadingActions.disableLoading());
-        setSourceAccountId(undefined);
-        setAmmount(undefined);
-        setDestinationAccountNumber("");
       });
   };
 
@@ -88,8 +95,8 @@ export default function Transfer(props: IProps) {
             label="Ammount"
             type="number"
             id="ammount"
-            value={ammount || undefined}
-            onChange={(e) => setAmmount(parseFloat(e.target.value))}
+            value={ammount}
+            onChange={(e) => setAmmount(e.target.value)}
           />
         </DialogContent>
         <DialogActions>
@@ -100,8 +107,8 @@ export default function Transfer(props: IProps) {
               sourceAccountId === undefined ||
               sourceAccountId === null ||
               destinationAccountNumber.length === 0 ||
-              ammount === undefined ||
-              isNaN(ammount)
+              ammount === "" ||
+              parseFloat(ammount) <= 0
             }
           >
             Transfer

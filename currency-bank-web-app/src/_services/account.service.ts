@@ -15,45 +15,31 @@ export const accountService = {
 };
 
 function getAllAccountsForCurrentUser() {
-  return _get<IAccount[]>(`account/getAccounts`).then((a) => {
-    return a;
-  });
+  return _get<IAccount[]>(`account/getAccounts`);
 }
 
 function getHistoryForUserAccounts() {
-  return _get<IHistoryAccounts[]>(`account/getHistory`).then((a) => {
-    return a;
-  });
+  return _get<IHistoryAccounts[]>(`account/getHistory`);
 }
 
 function openNew(newAccount: INewAccount) {
-  return _post<IAccount>(`account/create`, newAccount).then((account) => {
-    return account;
-  });
+  return _post<IAccount>(`account/create`, newAccount);
 }
 
 function deleteAccount(accountId: number) {
-  return _delete<string>(`account/deleteAccount?accountId=${accountId}`).then(
-    (message) => {
-      return message;
-    }
-  );
+  return _delete<string>(`account/deleteAccount?accountId=${accountId}`);
 }
 
 function cashOut(accountId: number, ammount: number) {
   return _put<IAccount>(
     `account/cashout?accountId=${accountId}&ammount=${ammount}`
-  ).then((account) => {
-    return account;
-  });
+  );
 }
 
 function cashIn(accountId: number, ammount: number) {
   return _put<IAccount>(
     `account/cashIn?accountId=${accountId}&ammount=${ammount}`
-  ).then((account) => {
-    return account;
-  });
+  );
 }
 
 function transfer(
@@ -63,9 +49,7 @@ function transfer(
 ) {
   return _post<IAccount[]>(
     `account/transferMoney?principalAccountId=${accountId}&destinationAccountNumber=${destAccountNumber}&ammount=${ammount}`
-  ).then((accounts) => {
-    return accounts;
-  });
+  );
 }
 
 function exchange(
@@ -75,7 +59,5 @@ function exchange(
 ) {
   return _put<IAccount[]>(
     `account/exchange?sourceAccountId=${srcAccountId}&destinationAccountId=${destAccountId}&ammount=${ammount}`
-  ).then((accounts) => {
-    return accounts;
-  });
+  );
 }

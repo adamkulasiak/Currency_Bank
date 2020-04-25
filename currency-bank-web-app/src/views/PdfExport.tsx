@@ -6,6 +6,7 @@ import { alertActions } from "../_actions/alert.actions";
 import { DialogTitle, DialogContent, DialogActions } from "../components/Modal";
 import { pdfService } from "../_services/pdf.service";
 import { IPdfParameters } from "../interfaces/Pdf/IPdfParameters";
+import { loadingActions } from "../_actions/loading.actions";
 
 interface IProps {
   dispatch: any;
@@ -15,9 +16,10 @@ interface IProps {
 
 export default function PdfExport(props: IProps) {
   const [filename, setFilename] = useState<string>("");
-  const [saveToDefinedPath, setSaveToDefinedPath] = useState<boolean>(false);
+  const [saveToDefinedPath, setSaveToDefinedPath] = useState<boolean>(true);
 
   const handleSave = () => {
+    props.dispatch(loadingActions.enableLoading());
     const obj: IPdfParameters = {
       Filename: filename,
       SaveToDefinedPath: saveToDefinedPath,
@@ -25,11 +27,15 @@ export default function PdfExport(props: IProps) {
 
     pdfService
       .getAll(obj)
-      .then((msg) => {
+      .then((msg: string) => {
         props.dispatch(alertActions.success(msg));
+      })
+      .catch((err) => {
+        props.dispatch(alertActions.error("Error during printing PDF"));
       })
       .finally(() => {
         props.onClose();
+        props.dispatch(loadingActions.disableLoading());
       });
   };
   return (
@@ -58,6 +64,7 @@ export default function PdfExport(props: IProps) {
             control={
               <Switch
                 checked={saveToDefinedPath}
+                disabled
                 onChange={(e) => setSaveToDefinedPath(e.target.checked)}
                 name="saveToDefinedPath"
                 color="primary"
