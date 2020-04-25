@@ -14,6 +14,8 @@ import { connect } from "react-redux";
 import { authActions } from "../_actions/auth.actions";
 import { IUserForRegisterDto } from "../interfaces/register/IUserForRegisterDto";
 import logo from "../../src/assets/128.png";
+import validateEmail from "../utils/EmailValidator";
+import validatePesel from "../utils/PeselValidator";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -50,6 +52,10 @@ function Register(props: IProps) {
   const [password, setPassword] = useState<string>("");
   const [password2, setPassword2] = useState<string>("");
 
+  const [isEmailInvalid, setIsEmailInvalid] = useState<boolean>(false);
+  const [isUsernameInvalid, setIsUsernameInvalid] = useState<boolean>(false);
+  const [isPeselInvalid, setIsPeselInvalid] = useState<boolean>(false);
+
   const createUserForRegister = () => {
     const obj: IUserForRegisterDto = {
       FirstName: firstname,
@@ -68,6 +74,30 @@ function Register(props: IProps) {
 
     const { dispatch } = props;
     dispatch(authActions.register(createUserForRegister()));
+  };
+
+  const emailValidate = () => {
+    if (!validateEmail(email)) {
+      setIsEmailInvalid(true);
+    } else {
+      setIsEmailInvalid(false);
+    }
+  };
+
+  const usernameValidate = () => {
+    if (username.length > 0) {
+      setIsUsernameInvalid(false);
+    } else {
+      setIsUsernameInvalid(true);
+    }
+  };
+
+  const peselValidate = () => {
+    if (!validatePesel(pesel)) {
+      setIsPeselInvalid(true);
+    } else {
+      setIsPeselInvalid(false);
+    }
   };
 
   return (
@@ -117,16 +147,21 @@ function Register(props: IProps) {
             margin="normal"
             required
             fullWidth
+            error={isUsernameInvalid}
+            helperText={isUsernameInvalid ? "Username is required" : ""}
             id="username"
             label="Username"
             name="username"
             autoComplete="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            onBlur={() => usernameValidate()}
           />
           <TextField
             variant="outlined"
             margin="normal"
+            error={isEmailInvalid}
+            helperText={isEmailInvalid ? "Email is invalid" : ""}
             required
             fullWidth
             id="email"
@@ -135,10 +170,13 @@ function Register(props: IProps) {
             autoComplete="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            onBlur={() => emailValidate()}
           />
           <TextField
             variant="outlined"
             margin="normal"
+            error={isPeselInvalid}
+            helperText={isPeselInvalid ? "Pesel must consist of 11 digits" : ""}
             required
             fullWidth
             id="pesel"
@@ -147,6 +185,7 @@ function Register(props: IProps) {
             autoComplete="pesel"
             value={pesel}
             onChange={(e) => setPesel(e.target.value)}
+            onBlur={() => peselValidate()}
           />
           <TextField
             variant="outlined"
