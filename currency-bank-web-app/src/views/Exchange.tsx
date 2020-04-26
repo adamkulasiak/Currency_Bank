@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import { TextField } from "@material-ui/core";
+import { TextField, Chip } from "@material-ui/core";
 import { IAccount } from "../interfaces/IAccount";
 import { loadingActions } from "../_actions/loading.actions";
 import { accountService } from "../_services/account.service";
 import { alertActions } from "../_actions/alert.actions";
 import { DialogTitle, DialogContent, DialogActions } from "../components/Modal";
 import { createCustomAccountsDropdown, getOption } from "../utils/Accounts";
+import "./Exchange.css";
+import { Currency } from "../enums/Currency";
+import { ratesService } from "../_services/rates.service";
 
 interface IProps {
   dispatch: any;
@@ -22,6 +25,33 @@ export default function Exchange(props: IProps) {
   const [sourceAccountId, setSourceAccountId] = useState<number>();
   const [destinationAccountId, setDestinationAccountId] = useState<number>();
   const [ammount, setAmmount] = useState<string>("");
+  const [currencyChip, setCurrencyChip] = useState<string>("Exchange rate: ");
+
+  useEffect(() => {
+    getRate();
+  }, [sourceAccountId]);
+
+  useEffect(() => {
+    getRate();
+  }, [destinationAccountId]);
+
+  const getRate = () => {
+    if (sourceAccountId !== undefined && destinationAccountId !== undefined) {
+      const sourceAccount = props.accounts.find(
+        (a) => a.id === sourceAccountId
+      );
+      const destAccount = props.accounts.find(
+        (a) => a.id === destinationAccountId
+      );
+      const srcCurrency = Currency[sourceAccount.currency];
+      const destCurrency = Currency[destAccount.currency];
+      ratesService.getRate(srcCurrency, destCurrency).then((currency) => {
+        setCurrencyChip(currencyChip + currency);
+      });
+    } else {
+      setCurrencyChip("Exchange rate: ");
+    }
+  };
 
   const handleTransfer = () => {
     props.dispatch(loadingActions.enableLoading());
@@ -95,6 +125,7 @@ export default function Exchange(props: IProps) {
               />
             )}
           />
+          <Chip id="currency" label={currencyChip} />
           <TextField
             variant="outlined"
             margin="normal"
