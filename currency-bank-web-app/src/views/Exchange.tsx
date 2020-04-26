@@ -25,15 +25,29 @@ export default function Exchange(props: IProps) {
   const [sourceAccountId, setSourceAccountId] = useState<number>();
   const [destinationAccountId, setDestinationAccountId] = useState<number>();
   const [ammount, setAmmount] = useState<string>("");
-  const [currencyChip, setCurrencyChip] = useState<string>("Exchange rate: ");
+  const [currencyChip, setCurrencyChip] = useState<string>("");
+  const [sumOfAmmount, setSumOfAmmount] = useState<string>("");
+  const [destCurrency, setDestCurrency] = useState<string>("");
 
   useEffect(() => {
     getRate();
+    getSumOfAmmount();
   }, [sourceAccountId]);
 
   useEffect(() => {
     getRate();
+    getSumOfAmmount();
+    if (destinationAccountId !== undefined) {
+      const destAccount = props.accounts.find(
+        (a) => a.id === destinationAccountId
+      );
+      setDestCurrency(Currency[destAccount.currency]);
+    }
   }, [destinationAccountId]);
+
+  useEffect(() => {
+    getSumOfAmmount();
+  }, [ammount]);
 
   const getRate = () => {
     if (sourceAccountId !== undefined && destinationAccountId !== undefined) {
@@ -46,10 +60,24 @@ export default function Exchange(props: IProps) {
       const srcCurrency = Currency[sourceAccount.currency];
       const destCurrency = Currency[destAccount.currency];
       ratesService.getRate(srcCurrency, destCurrency).then((currency) => {
-        setCurrencyChip(currencyChip + currency);
+        setCurrencyChip(currency);
       });
     } else {
-      setCurrencyChip("Exchange rate: ");
+      setCurrencyChip("");
+    }
+  };
+
+  const getSumOfAmmount = () => {
+    if (
+      sourceAccountId !== undefined &&
+      destinationAccountId !== undefined &&
+      ammount !== "" &&
+      currencyChip !== ""
+    ) {
+      let value = (parseFloat(ammount) * parseFloat(currencyChip)).toFixed(2);
+      setSumOfAmmount(`${value.toString()} ${destCurrency}`);
+    } else {
+      setSumOfAmmount("");
     }
   };
 
@@ -125,7 +153,11 @@ export default function Exchange(props: IProps) {
               />
             )}
           />
-          <Chip id="currency" label={currencyChip} />
+          <Chip
+            id="currency"
+            label={currencyChip}
+            style={{ display: currencyChip === "" ? "none" : "inline-flex" }}
+          />
           <TextField
             variant="outlined"
             margin="normal"
@@ -136,7 +168,14 @@ export default function Exchange(props: IProps) {
             type="number"
             id="ammount"
             value={ammount}
-            onChange={(e) => setAmmount(e.target.value)}
+            onChange={(e) => {
+              setAmmount(e.target.value);
+            }}
+          />
+          <Chip
+            id="sum-ammount"
+            label={sumOfAmmount}
+            style={{ display: sumOfAmmount === "" ? "none" : "inline-flex" }}
           />
         </DialogContent>
         <DialogActions>
