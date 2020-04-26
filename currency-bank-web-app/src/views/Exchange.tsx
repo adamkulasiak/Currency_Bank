@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import { TextField, Chip } from "@material-ui/core";
+import { TextField, Chip, CircularProgress } from "@material-ui/core";
 import { IAccount } from "../interfaces/IAccount";
 import { loadingActions } from "../_actions/loading.actions";
 import { accountService } from "../_services/account.service";
@@ -28,6 +28,7 @@ export default function Exchange(props: IProps) {
   const [currencyChip, setCurrencyChip] = useState<string>("");
   const [sumOfAmmount, setSumOfAmmount] = useState<string>("");
   const [destCurrency, setDestCurrency] = useState<string>("");
+  const [loadingChip, setLoadingChip] = useState<boolean>(false);
 
   useEffect(() => {
     getRate();
@@ -51,6 +52,7 @@ export default function Exchange(props: IProps) {
 
   const getRate = () => {
     if (sourceAccountId !== undefined && destinationAccountId !== undefined) {
+      setLoadingChip(true);
       const sourceAccount = props.accounts.find(
         (a) => a.id === sourceAccountId
       );
@@ -59,9 +61,12 @@ export default function Exchange(props: IProps) {
       );
       const srcCurrency = Currency[sourceAccount.currency];
       const destCurrency = Currency[destAccount.currency];
-      ratesService.getRate(srcCurrency, destCurrency).then((currency) => {
-        setCurrencyChip(currency);
-      });
+      ratesService
+        .getRate(srcCurrency, destCurrency)
+        .then((currency) => {
+          setCurrencyChip(currency);
+        })
+        .finally(() => setLoadingChip(false));
     } else {
       setCurrencyChip("");
     }
@@ -154,10 +159,12 @@ export default function Exchange(props: IProps) {
             )}
           />
           <Chip
-            id="currency"
+            className="mt"
             label={currencyChip}
             style={{ display: currencyChip === "" ? "none" : "inline-flex" }}
           />
+          {loadingChip && <CircularProgress className="mt" size={20} />}
+
           <TextField
             variant="outlined"
             margin="normal"
