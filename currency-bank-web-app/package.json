@@ -14,7 +14,7 @@
     "@types/mui-datatables": "^2.13.7",
     "@types/react-redux": "^7.1.7",
     "@types/redux-logger": "^3.0.7",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "date-format": "^3.0.0",
     "history": "^4.10.1",
     "js-file-download": "^0.4.11",
